@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwiftcnRuby</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body id="body">
+  <div id="wrap">
+
+      <%= content_for(:nav) || render("layouts/nav") %>
+
+      <div class="container">
+
+        <!-- @include('flash::message') -->
+
+        <%= yield %>
+
+        <!-- for weixing share-->
+        <div style="display: none">
+            <img src="/logo-300.jpg"/>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="container small">
+        <p class="pull-left">
+          <i class="fa fa-heart-o"></i> Thanks For PHPHub.
+            <br>
+            <i class="fa fa-cloud"></i> Powered by UCloud</a>.
+        </p>
+
+      </div>
+    </div>
+
+
+</body>
+</html>

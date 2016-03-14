@@ -1,0 +1,280 @@
+.navbar-default{
+    background-color: #fff;
+}
+.search-input {
+  background-image: image-url("icon-search.png");
+  background-repeat: no-repeat;
+  background-position: 10px;
+  padding-left: 25px;
+  border: 1px solid #e5e5e5;
+  box-shadow: none;
+  -webkit-transition: all 0.15s ease-in 0s;
+  transition: all 0.15s ease-in 0s;
+}
+
+#wrap > .navbar-default:first-child {
+
+  min-height: 40px;
+  /*box-shadow: 0 0px 2px 0 rgba(0,0,0,0.1),0 1px 0 0 rgba(0,0,0,0.1);*/
+
+  .btn {
+    border-radius: 2px;
+  }
+
+  .navbar-brand{
+    height: 38px;
+    padding-top: 10px;
+  }
+
+  .nav>li>a {
+    float: none;
+    padding: 10px 10px 10px;
+    line-height: 19px;
+    color: #444;
+    text-decoration: none;
+  }
+
+  .navbar-nav.navbar-right:last-child{
+    margin-right: 0px;
+  }
+
+  .github-login {
+
+    margin-top: 4px;
+    margin-bottom: 4px;
+    font-size: 13px;
+    padding: 5px 12px !important;
+    
+    i {
+      font-size: 14px;
+    }
+
+  }
+
+  .login-btn{
+      color: #FFF !important;
+  }
+
+  .navbar-form{
+    padding: 0px 20px;
+    margin-top: 6px;
+    margin-bottom: 4px;
+
+    .form-control {
+      font-size: 13px;
+      height: 28px;
+      border-radius: 14px;
+    }
+
+    .btn {
+      font-size: 13px;
+      color: #808080;
+      padding: 4px 9px;
+    }
+
+    .mac-style {
+      width: 180px;
+      transition: width 1s ease-in-out
+    }
+    .mac-style:focus {
+      width: 260px
+    }
+
+
+  }
+}
+
+
+// ipad below
+@media (max-width: 1180px) {
+
+  #wrap > .navbar-default:first-child {
+    .github-login .btn {
+      margin-left: 12px;
+      margin-bottom: 4px !important;
+    }
+
+    .nav>li {
+      display: inline-block;
+    }
+
+    .navbar-collapse {
+      padding-right: 15px;
+      padding-left: 22px;
+      word-spacing: 2px;
+      padding-right: 18px;
+    }
+
+    .navbar-form {
+      padding-left: 18px;
+      margin-left: -22px;
+      .form-group {
+        display: inline-block;
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
+
+      .mac-style {
+        width: 200px;
+      }
+      .mac-style:focus {
+        width: 220px;
+      }
+
+    }
+  }
+
+  .col-xs-6 {
+    width: 100%;
+    float: none;
+  }
+  .node-panel {
+
+    .remove-padding-vertically {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+
+
+  .side-bar {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  ul.topic-filter {
+    li {
+      padding-left: 1px;
+      padding-right: 0px;
+      font-size: 11px;
+    }
+
+    float: left !important;
+    margin-top: 2px;
+  }
+  .badge-reply-count {
+    margin: 20px 0px;
+  }
+
+  .users-index {
+    .col-md-1.remove-padding-right {
+      float: left;
+    }
+  }
+
+  .users-show {
+    dl dd {
+      margin-left: inherit;
+    }
+
+    .dl-horizontal dd {
+      margin-left: 0px;
+    }
+  }
+}
+
+@media only screen
+and (min-width : 120px)
+and (max-width : 767px) {
+  .navbar {
+        .container:before, .container:after, .container-fluid:before, .navbar-header:before, .navbar-header:after, .navbar-collapse:before, .navbar-collapse:after {
+            display: table;
+            content: initial;
+        }
+    }
+    .navbar-nav {
+      margin: 0px;
+    }
+    #wrap > .navbar-default:first-child {
+
+          .navbar-brand{
+            padding-top: 10px;
+            padding-left: 2px;
+            padding-right: 8px;
+          }
+
+        .navbar-collapse {
+            padding-right: 16px;
+            padding-left: 16px;
+            padding-left: 16px;
+            word-spacing: 2px;
+            text-align: right;
+            margin-right: 0px;
+        }
+
+         .navbar-collapse>ul:first-child {
+            float:left;
+         }
+
+         .navbar-collapse>ul:last-child {
+            float:right;
+         }
+         
+        .nav > li {
+            display: inline-block;
+            margin-left: 0px;
+            margin-right: 0px;
+            word-spacing: 0px;
+        }
+
+        .nav > li > a {
+            padding: 10px 8px 10px;
+        }
+
+        .navbar-form {
+            display: none;
+        }
+        .github-login {
+            text-align: right;
+        }
+        .navbar-nav.navbar-right:last-child {
+            margin-right: -15px;
+        }
+        .nav-tab-doc{
+          display: none !important;
+        }
+
+    }
+    .topnav, .box, .panel{
+        margin-bottom: 12px;
+    }
+
+}
+
+// ipad below
+/* iPads (portrait) ----------- */
+@media only screen
+and (min-width : 768px)
+and (max-width : 1024px){
+  #wrap > .navbar-default:first-child {
+    ul.github-login {
+      margin-right: -15px!important;
+      .btn {
+        margin-bottom: 4px;
+      }
+    }
+
+    .navbar-form {
+      margin-left: 0px;
+      .form-group {
+        display: inline-block;
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
+      .mac-style {
+        width: 120px;
+      }
+      .mac-style:focus {
+        width: 150px;
+      }
+    }
+  }
+  .users-show .dl-horizontal dd {
+    margin-left: 58px;
+  }
+
+  .main-col {
+      padding-left: 0px;
+      padding-right: 0px;
+  }
+
+}
