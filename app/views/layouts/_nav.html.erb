@@ -1,13 +1,13 @@
 <%= nav_bar static: :top do %>
+
     <%= link_to 'Swift 中国', root_path , class:'navbar-brand hidden-in-mobile'%>
-    
     <%= link_to 'Swift', root_path , class:'navbar-brand display-in-mobile'%>
 
     <div class="navbar-collapse">
       <%= menu_group do %>
           <%= menu_item "社区", root_path %>
           <%= menu_item "工作", login_path %>
-          <%= menu_item "关于", '#' ,class:'hidden-in-mobile'  %>
+          <%= menu_item "关于", about_path ,class:'hidden-in-mobile'  %>
           <%= menu_item "文档", 'http://baidu.com' ,class:'hidden-in-mobile' %>
       <% end %>
     
@@ -27,6 +27,6 @@
         <% end %>
 
       <% end %>
-      
+
       </div>
 <% end %>

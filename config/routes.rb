@@ -6,10 +6,12 @@ Rails.application.routes.draw do
     sessions: "users/sessions"
   }
 
-  get 'login' => 'users#login'
-
-
   root 'topics#index'
+  
+  get 'login' => 'users#login'
+  get 'about' => 'pages#about'
+
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
