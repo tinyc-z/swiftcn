@@ -11,7 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160313073410) do
+ActiveRecord::Schema.define(version: 20160322182251) do
+
+  create_table "Nodes", force: :cascade do |t|
+    t.string   "name",         limit: 190
+    t.string   "sulg",         limit: 190
+    t.integer  "parent_node",  limit: 4
+    t.integer  "topics_count", limit: 4,   default: 0
+    t.integer  "sort",         limit: 4,   default: 0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.datetime "deleted_at"
+  end
+
+  add_index "nodes", ["name"], name: "index_nodes_on_name", using: :btree
+  add_index "nodes", ["parent_node"], name: "index_nodes_on_parent_node", using: :btree
+
+  create_table "Topics", force: :cascade do |t|
+    t.string   "title",              limit: 190,                   null: false
+    t.text     "body",               limit: 65535
+    t.text     "body_original",      limit: 65535
+    t.text     "excerpt",            limit: 65535
+    t.boolean  "is_excellent",                     default: false
+    t.boolean  "is_wiki",                          default: false
+    t.boolean  "is_blocked",                       default: false
+    t.integer  "replies_count",      limit: 4,     default: 0
+    t.integer  "view_count",         limit: 4,     default: 0
+    t.integer  "favorites_count",    limit: 4,     default: 0
+    t.integer  "votes_count",        limit: 4,     default: 0
+    t.integer  "last_reply_user_id", limit: 4
+    t.integer  "order",              limit: 4,     default: 0
+    t.integer  "node_id",            limit: 4,                     null: false
+    t.integer  "user_id",            limit: 4,                     null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.datetime "deleted_at"
+  end
 
   create_table "authentications", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
@@ -34,9 +69,9 @@ ActiveRecord::Schema.define(version: 20160313073410) do
     t.boolean  "is_banned",                          default: false, null: false
     t.string   "avatar",                 limit: 255
     t.string   "password",               limit: 255, default: "0",   null: false
-    t.integer  "topic_count",            limit: 4,   default: 0,     null: false
-    t.integer  "reply_count",            limit: 4,   default: 0,     null: false
-    t.integer  "notification_count",     limit: 4,   default: 0,     null: false
+    t.integer  "topics_count",           limit: 4,   default: 0,     null: false
+    t.integer  "replies_count",          limit: 4,   default: 0,     null: false
+    t.integer  "notifications_count",    limit: 4,   default: 0,     null: false
     t.string   "city",                   limit: 255
     t.string   "company",                limit: 255
     t.string   "twitter_account",        limit: 255
