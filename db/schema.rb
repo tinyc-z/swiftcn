@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160423144136) do
+ActiveRecord::Schema.define(version: 20160424183115) do
+
+  create_table "appends", force: :cascade do |t|
+    t.integer  "topic_id",   limit: 4
+    t.text     "content",    limit: 65535
+    t.datetime "deleted_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "attentions", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "topic_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "attentions", ["topic_id", "user_id"], name: "index_attentions_on_topic_id_and_user_id", using: :btree
+  add_index "attentions", ["topic_id"], name: "index_attentions_on_topic_id", using: :btree
+  add_index "attentions", ["user_id"], name: "index_attentions_on_user_id", using: :btree
 
   create_table "authentications", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
@@ -27,6 +46,13 @@ ActiveRecord::Schema.define(version: 20160423144136) do
   add_index "authentications", ["uid"], name: "index_authentications_on_uid", using: :btree
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "topic_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   create_table "nodes", force: :cascade do |t|
     t.string   "name",           limit: 190
     t.string   "sulg",           limit: 190
@@ -40,6 +66,12 @@ ActiveRecord::Schema.define(version: 20160423144136) do
 
   add_index "nodes", ["name"], name: "index_nodes_on_name", using: :btree
   add_index "nodes", ["parent_node_id"], name: "index_nodes_on_parent_node_id", using: :btree
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "topics", force: :cascade do |t|
     t.string   "title",              limit: 190,                   null: false
@@ -89,10 +121,13 @@ ActiveRecord::Schema.define(version: 20160423144136) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
+    t.integer  "role_id",                limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["name"], name: "index_users_on_name", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
+  add_foreign_key "users", "roles"
 end

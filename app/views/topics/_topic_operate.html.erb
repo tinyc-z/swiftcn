@@ -1,0 +1,127 @@
+<div class="panel-footer operate">
+
+  <div class="pull-left" style="font-size:15px;">
+    <%=link_to url_for_share_to_weibo(topic) do %>
+      <i class="fa fa-weibo"></i>
+    <% end %>
+    <%=link_to url_for_share_to_twitter(topic) do %>
+      <i class="fa fa-twitter"></i>
+    <% end %>
+    <%=link_to url_for_share_to_facebook(topic) do %>
+      <i class="fa fa-facebook"></i>
+    <% end %>
+    <%=link_to url_for_share_to_google(topic) do %>
+      <i class="fa fa-google-plus"></i>
+    <% end %>
+  </div>
+
+  <div class="pull-right">
+
+    <% if current_user.try(:has_attentioned_topic?,topic) %>
+      <%= link_to toggle_attention_topic_path(topic), {method:"post", id:"topic-attent-cancel-button"} do %>
+        <i class="glyphicon glyphicon-eye-open" style="color:#ce8a81"></i> 
+        <span><%= lang('Cancel') %></span>
+      <% end %>
+    <% else %>
+      <%= link_to toggle_attention_topic_path(topic), {id:"topic-attent-button"} do %>
+        <i class="glyphicon glyphicon-eye-open"></i> 
+        <span><%= lang('Attent') %></span>
+      <% end %>
+    <%end%>
+
+    <% if current_user.try(:has_favorited_topic?,topic) %>
+      <%= link_to toggle_favorit_topic_path(topic), {method: :put, id:"topic-favorite-cancel-button"} do %>
+        <i class="glyphicon glyphicon-bookmark" style="color:#ce8a81"></i> 
+        <span><%= lang('Cancel') %></span>
+      <% end %>
+    <% else %>
+      <%= link_to toggle_favorit_topic_path(topic), {method: :put,id:"topic-favorite-button"} do %>
+        <i class="glyphicon glyphicon-bookmark"></i> 
+        <span><%= lang('Favorite') %></span>
+      <% end %>
+    <%end%>
+
+    <% if can? :manage, topic %>
+
+      <%= link_to toggle_recomend_topic_path(topic), {method: :put,id:"topic-recomend-button",class:"admin #{topic.is_excellent? ? 'active' : ''}"} do %>
+        <i class="fa fa-graduation-cap"></i>
+      <% end %>
+
+      <%= link_to toggle_wiki_topic_path(topic), {method: :put,id:"topic-wiki-button",class:"admin #{topic.is_wiki? ? 'active' : ''}"} do %>
+        <i class="fa fa-graduation-cap"></i>
+      <% end %>
+
+      <% if topic.order >= 0 %>
+        <%= link_to toggle_pin_topic_path(topic), {method: :put,id:"topic-pin-button",class:"admin #{topic.order >= 0 ? 'active' : ''}"} do %>
+          <i class="fa fa-thumb-tack"></i>
+        <% end %>
+      <% end %>
+
+      <% if topic.order <= 0 %>
+        <%= link_to toggle_sink_topic_path(topic), {method: :put,id:"topic-sink-button",class:"admin #{topic.order < 0 ? 'active' : ''}"} do %>
+          <i class="fa fa-anchor"></i>
+        <% end %>
+      <% end %>
+
+      <% if topic.order <= 0 %>
+        <%= link_to topic_path(topic), {method: :delete,id:"topic-delete-button",class:"admin"} do %>
+          <i class="fa fa-trash-o"></i>
+        <% end %>
+      <% end %>
+
+    <% end %>
+
+
+    <% if can? :edit, topic %>
+
+      <a id="topic-append-button" href="javascript:void(0);" title="{{ lang('Append') }}" class="admin" data-toggle="modal" data-target="#exampleModal">
+        <i class="fa fa-plus"></i>
+      </a>
+
+      <a id="topic-edit-button" href="{{ route('topics.edit', [$topic->id]) }}" title="{{ lang('Edit') }}" class="admin">
+        <i class="fa fa-pencil-square-o"></i>
+      </a>
+    <% end %>
+
+
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="" aria-labelledby="exampleModalLabel" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">{{ lang('Append Content') }}</h4>
+      </div>
+
+     {{ Form::open(['route' => ['topics.append', $topic->id],'method' => 'post']) }}
+
+        <div class="modal-body">
+
+          <div class="alert alert-warning">
+              {{ lang('append_notice') }}
+          </div>
+
+          <div class="form-group">
+            {{ Form::textarea('content', null, ['class' => 'form-control',
+                                                'style' => 'min-height:20px',
+                                          'placeholder' => lang('Please using markdown.')]) }}
+
+          </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{ lang('Close') }}</button>
+            <button type="submit" class="btn btn-primary">{{ lang('Submit') }}</button>
+          </div>
+
+      {{ Form::close() }}
+
+    </div>
+  </div>
+</div>

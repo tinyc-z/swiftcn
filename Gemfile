@@ -28,6 +28,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
+gem "font-awesome-rails"
 
 # Easiest way to add multi-environment yaml settings to Rails, Sinatra, Pandrino and other ruby projects.
 gem 'config'
@@ -39,6 +40,7 @@ gem 'omniauth-github'
 gem 'jquery-turbolinks'
 gem 'nprogress-rails'
 gem 'chinese_pinyin'
+gem 'cancancan', '~> 1.10'
 
 # gem 'rails_admin'
 

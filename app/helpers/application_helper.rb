@@ -6,5 +6,17 @@ module ApplicationHelper
   def lang(str)
     t(str)
   end
+
+  def current_url(encode=false)
+    encode ? url_encode(request.original_url) : request.original_url
+  end
+
+  def url_encode(url)
+    URI.encode(url)
+  end
+  
+  def url_decode(url)
+    URI.decode(url)
+  end
   
 end

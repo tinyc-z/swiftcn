@@ -13,8 +13,27 @@ Rails.application.routes.draw do
 
   resources :nodes, only: [:show]
 
-  resources :topics
+  resources :topics do 
+    member do
+      put :up_vote
+      put :down_vote
+      
+      put :toggle_attention
+      put :toggle_favorit
+      put :toggle_recomend
+      put :toggle_wiki
+      put :toggle_pin
+      put :toggle_sink
+      
+      
+
+
+    end
+  end
+
   resources :users
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

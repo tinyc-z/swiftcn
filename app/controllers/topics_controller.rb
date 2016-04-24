@@ -7,7 +7,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    
+    @topic = Topic.find params_id
   end
 
 end

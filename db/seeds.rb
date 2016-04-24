@@ -6,10 +6,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 {'Swift'=>%W"Swift 重构 设计模式 Testing 开源项目",'开发'=>%W"iOS OSX tvOS watchOS Xcode 调试 算法 安全",'社区'=>%W"公告 反馈 社区开发 线下聚会",'分享'=>%W"创意 工具 书籍 求职 求职 合伙人 创业 移民 其他"}.each do |k,v|
-  node = Node.create!(:name => k)
+  node = Node.find_or_create_by(:name => k)
   v.each do |name|
-    node.childs.create!(name:name)
+    node.childs.find_or_create_by(name:name)
   end
+end
+
+['registered', 'banned', 'editer', 'admin'].each do |role|
+  Role.find_or_create_by({name: role})
 end
 
 case Rails.env
