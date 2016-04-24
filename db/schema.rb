@@ -11,23 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322182251) do
+ActiveRecord::Schema.define(version: 20160423144136) do
 
-  create_table "Nodes", force: :cascade do |t|
-    t.string   "name",         limit: 190
-    t.string   "sulg",         limit: 190
-    t.integer  "parent_node",  limit: 4
-    t.integer  "topics_count", limit: 4,   default: 0
-    t.integer  "sort",         limit: 4,   default: 0
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+  create_table "authentications", force: :cascade do |t|
+    t.integer  "user_id",      limit: 4
+    t.integer  "uid",          limit: 4
+    t.string   "provider",     limit: 190, null: false
+    t.string   "access_token", limit: 190
+    t.datetime "expires_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "authentications", ["access_token"], name: "index_authentications_on_access_token", using: :btree
+  add_index "authentications", ["uid"], name: "index_authentications_on_uid", using: :btree
+  add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
+
+  create_table "nodes", force: :cascade do |t|
+    t.string   "name",           limit: 190
+    t.string   "sulg",           limit: 190
+    t.integer  "parent_node_id", limit: 4
+    t.integer  "topics_count",   limit: 4,   default: 0
+    t.integer  "sort",           limit: 4,   default: 0
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.datetime "deleted_at"
   end
 
   add_index "nodes", ["name"], name: "index_nodes_on_name", using: :btree
-  add_index "nodes", ["parent_node"], name: "index_nodes_on_parent_node", using: :btree
+  add_index "nodes", ["parent_node_id"], name: "index_nodes_on_parent_node_id", using: :btree
 
-  create_table "Topics", force: :cascade do |t|
+  create_table "topics", force: :cascade do |t|
     t.string   "title",              limit: 190,                   null: false
     t.text     "body",               limit: 65535
     t.text     "body_original",      limit: 65535
@@ -47,20 +61,6 @@ ActiveRecord::Schema.define(version: 20160322182251) do
     t.datetime "updated_at",                                       null: false
     t.datetime "deleted_at"
   end
-
-  create_table "authentications", force: :cascade do |t|
-    t.integer  "user_id",      limit: 4
-    t.integer  "uid",          limit: 4
-    t.string   "provider",     limit: 190, null: false
-    t.string   "access_token", limit: 190
-    t.datetime "expires_at"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
-  add_index "authentications", ["access_token"], name: "index_authentications_on_access_token", using: :btree
-  add_index "authentications", ["uid"], name: "index_authentications_on_uid", using: :btree
-  add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 190, default: "",    null: false

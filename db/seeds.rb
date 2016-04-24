@@ -5,3 +5,27 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+{'Swift'=>%W"Swift 重构 设计模式 Testing 开源项目",'开发'=>%W"iOS OSX tvOS watchOS Xcode 调试 算法 安全",'社区'=>%W"公告 反馈 社区开发 线下聚会",'分享'=>%W"创意 工具 书籍 求职 求职 合伙人 创业 移民 其他"}.each do |k,v|
+  node = Node.create!(:name => k)
+  v.each do |name|
+    node.childs.create!(name:name)
+  end
+end
+
+case Rails.env
+when 'development','test'
+    50.times do |t|
+      u = User.create!({
+        name:Faker::Name.name,
+        email:Faker::Internet.email,
+        avatar:Faker::Avatar.image,
+      })
+      rand(50).times{
+         u.topics.create({
+          title:Faker::Hipster.sentence,
+          body_original:Faker::Hipster.paragraphs,
+          node_id:rand(10)
+        }) 
+      }
+    end
+end

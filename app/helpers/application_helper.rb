@@ -6,4 +6,5 @@ module ApplicationHelper
   def lang(str)
     t(str)
   end
+  
 end

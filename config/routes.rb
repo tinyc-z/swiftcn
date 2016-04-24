@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   get 'login' => 'users#login'
   get 'about' => 'pages#about'
 
-  
+  resources :nodes, only: [:show]
+
+  resources :topics
+  resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

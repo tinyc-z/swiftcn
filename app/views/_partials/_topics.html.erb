@@ -1,0 +1,66 @@
+<ul class="list-group row topic-list">
+    <% @topics.each do |topic| %>
+        <li class="list-group-item media" style="margin-top: 0px;">
+
+            <%= link_to topic,class:'pull-right' do %>
+                <span class="badge badge-reply-count"> <%= topic.replies_count %> </span>
+            <% end %>
+
+            <div class="avatar pull-left">
+                <%= link_to topic.user do %>
+                    <%=image_tag(topic.user.avatar,size:"48", alt: "topic.user.name", class:"media-object img-thumbnail avatar")%>
+                <% end %>
+            </div>
+
+            <div class="infos">
+
+              <div class="media-heading">
+
+                <% if !@filter %>
+                    <% if topic.order > 0 %>
+                        <span class="label label-warning topic-pin-label"><%= lang('Stick') %></span>
+                    <% elsif topic.is_excellent? %>
+                            <span class="label label-success topic-recommend-label"><%= lang('Recommended') %></span>
+                    <% end %>
+                <% end %>
+
+                <%=link_to topic.title,topic %>
+
+              </div>
+              <div class="media-body meta">
+
+                <% if topic.votes_count > 0 %>
+                    <a href="<%= topic_path(topic) %>" class="remove-padding-left" id="pin-<%=topic.id%>">
+                        <span class="fa fa-thumbs-o-up"> <%= topic.votes_count %> </span>
+                    </a>
+                    <span> •  </span>
+                <% end %>
+
+                <!-- <a href="{{ route('nodes.show', [$topic->node->id]) }}" title="{{{ $topic->node->name }}}" {{ $topic->vote_count == 0 || 'class="remove-padding-left"'}}>
+                    {{{ $topic->node->name }}}
+                </a> -->
+                <% if topic.node.present? %>
+                  <%=link_to topic.node.name,topic.node %>    
+                <% end %>
+                
+
+                <% if topic.replies_count ==0 %>
+                    <span> • </span>
+                        <%=link_to topic.user.name,topic.user %>
+                    <span> • </span>
+                        <span class="timeago"><%= topic.created_at && distance_of_time_in_words_to_now(topic.created_at) %></span>
+                <% end %>
+
+                <% if topic.replies_count > 0 %>
+                    <span> • </span><%= lang('Last Reply by') %>
+                    <%= link_to topic.last_reply_user.name,topic.last_reply_user %>
+                    <span> • </span>
+                    <span class="timeago"><%= distance_of_time_in_words_to_now topic.updated_at %></span>
+                <% end %>
+
+              </div>
+
+            </div>
+        </li>
+    <% end %>
+</ul>
