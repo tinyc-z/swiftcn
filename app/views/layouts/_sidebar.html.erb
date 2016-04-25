@@ -1,0 +1,108 @@
+<div class="col-md-3 side-bar">
+
+  <div class="panel panel-default corner-radius">
+
+    <% if @node %>
+      <div class="panel-heading text-center">
+        <h3 class="panel-title"><% @node.name %></h3>
+      </div>
+    <% end %>
+
+    <div class="panel-body text-center">
+      <div class="btn-group">
+        <a href="
+          {{ isset($node) ? URL::route('topics.create', ['node_id' => $node->id]) : URL::route('topics.create') ; }}
+          " class="btn btn-success btn-lg">
+          <i class="glyphicon glyphicon-pencil"> </i> <%= lang('New Topic') %>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <% if @links.present? %>
+    <div class="panel panel-default corner-radius hidden-in-mobile">
+      <div class="panel-heading text-center">
+        <h3 class="panel-title"> 友情社区 </h3>
+      </div>
+
+        <!-- <div class="sider-box-content" style="margin-top: 4px;margin-bottom: 0px">
+          <object height="180" width="100%" data="http://files.cnblogs.com/mrcoke/hamster.swf?" type="application/x-shockwave-flash">
+          <param value="http://files.cnblogs.com/mrcoke/hamster.swf?" name="movie">
+          <param value="always" name="AllowScriptAccess">
+          <param value="opaque" name="wmode">
+          </object>
+          <div class="c"></div>
+        </div> -->
+
+      <div class="panel-body text-center" style="padding-top: 5px;">
+        <% @links.each do |link| %>
+          <a href="<%=link.link%>" target="_blank" title="<%=link.title%>">
+              <img src="<%=link.cover%>" style="width:150px; margin: 3px 0;">
+            </a>
+        <% end %>
+      </div>
+    </div>        
+  <% end %>
+
+  <% if current_page?(root_url) %>
+      <div class="panel panel-default corner-radius hidden-in-mobile">
+        <div class="panel-heading text-center">
+          <h3 class="panel-title"><%= lang('Recomended Resources') %></h3>
+        </div>
+        <div class="panel-body">
+          <ul class="list">
+              <li><a rel="nofollow" href="http://docs.swiftcn.io">Swift 中文文档</a></li>
+              <li><a rel="nofollow" href="http://swifter.tips/">Swift Tips</a></li>
+              <li><a rel="nofollow" href="https://developer.apple.com/swift/blog/">Swift 官方博客</a></li>
+              <li><a rel="nofollow" href="http://touchspring.gitbooks.io/document/content/iOS/swift%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83.html">Swift 编码规范</a></li>
+              <li><a rel="nofollow" href="http://letsswift.com/category/swiftguide/">Swift 教程</a></li>
+              <li><a rel="nofollow" href="https://github.com/ipader/SwiftGuide">Swift 语言指南</a></li>
+              <li><a rel="nofollow" href="https://github.com/ipader/SwiftGuide/blob/master/Featured.md">Swift 开源项目精选</a></li>
+          </ul>
+        </div>
+      </div>
+  <% end %>
+
+  <% if @similar_topics.present? %>
+    <div class="panel panel-default corner-radius">
+      <div class="panel-heading text-center">
+        <h3 class="panel-title"><% lang('Same Node Topics') %></h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list">
+        <% @similar_topics.each do |topic| %>
+          <li>
+            <%=link_to topic.title,topic %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @tip.present? %>
+    <div class="panel panel-default corner-radius hidden-in-mobile">
+      <div class="panel-heading text-center">
+        <h3 class="panel-title"><%= lang('Tips and Tricks') %></h3>
+      </div>
+      <div class="panel-body">
+        <%= @tip.body %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="panel panel-default corner-radius hidden-in-mobile">
+    <div class="panel-heading text-center">
+      <h3 class="panel-title"><%= lang('Site Status') %></h3>
+    </div>
+    <div class="panel-body">
+      <ul>
+        <!-- <li>{{ lang('Total User') }}: {{ $siteStat->user_count }} </li> ---->
+        <li><%= lang('Total Topic') %>: <%= Stat.topic_count %> </li>
+        <li><%= lang('Total Reply') %>: <%= Stat.reply_count %> </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+<div class="clearfix"></div>

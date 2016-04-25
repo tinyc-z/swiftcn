@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424183115) do
+ActiveRecord::Schema.define(version: 20160425173820) do
 
   create_table "appends", force: :cascade do |t|
     t.integer  "topic_id",   limit: 4
@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(version: 20160424183115) do
     t.datetime "updated_at",           null: false
   end
 
+  create_table "links", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "link",       limit: 255
+    t.string   "cover",      limit: 255
+    t.integer  "sort",       limit: 4,   default: 0
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
   create_table "nodes", force: :cascade do |t|
     t.string   "name",           limit: 190
     t.string   "sulg",           limit: 190
@@ -67,8 +76,36 @@ ActiveRecord::Schema.define(version: 20160424183115) do
   add_index "nodes", ["name"], name: "index_nodes_on_name", using: :btree
   add_index "nodes", ["parent_node_id"], name: "index_nodes_on_parent_node_id", using: :btree
 
+  create_table "replies", force: :cascade do |t|
+    t.integer  "user_id",       limit: 4
+    t.integer  "topic_id",      limit: 4
+    t.text     "body",          limit: 65535
+    t.text     "body_original", limit: 65535
+    t.boolean  "is_blocked",                  default: false
+    t.integer  "votes_count",   limit: 4,     default: 0
+    t.datetime "deleted_at"
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "site_statuses", force: :cascade do |t|
+    t.datetime "day_at"
+    t.integer  "register_count", limit: 4, default: 0
+    t.integer  "topic_count",    limit: 4, default: 0
+    t.integer  "reply_count",    limit: 4, default: 0
+    t.integer  "image_count",    limit: 4, default: 0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  create_table "tips", force: :cascade do |t|
+    t.string   "body",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -128,6 +165,17 @@ ActiveRecord::Schema.define(version: 20160424183115) do
   add_index "users", ["name"], name: "index_users_on_name", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "user_id",      limit: 4
+    t.integer  "votable_id",   limit: 4
+    t.string   "votable_type", limit: 255
+    t.string   "is",           limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "votes", ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id", length: {"votable_type"=>191, "votable_id"=>nil}, using: :btree
 
   add_foreign_key "users", "roles"
 end

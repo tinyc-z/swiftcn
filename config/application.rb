@@ -19,6 +19,8 @@ module SwiftcnRuby
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = 'zh-CN'
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.eager_load_paths += ["#{config.root}/lib"]
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
@@ -27,4 +29,7 @@ module SwiftcnRuby
         g.factory_girl false
     end
   end
+
+  WillPaginate.per_page = 10
+  
 end

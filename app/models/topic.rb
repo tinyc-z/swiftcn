@@ -31,8 +31,33 @@ class Topic < ActiveRecord::Base
   belongs_to :node, :counter_cache => true
 
   has_many :appends, dependent: :destroy
-  
-  has_many :attentioners , through: :attentions, dependent: :destroy
+  has_many :replies, dependent: :destroy
 
+  has_many :votes, as: :votable, dependent: :destroy
+
+  # has_many :attentioners , through: :attentions, dependent: :destroy
+
+  def similar_topics(limit=8,shuffle=false)
+    topics = Topic.where(node_id:self.node_id).where.not(id: self.id)
+    if shuffle
+      topics.limit(limit*5).sample(limit)
+    else
+      topics.limit(limit)
+    end
+  end
+
+  def has_reply?
+    self.replies_count > 0
+  end
+
+  def last_reply_user
+    return self.replies.last.user
+  end
+
+  private
+  after_create :for_stat
+  def for_stat
+    SiteStatus.inc_topic
+  end
 
 end

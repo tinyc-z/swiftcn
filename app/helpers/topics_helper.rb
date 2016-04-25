@@ -11,4 +11,9 @@ module TopicsHelper
   def url_for_share_to_google(topic)
     "https://plus.google.com/share?url=#{current_url(true)}"
   end
+
+  def replyFloorFromIndex(index)
+    "99"
+  end
+
 end

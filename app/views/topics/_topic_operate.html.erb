@@ -44,7 +44,7 @@
     <% if can? :manage, topic %>
 
       <%= link_to toggle_recomend_topic_path(topic), {method: :put,id:"topic-recomend-button",class:"admin #{topic.is_excellent? ? 'active' : ''}"} do %>
-        <i class="fa fa-graduation-cap"></i>
+        <i class="fa fa-trophy"></i>
       <% end %>
 
       <%= link_to toggle_wiki_topic_path(topic), {method: :put,id:"topic-wiki-button",class:"admin #{topic.is_wiki? ? 'active' : ''}"} do %>

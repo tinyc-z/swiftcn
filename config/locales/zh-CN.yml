@@ -4,6 +4,13 @@ zh-CN:
   site_name: "Swift中国"
   Reads: 阅读
   at: 于
+
+  will_paginate:
+    previous_label: "«"
+    next_label: "»"
+    page_gap: "..."
+    
+
   
   activerecord:
     errors:

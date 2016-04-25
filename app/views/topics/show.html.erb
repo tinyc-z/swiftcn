@@ -49,25 +49,31 @@
   <!-- Reply List -->
   <div class="replies panel panel-default list-panel replies-index">
     <div class="panel-heading">
-      <div class="total">{{ lang('Total Reply Count') }}: <b>{{ $replies->getTotal() }}</b> </div>
+      <div class="total"><%= lang('Total Reply Count') %>: <b><%= @topic.replies_count %></b> </div>
     </div>
 
     <div class="panel-body">
 
-      @if (count($replies))
-        @include('topics.partials.replies')
-      @else
-         <div class="empty-block">{{ lang('No comments') }}~~</div>
-      @endif
+    <% if @topic.has_reply? %>
+      <%= render partial: "replies",locals:{replies:@replies} %>
+    <% else %>
+      <div class="empty-block"><%= lang('No comments') %>~~</div>
+    <% end %>
 
       <!-- Pager -->
       <div class="pull-right" style="padding-right:20px">
-        {{ $replies->appends(Request::except('page'))->links(); }}
+        <% if @topic.has_reply? %>
+          <div class="digg_pagination">
+              <%= will_paginate @replies,inner_window:1,outer_window:0%>
+          </div>
+        <% end %>
       </div>
+
     </div>
   </div>
 
   <!-- Reply Box -->
+  <!--
   <div class="reply-box form box-block">
 
     @include('layouts.partials.errors')
@@ -104,9 +110,9 @@
 
     {{ Form::close() }}
   </div>
+-->
 
 </div>
 
-@include('layouts.partials.sidebar')
 
-@stop
+<%= render "layouts/sidebar" %>

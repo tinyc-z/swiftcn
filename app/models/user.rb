@@ -61,11 +61,15 @@ class User < ActiveRecord::Base
     Favorite.exists?(user_id:self.id,topic_id:topic.id)
   end
 
-  
 
   private
   def set_default_role
     self.role ||= Role.find_by_name('registered')
+  end
+
+  after_create :for_stat
+  def for_stat
+    SiteStatus.inc_register
   end
 
 end

@@ -3,7 +3,7 @@ source 'https://gems.ruby-china.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
-gem 'rails', '4.2.4'
+gem 'rails'
 # Use sqlite3 as the database for Active Record
 gem 'mysql2', '~> 0.3.18'
 # Use SCSS for stylesheets
@@ -41,6 +41,10 @@ gem 'jquery-turbolinks'
 gem 'nprogress-rails'
 gem 'chinese_pinyin'
 gem 'cancancan', '~> 1.10'
+# gem "squeel"
+
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap'
 
 # gem 'rails_admin'
 

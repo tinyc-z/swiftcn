@@ -18,11 +18,12 @@ class Node < ActiveRecord::Base
   
   has_many :topics
   has_many :childs, class_name: 'Node', foreign_key: :parent_node_id
-  belongs_to :parent, class_name: 'Node', foreign_key: :id,primary_key: :parent_node_id
+  belongs_to :parent, class_name: 'Node', foreign_key: :parent_node_id
 
   scope :is_parent, ->{where(parent_node_id: nil)}
 
   before_save :build_sulg
+
 
   private
   def build_sulg

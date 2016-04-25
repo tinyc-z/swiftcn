@@ -18,6 +18,9 @@
             <div class="panel-footer text-right remove-padding-horizontal pager-footer">
                 <!-- Pager -->
                 <%#= $topics->appends(Request::except('page', '_pjax'))->links(); %>
+                <div class="digg_pagination">
+                    <%= will_paginate @topics,inner_window:1,outer_window:0%>
+                </div>
             </div>
         <% end %>
     </div>
@@ -27,3 +30,5 @@
     <%= render "nodes/list" %>
 
 </div>
+
+<%= render "layouts/sidebar" %>
