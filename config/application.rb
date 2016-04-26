@@ -30,6 +30,6 @@ module SwiftcnRuby
     end
   end
 
-  WillPaginate.per_page = 10
+  WillPaginate.per_page = 20
   
 end

@@ -15,8 +15,7 @@ Rails.application.routes.draw do
 
   resources :topics do 
     member do
-      put :up_vote
-      put :down_vote
+      post :toggle_up_vote
       
       put :toggle_attention
       put :toggle_favorit

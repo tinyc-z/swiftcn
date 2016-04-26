@@ -29,7 +29,7 @@ when 'development','test'
     30.times do |t|
       u = User.find t+1
       p "build user #{t+1} data..." 
-      rand(50).times{
+      rand(5).times{
         t = u.topics.create({
               title:Faker::Hipster.sentence,
               body_original:Faker::Hipster.paragraph,
@@ -38,7 +38,7 @@ when 'development','test'
         rand(200).times do |tt|
           t.replies.create({
             body:Faker::Hipster.paragraph,
-            user_id:u.id
+            user_id:User.find(rand(29)+1).id
           })
         end
     }

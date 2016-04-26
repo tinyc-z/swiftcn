@@ -15,12 +15,8 @@
       <h1 class="panel-title topic-title"><%= @topic.title %></h1>
 
       <div class="votes">
-        <%= link_to up_vote_topic_path, class: "vote" do %>
-          <li class="glyphicon glyphicon-thumbs-up"></li> <%= @topic.votes_count %>
-        <% end %>
-          &nbsp;
-        <%= link_to down_vote_topic_path, class: "vote" do %>
-          <li class="glyphicon glyphicon-thumbs-down"></li>
+        <%= link_to toggle_up_vote_topic_path, {class: "vote #{@topic.vote_up?(current_user) ? 'active' : ''}",remote:true,method: :post} do %>
+          &nbsp;<li class="fa fa-thumbs-o-up"></li>&nbsp;<span id="vote_up_count"><%= votes_count(@topic.votes_count) %></span>
         <% end %>
       </div>
       <%= render partial: "meta",locals:{topic:@topic} %>
@@ -34,7 +30,7 @@
 
     <% @topic.appends.each_with_index do |append,index| %>
       <div class="appends">
-            <span class="meta"><%= "lang('Append')  #{index}" %> &nbsp;·&nbsp; <abbr title="<%= append.created_at %>" class="timeago"><%= distance_of_time_in_words_to_now append.created_at %></abbr></span>
+            <span class="meta"><%= "lang('Append')  #{index}" %> &nbsp;·&nbsp; <abbr class="timeago"><%= distance_of_time_in_words_to_now append.created_at %></abbr></span>
             <div class="sep5"></div>
             <div class="markdown-reply append-content">
                 <%= append.content %>
@@ -61,7 +57,7 @@
     <% end %>
 
       <!-- Pager -->
-      <div class="pull-right" style="padding-right:20px">
+      <div class="pull-right">
         <% if @topic.has_reply? %>
           <div class="digg_pagination">
               <%= will_paginate @replies,inner_window:1,outer_window:0%>

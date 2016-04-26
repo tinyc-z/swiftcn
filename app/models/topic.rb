@@ -33,6 +33,8 @@ class Topic < ActiveRecord::Base
   has_many :appends, dependent: :destroy
   has_many :replies, dependent: :destroy
 
+  has_one :last_reply_user, class_name: 'User', primary_key: :last_reply_user_id,foreign_key: :id
+
   has_many :votes, as: :votable, dependent: :destroy
 
   # has_many :attentioners , through: :attentions, dependent: :destroy
@@ -50,8 +52,17 @@ class Topic < ActiveRecord::Base
     self.replies_count > 0
   end
 
-  def last_reply_user
-    return self.replies.last.user
+  #vote
+  def vote_up?(user)
+    self.votes.where(user_id:user.id).exists? if user
+  end
+
+  def vote_up(user)
+    self.votes.find_or_create_by(user_id:user.id)
+  end
+
+  def cancel_vote_up(user)
+    self.votes.where(user_id:user.id).destroy_all
   end
 
   private

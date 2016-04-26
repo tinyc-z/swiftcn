@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160425173820) do
+ActiveRecord::Schema.define(version: 20160426131350) do
 
   create_table "appends", force: :cascade do |t|
     t.integer  "topic_id",   limit: 4
@@ -96,12 +96,14 @@ ActiveRecord::Schema.define(version: 20160425173820) do
 
   create_table "site_statuses", force: :cascade do |t|
     t.datetime "day_at"
-    t.integer  "register_count", limit: 4, default: 0
-    t.integer  "topic_count",    limit: 4, default: 0
-    t.integer  "reply_count",    limit: 4, default: 0
-    t.integer  "image_count",    limit: 4, default: 0
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.integer  "register_count",  limit: 4, default: 0
+    t.integer  "topic_count",     limit: 4, default: 0
+    t.integer  "reply_count",     limit: 4, default: 0
+    t.integer  "image_count",     limit: 4, default: 0
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "vote_up_count",   limit: 4, default: 0
+    t.integer  "vote_down_count", limit: 4, default: 0
   end
 
   create_table "tips", force: :cascade do |t|

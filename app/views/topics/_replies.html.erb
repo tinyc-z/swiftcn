@@ -13,7 +13,7 @@
         <div class="media-heading meta">
           <%= link_to reply.user.name,reply.user ,class:"remove-padding-left author"%>
           <span> •  </span>
-          <abbr class="timeago" title="{{ $reply->created_at }}"><%= distance_of_time_in_words_to_now(reply.created_at) %></abbr>
+          <abbr class="timeago" ><%= distance_of_time_in_words_to_now(reply.created_at) %></abbr>
           <span> •  </span>
           <% floorIndex = replyFloorFromIndex(index) %>
           <a name="reply<%=floorIndex%>" class="anchor" href="#reply<%=floorIndex%>" aria-hidden="true">#<%=floorIndex%></a>

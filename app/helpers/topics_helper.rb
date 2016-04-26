@@ -16,4 +16,8 @@ module TopicsHelper
     "99"
   end
 
+  def votes_count(count)
+    count if count>0
+  end
+
 end

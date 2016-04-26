@@ -1,27 +1,37 @@
 class SiteStatus < ActiveRecord::Base
 
   def self.today
-    SiteStatus.where(create_at:Time.now.all_day).first || SiteStatus.new(day_at:Time.now)
+    SiteStatus.where(created_at:Time.now.all_day).first || SiteStatus.new(day_at:Time.now)
   end
 
-  def inc_register
-    s = self.today.inc_register_count += 1 
-    s.save
+  def self.inc_register
+    inc_counter :register_count
   end
 
-  def inc_topic
-    s = self.today.inc_topic_count += 1 
-    s.save
+  def self.inc_topic
+    inc_counter :topic_count
   end
 
-  def inc_reply
-    s = self.today.inc_reply_count += 1 
-    s.save
+  def self.inc_reply
+    inc_counter :topic_count
   end
+
+  def self.inc_vote_up
+    inc_counter :vote_up_count
+  end
+
+  def self.inc_vote_down
+    inc_counter :vote_down_count
+  end  
   
-  def inc_image
-    s = self.today.inc_image_count += 1 
-    s.save
+  def self.inc_image
+    inc_counter :image_count
+  end
+
+  private
+  def self.inc_counter(sym)
+    status = self.today
+    status.update_attribute(sym,status[sym]+1)
   end
 
 end
