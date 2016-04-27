@@ -17,12 +17,13 @@ Rails.application.routes.draw do
     member do
       post :toggle_up_vote
       
-      put :toggle_attention
-      put :toggle_favorit
-      put :toggle_recomend
-      put :toggle_wiki
-      put :toggle_pin
-      put :toggle_sink
+      post :toggle_attention
+      
+      post :toggle_favorit
+      post :toggle_recomend
+      post :toggle_wiki
+      post :toggle_pin
+      post :toggle_sink
     end
   end
 

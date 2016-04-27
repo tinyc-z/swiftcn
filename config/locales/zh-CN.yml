@@ -4,6 +4,8 @@ zh-CN:
   site_name: "Swift中国"
   Reads: 阅读
   at: 于
+  Attent: '关注'
+  Cancel: '取消'
 
   will_paginate:
     previous_label: "«"

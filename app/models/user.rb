@@ -55,14 +55,6 @@ class User < ActiveRecord::Base
     true
   end
 
-  def has_attentioned_topic?(topic)
-    Attention.exists?(user_id:self.id,topic_id:topic.id)
-  end
-
-  def has_favorited_topic?(topic)
-    Favorite.exists?(user_id:self.id,topic_id:topic.id)
-  end
-
 
   private
   def set_default_role

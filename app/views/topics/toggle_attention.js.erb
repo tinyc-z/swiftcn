@@ -1,6 +1,7 @@
-$('#vote_up_count').text("<%=votes_count(@topic.votes_count)%>")
 <%if @did_attention %>
-  $('.votes>a:first').removeClass('active')
+  $('#topic-attent-cancel-button').removeClass('active')
+  $('#topic-attent-cancel-button>span').text("<%=lang('Attent')%>")
 <% else %>
-  $('.votes>a:first').addClass('active')
+  $('#topic-attent-cancel-button').addClass('active')
+  $('#topic-attent-cancel-button>span').text("<%=lang('Cancel')%>")
 <% end %>

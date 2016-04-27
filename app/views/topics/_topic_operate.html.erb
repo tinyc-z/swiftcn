@@ -17,19 +17,12 @@
 
   <div class="pull-right">
 
-    <% if current_user.try(:has_attentioned_topic?,topic) %>
-      <%= link_to toggle_attention_topic_path(topic), {method:"post", id:"topic-attent-cancel-button"} do %>
-        <i class="glyphicon glyphicon-eye-open" style="color:#ce8a81"></i> 
-        <span><%= lang('Cancel') %></span>
-      <% end %>
-    <% else %>
-      <%= link_to toggle_attention_topic_path(topic), {id:"topic-attent-button"} do %>
-        <i class="glyphicon glyphicon-eye-open"></i> 
-        <span><%= lang('Attent') %></span>
-      <% end %>
-    <%end%>
+    <%= link_to toggle_attention_topic_path(topic), {method: :post, remote: true, class:topic.did_attention?(current_user) ? 'active' : '', id:"topic-attent-cancel-button"} do %>
+      <i class="glyphicon glyphicon-eye-open"></i> 
+      <span><%= lang('Cancel') %></span>
+    <% end %>
 
-    <% if current_user.try(:has_favorited_topic?,topic) %>
+    <% if current_user.try(:did_favorited_topic?,topic) %>
       <%= link_to toggle_favorit_topic_path(topic), {method: :put, id:"topic-favorite-cancel-button"} do %>
         <i class="glyphicon glyphicon-bookmark" style="color:#ce8a81"></i> 
         <span><%= lang('Cancel') %></span>

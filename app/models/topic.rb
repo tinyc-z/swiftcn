@@ -57,4 +57,9 @@ class Topic < ActiveRecord::Base
     self.replies_count > 0
   end
 
+
+  def did_favorited_topic?(topic)
+    Favorite.exists?(user_id:self.id,topic_id:topic.id)
+  end
+
 end

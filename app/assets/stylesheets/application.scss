@@ -252,6 +252,11 @@ ul.list {
         /*border: 1px solid $graylight;*/
         border:none;
     }
+    .operate {
+      a.active {
+        color: #ce8a81;
+      }
+    }
 }
 
 .list-panel {
