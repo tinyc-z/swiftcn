@@ -1,0 +1,6 @@
+$('#vote_up_count').text("<%=votes_count(@topic.votes_count)%>")
+<%if @did_attention %>
+  $('.votes>a:first').removeClass('active')
+<% else %>
+  $('.votes>a:first').addClass('active')
+<% end %>

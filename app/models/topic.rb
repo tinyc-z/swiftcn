@@ -27,17 +27,22 @@ class Topic < ActiveRecord::Base
 
   acts_as_paranoid
 
+  include VoteUp #vote up
+  include TopicAttention #attention
+  include CounterStat #统计
+
   belongs_to :user, :counter_cache => true
   belongs_to :node, :counter_cache => true
 
   has_many :appends, dependent: :destroy
   has_many :replies, dependent: :destroy
+  has_many :attentions , dependent: :destroy
 
   has_one :last_reply_user, class_name: 'User', primary_key: :last_reply_user_id,foreign_key: :id
 
   has_many :votes, as: :votable, dependent: :destroy
 
-  # has_many :attentioners , through: :attentions, dependent: :destroy
+  
 
   def similar_topics(limit=8,shuffle=false)
     topics = Topic.where(node_id:self.node_id).where.not(id: self.id)
@@ -50,25 +55,6 @@ class Topic < ActiveRecord::Base
 
   def has_reply?
     self.replies_count > 0
-  end
-
-  #vote
-  def vote_up?(user)
-    self.votes.where(user_id:user.id).exists? if user
-  end
-
-  def vote_up(user)
-    self.votes.find_or_create_by(user_id:user.id)
-  end
-
-  def cancel_vote_up(user)
-    self.votes.where(user_id:user.id).destroy_all
-  end
-
-  private
-  after_create :for_stat
-  def for_stat
-    SiteStatus.inc_topic
   end
 
 end

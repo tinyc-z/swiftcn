@@ -23,15 +23,16 @@ Rails.application.routes.draw do
       put :toggle_wiki
       put :toggle_pin
       put :toggle_sink
-      
-      
+    end
+  end
 
-
+  resources :replies do 
+    member do
+      post :toggle_up_vote
     end
   end
 
   resources :users
-  resources :replies
 
   
 

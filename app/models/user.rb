@@ -40,6 +40,8 @@ class User < ActiveRecord::Base
 
   acts_as_paranoid
 
+  include CounterStat #统计
+
   belongs_to :role
   has_many :topics, dependent: :destroy
   has_many :sttentions, dependent: :destroy
@@ -65,11 +67,6 @@ class User < ActiveRecord::Base
   private
   def set_default_role
     self.role ||= Role.find_by_name('registered')
-  end
-
-  after_create :for_stat
-  def for_stat
-    SiteStatus.inc_register
   end
 
 end

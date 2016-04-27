@@ -18,10 +18,14 @@
           <% floorIndex = replyFloorFromIndex(index) %>
           <a name="reply<%=floorIndex%>" class="anchor" href="#reply<%=floorIndex%>" aria-hidden="true">#<%=floorIndex%></a>
           <span class="operate pull-right">
-            <a data-method="post" id="reply-up-vote-{{ $reply->id }}" href="javascript:void(0);" data-url="{{ route('replies.vote', $reply->id) }}" title="{{ lang('Vote Up') }}">
-               <i class="fa fa-thumbs-o-up" style="font-size:14px;"></i> <%= reply.votes_count > 0 ? reply.votes_count : '' %>
-            </a>
-            <span> •  </span>
+            <%= link_to toggle_up_vote_reply_path(reply), {remote:true,method: :post} do %>
+              <i class="fa fa-thumbs-o-up" style="font-size:14px;"></i> 
+              <span id="reply-vote-<%=reply.id%>">
+                <%= votes_count(reply.votes_count) %>
+              </span>
+            <% end %>
+
+            <span>•</span>
 
             <% if can? :manage, reply %>
                 <%=link_to reply,{method: :delete} do %>

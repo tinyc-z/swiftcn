@@ -1,13 +1,16 @@
 class Reply < ActiveRecord::Base
   acts_as_paranoid
+
+  include CounterStat #统计
+  include VoteUp #点赞
   
   belongs_to :user, :counter_cache => true
   belongs_to :topic, :counter_cache => true
-
   has_many :votes, as: :votable, dependent: :destroy
 
-  private
 
+
+  private
   after_create :set_last_reply_user
   def set_last_reply_user
     if self.topic_id
@@ -15,10 +18,6 @@ class Reply < ActiveRecord::Base
     end
   end
 
-  after_create :for_stat
-  def for_stat
-    SiteStatus.inc_reply
-  end
 
 end
 

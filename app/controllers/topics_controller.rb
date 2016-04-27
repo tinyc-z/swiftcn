@@ -3,7 +3,7 @@ class TopicsController < ApplicationController
 
   def index
     @nodes = Node.is_parent.includes(:childs)
-    @topics = Topic.order('id DESC').paginate(:page => params[:page])
+    @topics = Topic.order('id DESC').includes(:user,:node,:last_reply_user).paginate(:page => params[:page])
     @links = Link.all
     # @filter
     # topics
@@ -29,9 +29,14 @@ class TopicsController < ApplicationController
   end
 
   def toggle_attention
-    if user_signed_in?
-      
+    @topic = Topic.find(params_id)
+    @did_attention = @topic.did_attention?(current_user)
+    if @did_attention
+      @topic.remove_attention(current_user)
+    else
+      @topic.add_attention(current_user)
     end
+    @topic.reload
   end
 
 end
