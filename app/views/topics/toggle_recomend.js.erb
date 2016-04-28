@@ -1,0 +1,7 @@
+<%if @is_excellent %>
+  $('#topic-recomend-button').addClass('active')
+  $('.ribbon-excellent:first').slideDown()
+<% else %>
+  $('#topic-recomend-button').removeClass('active')
+  $('.ribbon-excellent:first').slideUp()
+<% end %>

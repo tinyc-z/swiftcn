@@ -17,49 +17,44 @@
 
   <div class="pull-right">
 
-    <%= link_to toggle_attention_topic_path(topic), {method: :post, remote: true, class:topic.did_attention?(current_user) ? 'active' : '', id:"topic-attent-cancel-button"} do %>
+    <%= link_to toggle_attention_topic_path(topic), {method: :post, remote: true, class:active_class(topic.did_attention?(current_user)), id:"topic-attent-button"} do %>
       <i class="glyphicon glyphicon-eye-open"></i> 
-      <span><%= lang('Cancel') %></span>
+      <span>
+        <%= topic.did_attention?(current_user)? lang('Cancel') : lang('Attent') %>
+      </span>
     <% end %>
 
-    <% if current_user.try(:did_favorited_topic?,topic) %>
-      <%= link_to toggle_favorit_topic_path(topic), {method: :put, id:"topic-favorite-cancel-button"} do %>
-        <i class="glyphicon glyphicon-bookmark" style="color:#ce8a81"></i> 
-        <span><%= lang('Cancel') %></span>
-      <% end %>
-    <% else %>
-      <%= link_to toggle_favorit_topic_path(topic), {method: :put,id:"topic-favorite-button"} do %>
-        <i class="glyphicon glyphicon-bookmark"></i> 
-        <span><%= lang('Favorite') %></span>
-      <% end %>
-    <%end%>
+    <%= link_to toggle_favorit_topic_path(topic), {method: :post, remote: true, class:active_class(topic.did_favorit?(current_user)), id:"topic-favorit-button"} do %>
+      <i class="glyphicon glyphicon-bookmark"></i> 
+      <span>
+        <%= topic.did_favorit?(current_user)? lang('Cancel') : lang('Favorit') %>
+      </span>
+    <% end %>
 
     <% if can? :manage, topic %>
 
-      <%= link_to toggle_recomend_topic_path(topic), {method: :put,id:"topic-recomend-button",class:"admin #{topic.is_excellent? ? 'active' : ''}"} do %>
+      <%= link_to toggle_recomend_topic_path(topic), {method: :put, remote: true, id:"topic-recomend-button",class:"admin #{active_class(topic.is_excellent)}"} do %>
         <i class="fa fa-trophy"></i>
       <% end %>
 
-      <%= link_to toggle_wiki_topic_path(topic), {method: :put,id:"topic-wiki-button",class:"admin #{topic.is_wiki? ? 'active' : ''}"} do %>
+      <%= link_to toggle_wiki_topic_path(topic), {method: :put, remote: true, id:"topic-wiki-button",class:"admin #{active_class(topic.is_wiki)}"} do %>
         <i class="fa fa-graduation-cap"></i>
       <% end %>
 
       <% if topic.order >= 0 %>
-        <%= link_to toggle_pin_topic_path(topic), {method: :put,id:"topic-pin-button",class:"admin #{topic.order >= 0 ? 'active' : ''}"} do %>
+        <%= link_to toggle_pin_topic_path(topic), {method: :put, id:"topic-pin-button",class:"admin #{active_class(topic.order > 0)}"} do %>
           <i class="fa fa-thumb-tack"></i>
         <% end %>
       <% end %>
 
       <% if topic.order <= 0 %>
-        <%= link_to toggle_sink_topic_path(topic), {method: :put,id:"topic-sink-button",class:"admin #{topic.order < 0 ? 'active' : ''}"} do %>
+        <%= link_to toggle_sink_topic_path(topic), {method: :put, id:"topic-sink-button",class:"admin #{active_class(topic.order < 0)}"} do %>
           <i class="fa fa-anchor"></i>
         <% end %>
       <% end %>
-
-      <% if topic.order <= 0 %>
-        <%= link_to topic_path(topic), {method: :delete,id:"topic-delete-button",class:"admin"} do %>
-          <i class="fa fa-trash-o"></i>
-        <% end %>
+      
+      <%= link_to topic_path(topic), {method: :delete,id:"topic-delete-button",class:"admin",data: { confirm: "Are you sure?" }} do %>
+        <i class="fa fa-trash-o"></i>
       <% end %>
 
     <% end %>

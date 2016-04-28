@@ -1,4 +1,4 @@
-module VoteUp
+module VoteAble
   extend ActiveSupport::Concern
 
   def vote_up?(user)
@@ -12,5 +12,5 @@ module VoteUp
   def cancel_vote_up(user)
     self.votes.where(user_id:user.id).destroy_all
   end
-  
+
 end

@@ -22,6 +22,11 @@
 ---
 en:
   hello: "Hello world"
+  Reads: Reads
+  at: at
+  Attent: Attent
+  Cancel: Cancel
+  Favorit: Favorit
 
   will_paginate:
     previous_label: "«"

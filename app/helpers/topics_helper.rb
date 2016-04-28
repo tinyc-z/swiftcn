@@ -20,4 +20,12 @@ module TopicsHelper
     count if count>0
   end
 
+  def active_class(active)
+    'active' if active
+  end
+
+  def display_style(display)
+    'display: none;' unless display
+  end
+
 end

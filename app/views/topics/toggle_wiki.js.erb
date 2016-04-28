@@ -1,0 +1,7 @@
+<%if @is_wiki %>
+  $('#topic-wiki-button').addClass('active')
+  $('.ribbon-wiki:first').slideDown()
+<% else %>
+  $('#topic-wiki-button').removeClass('active')
+  $('.ribbon-wiki:first').slideUp()
+<% end %>

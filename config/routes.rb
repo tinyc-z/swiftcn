@@ -16,14 +16,13 @@ Rails.application.routes.draw do
   resources :topics do 
     member do
       post :toggle_up_vote
-      
       post :toggle_attention
-      
       post :toggle_favorit
-      post :toggle_recomend
-      post :toggle_wiki
-      post :toggle_pin
-      post :toggle_sink
+
+      put :toggle_recomend
+      put :toggle_wiki
+      put :toggle_pin
+      put :toggle_sink
     end
   end
 

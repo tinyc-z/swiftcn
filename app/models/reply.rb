@@ -2,7 +2,7 @@ class Reply < ActiveRecord::Base
   acts_as_paranoid
 
   include CounterStat #统计
-  include VoteUp #点赞
+  include VoteAble #点赞
   
   belongs_to :user, :counter_cache => true
   belongs_to :topic, :counter_cache => true

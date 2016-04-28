@@ -1,4 +1,4 @@
-module TopicAttention
+module AttentionAble
   extend ActiveSupport::Concern
 
   def did_attention?(user)

@@ -27,9 +27,11 @@ class Topic < ActiveRecord::Base
 
   acts_as_paranoid
 
-  include VoteUp #vote up
-  include TopicAttention #attention
   include CounterStat #统计
+  include VoteAble #vote up
+  include AttentionAble #attention
+  include FavoriteAble #收藏
+  
 
   belongs_to :user, :counter_cache => true
   belongs_to :node, :counter_cache => true
@@ -37,12 +39,12 @@ class Topic < ActiveRecord::Base
   has_many :appends, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :attentions , dependent: :destroy
+  has_many :favorites , dependent: :destroy
 
   has_one :last_reply_user, class_name: 'User', primary_key: :last_reply_user_id,foreign_key: :id
 
   has_many :votes, as: :votable, dependent: :destroy
 
-  
 
   def similar_topics(limit=8,shuffle=false)
     topics = Topic.where(node_id:self.node_id).where.not(id: self.id)
