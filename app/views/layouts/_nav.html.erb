@@ -1,19 +1,19 @@
 <%= nav_bar static: :top do %>
 
-    <%= link_to 'Swift 中国', root_path , class:'navbar-brand hidden-in-mobile'%>
-    <%= link_to 'Swift', root_path , class:'navbar-brand display-in-mobile'%>
+    <%= link_to lang('site.name 2'), root_path , class:'navbar-brand hidden-in-mobile'%>
+    <%= link_to lang('site.name_mobile'), root_path , class:'navbar-brand display-in-mobile'%>
 
     <div class="navbar-collapse">
       <%= menu_group do %>
-          <%= menu_item "社区", root_path %>
-          <%= menu_item "工作", login_path %>
-          <%= menu_item "关于", about_path ,class:'hidden-in-mobile'  %>
-          <%= menu_item "文档", 'http://baidu.com' ,class:'hidden-in-mobile' %>
+          <%= menu_item lang("site.Topics"), root_path %>
+          <%= menu_item lang("site.Jobs"), login_path %>
+          <%= menu_item lang("site.About"), about_path ,class:'hidden-in-mobile'  %>
+          <%= menu_item lang("site.Document"), 'http://baidu.com' ,class:'hidden-in-mobile' %>
       <% end %>
     
       <%= menu_group :pull => :right do %>
         <%= form_tag "/search",class:'navbar-form navbar-left' do %>
-          <%= text_field_tag :keyword,nil,placeholder:'搜索',class:'form-control search-input mac-style' %>
+          <%= text_field_tag :keyword,nil,placeholder:lang("site.Search"),class:'form-control search-input mac-style' %>
         <% end %>
         
         <%= menu_item nil, '/login#some',class:'text-warning' do %>
@@ -23,7 +23,7 @@
         <% end %>
         <%= menu_item nil, '/login#',class:'btn btn-info login-btn github-login',id:'login-btn' do %>
           <i class="fa fa-github-alt"></i>
-          登录
+          <%= lang('site.Login')%>
         <% end %>
 
       <% end %>

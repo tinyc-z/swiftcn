@@ -13,7 +13,7 @@
         <div class="media-heading meta">
           <%= link_to reply.user.name,reply.user ,class:"remove-padding-left author"%>
           <span> •  </span>
-          <abbr class="timeago" ><%= distance_of_time_in_words_to_now(reply.created_at) %></abbr>
+          <abbr class="timeago" ><%= reply.created_at %></abbr>
           <span> •  </span>
           <% floorIndex = replyFloorFromIndex(index) %>
           <a name="reply<%=floorIndex%>" class="anchor" href="#reply<%=floorIndex%>" aria-hidden="true">#<%=floorIndex%></a>
@@ -27,13 +27,13 @@
 
             <span>•</span>
 
-            <% if can? :manage, reply %>
-                <%=link_to reply,{method: :delete} do %>
+            <% if can? :destroy, reply %>
+                <%=link_to reply,{method: :delete, data: { confirm: "Are you sure?" }} do %>
                   <i class="fa fa-trash-o"></i>
                 <% end %>
                 <span> •  </span>
             <% end %>
-            <a class="fa fa-reply" href="javascript:void(0)" onclick="replyOne('<%= reply.user.name %>');" title="回复 <%=reply.user.name%>"></a>
+            <a class="fa fa-reply" href="javascript:void(0)" onclick="replyOne('<%= reply.user.name %>');" title="<%= t('site.Reply')%> <%=reply.user.name%>"></a>
           </span>
 
         </div>

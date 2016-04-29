@@ -41,24 +41,19 @@ class User < ActiveRecord::Base
   acts_as_paranoid
 
   include CounterStat #统计
+  include RoleAble
 
   belongs_to :role
   has_many :topics, dependent: :destroy
   has_many :sttentions, dependent: :destroy
   has_many :favorites, dependent: :destroy
   
-
   before_create :set_default_role
-
-  def admin?
-    # self.role == 'admin'
-    true
-  end
 
 
   private
   def set_default_role
-    self.role ||= Role.find_by_name('registered')
+    self.role = Role.registered
   end
 
 end

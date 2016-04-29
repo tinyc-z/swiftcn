@@ -14,6 +14,8 @@ class TopicsController < ApplicationController
     @replies = @topic.has_reply? ? @topic.replies.includes(:user).order('id DESC').paginate(:page => params[:page]) : []
     @similar_topics = @topic.similar_topics(8,true)
     @tip = Tip.first
+
+    @reply = Reply.new
     # @links = Link.all
   end
 
@@ -26,6 +28,7 @@ class TopicsController < ApplicationController
 
   def toggle_up_vote
     @topic = Topic.find(params_id)
+    authorize! :update, Vote
     @last_vote_up = @topic.vote_up?(current_user)
     if @last_vote_up
       @topic.cancel_vote_up(current_user)
@@ -57,30 +60,30 @@ class TopicsController < ApplicationController
 
   def toggle_recomend
     topic = Topic.find(params_id)
-    authorize! :manage, @topic
+    authorize! :manage, topic
     @is_excellent = !topic.is_excellent
     topic.update_attribute(:is_excellent,@is_excellent)
   end
 
   def toggle_wiki
     topic = Topic.find(params_id)
-    authorize! :manage, @topic
+    authorize! :manage, topic
     @is_wiki = !topic.is_wiki
     topic.update_attribute(:is_wiki,@is_wiki)
   end
 
   def toggle_pin
     topic = Topic.find(params_id)
-    authorize! :manage, @topic
+    authorize! :manage, topic
     topic.update_attribute(:order,topic.order == 1 ? 0 : 1)
-    redirect_to topic_path(topic)
+    redirect_to topic
   end
 
   def toggle_sink
     topic = Topic.find(params_id)
-    authorize! :manage, @topic
+    authorize! :manage, topic
     topic.update_attribute(:order,topic.order == -1 ? 0 : -1)
-    redirect_to topic_path(topic)
+    redirect_to topic
   end
 
 end

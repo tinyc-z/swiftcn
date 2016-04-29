@@ -4,16 +4,18 @@
   •
   <%=link_to topic.user.name,topic.user,class: "remove-padding-left" %>
   •
-  <%= lang('at') %> 
-  <abbr class="timeago"><%= distance_of_time_in_words_to_now topic.created_at %>前</abbr>
+  <%= lang('site.at') %> 
+  <abbr class="timeago"><%= topic.created_at %></abbr>
   •
   <% if topic.replies_count>0 %>
-    <%= lang('Last Reply by') %>
+    <%= lang('site.Last Reply by') %>
     <%= link_to topic.last_reply_user.try(:name),topic.last_reply_user %>
-    <%= lang('at') %>
-    <abbr class="timeago"><%= distance_of_time_in_words_to_now topic.updated_at %>前</abbr>
+    <%= lang('site.at') %>
+    <abbr class="timeago"><%= topic.updated_at %></abbr>
   <% end %>
 
-  <%= "#{topic.view_count} #{lang('Reads')}" %>
+  <%= "#{topic.view_count}" %>
+  <%= lang('site.Reads') %>
+  
 </div>
 <div class="clearfix"></div>

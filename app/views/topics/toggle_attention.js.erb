@@ -1,7 +1,7 @@
 <%if @did_attention %>
-  $('#topic-attent-cancel-button').removeClass('active')
-  $('#topic-attent-cancel-button>span').text("<%=lang('Attent')%>")
+  $('#topic-attent-button').removeClass('active')
+  $('#topic-attent-button>span').text("<%=lang('Attent')%>")
 <% else %>
-  $('#topic-attent-cancel-button').addClass('active')
-  $('#topic-attent-cancel-button>span').text("<%=lang('Cancel')%>")
+  $('#topic-attent-button').addClass('active')
+  $('#topic-attent-button>span').text("<%=lang('Cancel')%>")
 <% end %>

@@ -12,7 +12,7 @@
   end
 end
 
-['registered', 'banned', 'editer', 'admin'].each do |role|
+['registered', 'editer', 'admin'].each do |role|
   Role.find_or_create_by({name: role})
 end
 
