@@ -31,8 +31,9 @@ class Topic < ActiveRecord::Base
   include VoteAble #vote up
   include AttentionAble #attention
   include FavoriteAble #收藏
+  include BodyPipeline #生成body
+  include ExistsAble
   
-
   belongs_to :user, :counter_cache => true
   belongs_to :node, :counter_cache => true
 
@@ -45,6 +46,7 @@ class Topic < ActiveRecord::Base
 
   has_many :votes, as: :votable, dependent: :destroy
 
+  default_scope { where(is_blocked: false) }
 
   def similar_topics(limit=8,shuffle=false)
     topics = Topic.where(node_id:self.node_id).where.not(id: self.id)
@@ -59,9 +61,15 @@ class Topic < ActiveRecord::Base
     self.replies_count > 0
   end
 
-
   def did_favorited_topic?(topic)
     Favorite.exists?(user_id:self.id,topic_id:topic.id)
+  end
+
+  def fix_last_reply_user
+    reply = Reply.where(topic_id:self.id).last
+    if reply.present?
+      self.update_column(:last_reply_user_id,reply.user_id)
+    end
   end
 
 end

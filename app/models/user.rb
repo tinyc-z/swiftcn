@@ -42,7 +42,8 @@ class User < ActiveRecord::Base
 
   include CounterStat #统计
   include RoleAble
-
+  include ExistsAble
+  
   belongs_to :role
   has_many :topics, dependent: :destroy
   has_many :sttentions, dependent: :destroy

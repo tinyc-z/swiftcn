@@ -48,6 +48,12 @@ gem 'will_paginate-bootstrap'
 gem 'marked-rails'
 gem 'momentjs-rails'
 
+gem 'html-pipeline'
+gem 'github-markdown'
+gem 'gemoji'
+gem 'sanitize'
+gem 'github-linguist'
+gem 'rinku'
 # gem 'rails_admin'
 
 # Use ActiveModel has_secure_password

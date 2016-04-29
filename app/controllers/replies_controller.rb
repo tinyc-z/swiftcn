@@ -4,11 +4,10 @@ class RepliesController < ApplicationController
   def create
     authorize! :create, Reply
     topic = Topic.find(params[:topic])
-    # reply = topic.replies.build({body_original:params[:reply_content]})
-    reply = topic.replies.build({body:params[:reply_content]})
+    reply = topic.replies.build({body_original:params[:reply_content]})
     reply.user = current_user
     reply.save
-    redirect_to topic
+    redirect_to topic, :flash => { :errors => reply.errors.full_messages }
   end
 
   def toggle_up_vote
