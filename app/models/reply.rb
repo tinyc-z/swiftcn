@@ -21,7 +21,7 @@ class Reply < ActiveRecord::Base
   after_create :set_last_reply_user
   def set_last_reply_user
     if self.topic_id
-      Topic.where(id:self.topic_id).update_all(last_reply_user_id:self.user_id)
+      Topic.where(id:self.topic_id).update_all(last_reply_user_id:self.user_id,updated_at: DateTime.now)
     end
   end
   
@@ -30,7 +30,7 @@ class Reply < ActiveRecord::Base
     if self.topic_id
       reply = Reply.where(topic_id:self.topic_id).last
       if reply
-        Topic.where(id:self.topic_id).update_all(last_reply_user_id:reply.user_id)
+        Topic.where(id:self.topic_id).update_all(last_reply_user_id:reply.user_id,updated_at: reply.created_at)
       end
     end
   end

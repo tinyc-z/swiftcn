@@ -7,7 +7,7 @@
   <%= lang('site.at') %> 
   <abbr class="timeago"><%= topic.created_at %></abbr>
   •
-  <% if topic.replies_count>0 %>
+  <% if topic.has_reply? %>
     <%= lang('site.Last Reply by') %>
     <%= link_to topic.last_reply_user.try(:name),topic.last_reply_user %>
     <%= lang('site.at') %>

@@ -50,7 +50,10 @@ class User < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
   
   before_create :set_default_role
-
+  
+  # def to_param
+  #   "#{name}"
+  # end
 
   private
   def set_default_role

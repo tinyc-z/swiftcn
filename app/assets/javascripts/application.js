@@ -28,17 +28,12 @@ $(function(){
         init: function(){
             self = this
             this.siteBootUp();
-
-            // this.initLightBox();
             // this.initNotificationsCount();
         },
         siteBootUp: function(){
-            // this.initExternalLink();
             this.refresh_moment();
             this.initEmoji();
-            // this.initAutocompleteAtUser();
-            // this.initScrollToTop();
-            // this.initLocalStorage();
+            this.initScrollToTop();
             // this.initEditorPreview();
             // this.initHeightLight();
             // this.initReplyOnPressKey();
@@ -47,6 +42,12 @@ $(function(){
             // this.snowing();
             // this.forceImageDataType();
         },
+        /**
+         * Scroll to top in one click.
+         */
+        initScrollToTop: function(){
+            $.scrollUp.init();
+        },
         refresh_moment: function(){
             $('.timeago').each(function(){
                 var time_str = $(this).text();
@@ -54,7 +55,10 @@ $(function(){
                     $(this).text(moment(time_str).fromNow());
                 }
             });
-            setTimeout('self.refresh_moment()',10000); //指定10秒刷新一次 
+            if (window.refresh_moment_timer) {
+                clearTimeout(window.refresh_moment_timer)    
+            }
+            window.refresh_moment_timer=setTimeout('self.refresh_moment()', 15000);
             log('refresh_moment')
         },
         initEmoji: function(){
@@ -70,7 +74,7 @@ $(function(){
             });
             emojify.run();
 
-            $('#reply_content').textcomplete([
+            $('#body_original').textcomplete([
                 { // emoji strategy
                     match: /\B:([\-+\w]*)$/,
                     search: function (term, callback) {
@@ -92,8 +96,8 @@ $(function(){
       }
 
       _app_.init();
-
-      if ($('body').data('action') == 'topics@show') {
+      var action = $('body').data('action')
+      if (action == 'topics@show'||action == 'topics@new'||action=='topics@edit') {
         _topic_.init();
       }
 })

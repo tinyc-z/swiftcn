@@ -12,8 +12,8 @@ module TopicsHelper
     "https://plus.google.com/share?url=#{current_url(true)}"
   end
 
-  def replyFloorFromIndex(index)
-    "99"
+  def reply_floor_from_index(index)
+    ([0,params[:page].to_i-1].max)*Topic.per_page+index+1
   end
 
   def votes_count(count)

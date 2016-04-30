@@ -18,30 +18,32 @@ end
 
 case Rails.env
 when 'development','test'
-    30.times do |t|
-      u = User.create!({
-        name:Faker::Name.name,
+    20.times do |t|
+      u = User.create({
+        name:Pinyin.t(Faker::Name.name, splitter: '-'),
         email:Faker::Internet.email,
         avatar:Faker::Avatar.image,
       })
     end
 
-    30.times do |t|
+    20.times do |t|
       u = User.find t+1
-      p "build user #{t+1} data..." 
+      if u
+        p "build user #{t+1} data..." 
       rand(5).times{
         t = u.topics.create({
               title:Faker::Hipster.sentence,
               body_original:Faker::Hipster.paragraph,
               node_id:rand(10)
             })
-        rand(200).times do |tt|
+        rand(100).times do |tt|
           t.replies.create({
             body:Faker::Hipster.paragraph,
-            user_id:User.find(rand(29)+1).id
+            user_id:User.find(rand(19)+1).id
           })
         end
-    }
+        }
+      end
     end
 
 end

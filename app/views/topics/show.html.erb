@@ -24,13 +24,18 @@
     </div>
 
     <div class="content-body entry-content panel-body">
-      <%= render partial: "body",locals:{body:@topic.body_original} %>
-      <%= render partial: "ribbon",locals:{topic:@topic} %>
+    
+    <%#cache @topic do%>
+      <%= render partial: "body",locals:{body:@topic.body} %>
+    <%#end%>
+
+    <%= render partial: "ribbon",locals:{topic:@topic} %>
+
     </div>
 
     <% @topic.appends.each_with_index do |append,index| %>
       <div class="appends">
-            <span class="meta"><%= "lang('Append')  #{index}" %> &nbsp;·&nbsp; <abbr class="timeago"><%= append.created_at %></abbr></span>
+            <span class="meta"><%= "lang('site.Append')  #{index}" %> &nbsp;·&nbsp; <abbr class="timeago"><%= append.created_at %></abbr></span>
             <div class="sep5"></div>
             <div class="markdown-reply append-content">
                 <%= append.content %>
@@ -50,11 +55,13 @@
 
     <div class="panel-body">
 
-    <% if @topic.has_reply? %>
-      <%= render partial: "replies",locals:{replies:@replies} %>
-    <% else %>
-      <div class="empty-block"><%= lang('No comments') %>~~</div>
-    <% end %>
+    <%#cache [@topic,@page] do%>
+      <% if @topic.has_reply? %>
+        <%= render partial: "replies",locals:{replies:@replies} %>
+      <% else %>
+        <div class="empty-block"><%= lang('site.No comments') %>~~</div>
+      <% end %>
+    <%# end %>
 
       <!-- Pager -->
       <div class="pull-right">
@@ -72,9 +79,7 @@
   
   <div class="reply-box form box-block">
     
-    <% if flash[:errors].present? %>
-      <%= render partial: "layouts/errors",locals:{errors:flash[:errors]}  %>
-    <% end %>
+    <% @errors = @errors || flash[:errors] %>
     <% if @errors.present? %>
       <%= render partial: "layouts/errors",locals:{errors:@errors}  %>
     <% end %>
@@ -91,7 +96,7 @@
             reply_class = {disabled:'disabled',placeholder:"#{lang('site.User Login Required for commenting')}"}
           end 
           %>
-          <%= text_area_tag 'reply_content',nil,{class:'form-control',rows:5,style:'overflow:hidden'}.merge(reply_class) %>
+          <%= text_area_tag 'body_original',nil,{class:'form-control',rows:5,style:'overflow:hidden',required:"true"}.merge(reply_class) %>
         </div>
 
         <div class="form-group status-post-submit">

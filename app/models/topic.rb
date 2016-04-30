@@ -37,6 +37,11 @@ class Topic < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   belongs_to :node, :counter_cache => true
 
+  validates :title, :presence => true
+  validates :body, :presence => true
+  validates :user, :presence => true
+  validates :node, :presence => true
+
   has_many :appends, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :attentions , dependent: :destroy
@@ -47,6 +52,10 @@ class Topic < ActiveRecord::Base
   has_many :votes, as: :votable, dependent: :destroy
 
   default_scope { where(is_blocked: false) }
+
+  # def to_param
+  #   "#{id}-#{URI.encode(title.gsub(".", "").gsub(" ", "-"))}" 
+  # end
 
   def similar_topics(limit=8,shuffle=false)
     topics = Topic.where(node_id:self.node_id).where.not(id: self.id)

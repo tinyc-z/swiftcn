@@ -1,7 +1,7 @@
 <%if @did_favorit %>
   $('#topic-favorit-button').removeClass('active')
-  $('#topic-favorit-button>span').text("<%=lang('Favorit')%>")
+  $('#topic-favorit-button>span').text("<%=lang('site.Favorite')%>")
 <% else %>
   $('#topic-favorit-button').addClass('active')
-  $('#topic-favorit-button>span').text("<%=lang('Cancel')%>")
+  $('#topic-favorit-button>span').text("<%=lang('site.Cancel')%>")
 <% end %>

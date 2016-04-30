@@ -20,14 +20,14 @@
     <%= link_to toggle_attention_topic_path(topic), {method: :post, remote: true, class:active_class(topic.did_attention?(current_user)), id:"topic-attent-button"} do %>
       <i class="glyphicon glyphicon-eye-open"></i> 
       <span>
-        <%= topic.did_attention?(current_user)? lang('Cancel') : lang('Attent') %>
+        <%= topic.did_attention?(current_user)? lang('site.Cancel') : lang('site.Attent') %>
       </span>
     <% end %>
 
     <%= link_to toggle_favorit_topic_path(topic), {method: :post, remote: true, class:active_class(topic.did_favorit?(current_user)), id:"topic-favorit-button"} do %>
       <i class="glyphicon glyphicon-bookmark"></i> 
       <span>
-        <%= topic.did_favorit?(current_user)? lang('Cancel') : lang('Favorit') %>
+        <%= topic.did_favorit?(current_user)? lang('site.Cancel') : lang('site.Favorite') %>
       </span>
     <% end %>
 
@@ -62,11 +62,11 @@
 
     <% if can? :update, topic %>
 
-      <a id="topic-append-button" href="javascript:void(0);" title="{{ lang('Append') }}" class="admin" data-toggle="modal" data-target="#exampleModal">
+      <a id="topic-append-button" href="javascript:void(0);" title="{{ lang('site.Append') }}" class="admin" data-toggle="modal" data-target="#exampleModal">
         <i class="fa fa-plus"></i>
       </a>
 
-      <a id="topic-edit-button" href="{{ route('topics.edit', [$topic->id]) }}" title="{{ lang('Edit') }}" class="admin">
+      <a id="topic-edit-button" href="{{ route('topics.edit', [$topic->id]) }}" title="{{ lang('site.Edit') }}" class="admin">
         <i class="fa fa-pencil-square-o"></i>
       </a>
     <% end %>
@@ -83,7 +83,7 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="exampleModalLabel">{{ lang('Append Content') }}</h4>
+        <h4 class="modal-title" id="exampleModalLabel">{{ lang('site.Append Content') }}</h4>
       </div>
 
      {{ Form::open(['route' => ['topics.append', $topic->id],'method' => 'post']) }}
@@ -91,21 +91,21 @@
         <div class="modal-body">
 
           <div class="alert alert-warning">
-              {{ lang('append_notice') }}
+              {{ lang('site.append_notice') }}
           </div>
 
           <div class="form-group">
             {{ Form::textarea('content', null, ['class' => 'form-control',
                                                 'style' => 'min-height:20px',
-                                          'placeholder' => lang('Please using markdown.')]) }}
+                                          'placeholder' => lang('site.Please using markdown')]) }}
 
           </div>
 
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">{{ lang('Close') }}</button>
-            <button type="submit" class="btn btn-primary">{{ lang('Submit') }}</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{ lang('site.Close') }}</button>
+            <button type="submit" class="btn btn-primary">{{ lang('site.Submit') }}</button>
           </div>
 
       {{ Form::close() }}

@@ -10,10 +10,8 @@
 
     <div class="panel-body text-center">
       <div class="btn-group">
-        <a href="
-          {{ isset($node) ? URL::route('topics.create', ['node_id' => $node->id]) : URL::route('topics.create') ; }}
-          " class="btn btn-success btn-lg">
-          <i class="glyphicon glyphicon-pencil"> </i> <%= lang('New Topic') %>
+        <a href="<%=@node ? new_topic_path(node_id:@node.id) : new_topic_path %>" class="btn btn-success btn-lg">
+          <i class="glyphicon glyphicon-pencil"> </i> <%= lang('site.New Topic') %>
         </a>
       </div>
     </div>
@@ -47,7 +45,7 @@
   <% if current_page?(root_url) %>
       <div class="panel panel-default corner-radius hidden-in-mobile">
         <div class="panel-heading text-center">
-          <h3 class="panel-title"><%= lang('Recomended Resources') %></h3>
+          <h3 class="panel-title"><%= lang('site.Recomended Resources') %></h3>
         </div>
         <div class="panel-body">
           <ul class="list">
@@ -66,7 +64,7 @@
   <% if @similar_topics.present? %>
     <div class="panel panel-default corner-radius">
       <div class="panel-heading text-center">
-        <h3 class="panel-title"><% lang('Same Node Topics') %></h3>
+        <h3 class="panel-title"><% lang('site.Same Node Topics') %></h3>
       </div>
       <div class="panel-body">
         <ul class="list">
@@ -83,7 +81,7 @@
   <% if @tip.present? %>
     <div class="panel panel-default corner-radius hidden-in-mobile">
       <div class="panel-heading text-center">
-        <h3 class="panel-title"><%= lang('Tips and Tricks') %></h3>
+        <h3 class="panel-title"><%= lang('site.Tips and Tricks') %></h3>
       </div>
       <div class="panel-body">
         <%= @tip.body %>
@@ -93,13 +91,13 @@
 
   <div class="panel panel-default corner-radius hidden-in-mobile">
     <div class="panel-heading text-center">
-      <h3 class="panel-title"><%= lang('Site Status') %></h3>
+      <h3 class="panel-title"><%= lang('site.Site Status') %></h3>
     </div>
     <div class="panel-body">
       <ul>
         <!-- <li>{{ lang('Total User') }}: {{ $siteStat->user_count }} </li> ---->
-        <li><%= lang('Total Topic') %>: <%= Stat.topic_count %> </li>
-        <li><%= lang('Total Reply') %>: <%= Stat.reply_count %> </li>
+        <li><%= lang('site.Total Topic') %>: <%= Stat.topic_count %> </li>
+        <li><%= lang('site.Total Reply') %>: <%= Stat.reply_count %> </li>
       </ul>
     </div>
   </div>

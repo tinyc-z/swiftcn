@@ -1,5 +1,22 @@
 class TopicsController < ApplicationController
-  before_filter :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
+
+  def new
+    @current_node = Node.where(id:params[:node_id]).first if params[:node_id].present?
+    @parent_nodes = Node.is_parent.all
+    @topic = Topic.new
+  end
+
+  def create
+    @topic = Topic.new(create_params)
+    @topic.user = current_user
+    if @topic.save
+      redirect_to @topic
+    else
+      @parent_nodes = Node.is_parent.all
+      render 'new'
+    end
+  end
 
   def index
     @nodes = Node.is_parent.includes(:childs)
@@ -11,11 +28,11 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params_id)
-    @replies = @topic.has_reply? ? @topic.replies.includes(:user).order('id DESC').paginate(:page => params[:page]) : []
+    @replies = @topic.has_reply? ? @topic.replies.includes(:user).paginate(:page => params[:page]) : []
     @similar_topics = @topic.similar_topics(8,true)
     @tip = Tip.first
-
     @reply = Reply.new
+    Topic.increment_counter(:view_count,@topic.id)
     # @links = Link.all
   end
 
@@ -84,6 +101,11 @@ class TopicsController < ApplicationController
     authorize! :manage, topic
     topic.update_attribute(:order,topic.order == -1 ? 0 : -1)
     redirect_to topic
+  end
+
+  private
+  def create_params
+    params.require(:topic).permit(:body_original,:node_id,:title).merge(node_id:params[:node_id])
   end
 
 end

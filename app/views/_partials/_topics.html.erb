@@ -44,7 +44,7 @@
                 <% end %>
 
                 <% if topic.has_reply? %>
-                    <span> • </span><%= lang('Last Reply by') %>
+                    <span> • </span><%= lang('site.Last Reply by') %>
                     <%= link_to topic.last_reply_user.try(:name),topic.last_reply_user %>
                     <span> • </span>
                     <span class="timeago"><%= topic.updated_at %></span>

@@ -28,6 +28,10 @@ module SwiftcnRuby
     config.generators do |g|
         g.factory_girl false
     end
+
+    # cdn
+    config.action_controller.asset_host = '/'
+
   end
 
   WillPaginate.per_page = 20

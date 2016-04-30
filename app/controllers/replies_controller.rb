@@ -1,10 +1,10 @@
 class RepliesController < ApplicationController
-  before_filter :authenticate_user! #, except: [:index, :show]
+  before_action :authenticate_user! #, except: [:index, :show]
 
   def create
     authorize! :create, Reply
     topic = Topic.find(params[:topic])
-    reply = topic.replies.build({body_original:params[:reply_content]})
+    reply = topic.replies.build(create_params)
     reply.user = current_user
     reply.save
     redirect_to topic, :flash => { :errors => reply.errors.full_messages }
@@ -29,8 +29,8 @@ class RepliesController < ApplicationController
     redirect_to topic_path(reply.topic_id)
   end
 
-  def params_create
-    params.permit(:reply_content)
+  def create_params
+    params.permit(:body_original)
   end
 
 end

@@ -862,7 +862,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
 
 /* Image style */
 #scrollUp {
-    background-image: url("../images/top.png");
+    background-image: asset-url("top.png");
     bottom: 20px;
     right: 20px;
     width: 38px;    /* Width of image */
