@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20160430183246) do
     t.datetime "updated_at",               null: false
   end
 
+  add_index "appends", ["topic_id"], name: "index_appends_on_topic_id", using: :btree
+
   create_table "attentions", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "topic_id",   limit: 4
@@ -38,7 +40,6 @@ ActiveRecord::Schema.define(version: 20160430183246) do
     t.datetime "updated_at",           null: false
   end
 
-  add_index "attentions", ["topic_id", "user_id"], name: "index_attentions_on_topic_id_and_user_id", using: :btree
   add_index "attentions", ["topic_id"], name: "index_attentions_on_topic_id", using: :btree
   add_index "attentions", ["user_id"], name: "index_attentions_on_user_id", using: :btree
 
@@ -62,6 +63,9 @@ ActiveRecord::Schema.define(version: 20160430183246) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
+
+  add_index "favorites", ["topic_id"], name: "index_favorites_on_topic_id", using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
   create_table "links", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -97,6 +101,9 @@ ActiveRecord::Schema.define(version: 20160430183246) do
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
   end
+
+  add_index "replies", ["topic_id"], name: "index_replies_on_topic_id", using: :btree
+  add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -142,6 +149,8 @@ ActiveRecord::Schema.define(version: 20160430183246) do
     t.datetime "deleted_at"
   end
 
+  add_index "topics", ["user_id"], name: "index_topics_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 190, default: "",    null: false
     t.string   "encrypted_password",     limit: 255, default: "",    null: false
@@ -186,7 +195,8 @@ ActiveRecord::Schema.define(version: 20160430183246) do
     t.datetime "updated_at",               null: false
   end
 
-  add_index "votes", ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id", length: {"votable_type"=>191, "votable_id"=>nil}, using: :btree
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
+  add_index "votes", ["votable_type", "votable_id"], name: "index_votes_on_votable_type_and_votable_id", using: :btree
 
   add_foreign_key "users", "roles"
 end

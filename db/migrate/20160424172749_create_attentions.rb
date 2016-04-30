@@ -7,7 +7,7 @@ class CreateAttentions < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :favorites, :topic_id
-    add_index :favorites, :user_id
+    add_index :attentions, :topic_id
+    add_index :attentions, :user_id
   end
 end
