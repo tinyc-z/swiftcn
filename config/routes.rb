@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   
   get 'login' => 'users#login'
   get 'about' => 'pages#about'
+  get 'jobs' => 'nodes#jobs'
 
   resources :nodes, only: [:show]
 
