@@ -17,10 +17,10 @@
         <div class="form-group">
           <select required class="selectpicker form-control" name="node_id" >
             <option><%= lang('site.Pick a node') %></option>
-              <% @parent_nodes.each do |node|%>
+              <% Node.is_parent.includes(:childs).each do |node|%>
                 <optgroup label="<%= node.name %>">
                   <% node.childs.each do |child_node| %>
-                  <option value="<%=child_node.id%>" <%='selected' if @current_node == child_node %> ><%= child_node.name %></option>
+                  <option value="<%=child_node.id%>" <%='selected' if @topic.node_id == child_node.id %> ><%= child_node.name %></option>
                   <% end %>
                 </optgroup>
               <% end %>
@@ -29,7 +29,6 @@
 
         <div class="form-group">
           <%=f.text_field :title,{placeholder:lang('site.Please write down a topic'),class:'form-control',required:"true" } %>
-          <!-- {{ Form::text('title', null, ['class' => 'form-control', 'id' => 'topic-title', 'placeholder' => lang('Please write down a topic')]) }} -->
         </div>
 
         <%=render "composing_help_block" %>

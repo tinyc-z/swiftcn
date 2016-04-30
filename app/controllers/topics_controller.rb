@@ -2,9 +2,24 @@ class TopicsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def new
-    @current_node = Node.where(id:params[:node_id]).first if params[:node_id].present?
-    @parent_nodes = Node.is_parent.all
     @topic = Topic.new
+    @topic.node_id = params[:node_id]
+  end
+
+  def edit
+    @topic = Topic.find(params_id)
+    render 'new'
+  end
+
+  def update
+    @topic = Topic.find(params_id)
+    authorize! :update, @topic
+    if @topic.update_attributes(create_params.merge(updated_at:DateTime.now))
+      redirect_to @topic
+    else
+      render 'new'
+    end
+    
   end
 
   def create
@@ -13,14 +28,13 @@ class TopicsController < ApplicationController
     if @topic.save
       redirect_to @topic
     else
-      @parent_nodes = Node.is_parent.all
       render 'new'
     end
   end
 
   def index
     @nodes = Node.is_parent.includes(:childs)
-    @topics = Topic.order('id DESC').includes(:user,:node,:last_reply_user).paginate(:page => params[:page])
+    @topics = Topic.order('updated_at DESC').includes(:user,:node,:last_reply_user).paginate(:page => params[:page])
     @links = Link.all
     # @filter
     # topics
@@ -105,7 +119,7 @@ class TopicsController < ApplicationController
 
   private
   def create_params
-    params.require(:topic).permit(:body_original,:node_id,:title).merge(node_id:params[:node_id])
+    params.require(:topic).permit(:body_original,:title).merge(node_id:params[:node_id])
   end
 
 end

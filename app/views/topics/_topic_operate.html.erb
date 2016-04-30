@@ -62,11 +62,11 @@
 
     <% if can? :update, topic %>
 
-      <a id="topic-append-button" href="javascript:void(0);" title="{{ lang('site.Append') }}" class="admin" data-toggle="modal" data-target="#exampleModal">
+      <a id="topic-append-button" href="javascript:void(0);" title="<%= lang('site.Append') %>" class="admin" data-toggle="modal" data-target="#exampleModal">
         <i class="fa fa-plus"></i>
       </a>
 
-      <a id="topic-edit-button" href="{{ route('topics.edit', [$topic->id]) }}" title="{{ lang('site.Edit') }}" class="admin">
+      <a id="topic-edit-button" href="<%= edit_topic_path topic %>" title="<%= lang('site.Edit') %>" class="admin">
         <i class="fa fa-pencil-square-o"></i>
       </a>
     <% end %>
