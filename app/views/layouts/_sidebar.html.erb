@@ -67,7 +67,7 @@
         <h3 class="panel-title"><% lang('site.Same Node Topics') %></h3>
       </div>
       <div class="panel-body">
-        <ul class="list">
+        <ul class="list" style="word-break:break-all;">
         <% @similar_topics.each do |topic| %>
           <li>
             <%=link_to topic.title,topic %>

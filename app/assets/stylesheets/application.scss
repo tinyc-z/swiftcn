@@ -54,6 +54,7 @@ body {
     text-overflow: ellipsis;
   }
 }
+
 abbr[data-original-title], abbr[title] {
     cursor: none;
     border-bottom: none;
@@ -258,6 +259,11 @@ ul.list {
       a.active {
         color: #ce8a81;
       }
+    }
+    .media-heading {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break:break-all;
     }
 }
 

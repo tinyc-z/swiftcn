@@ -13,16 +13,16 @@
   .digg_pagination .current {
     font-style: normal;
     font-weight: bold;
-    background: #2e6ab1;
+    background: #8BAFCE;
     color: white;
-    border: 1px solid #2e6ab1; }
+    border: 1px solid #8BAFCE; }
   .digg_pagination a {
     text-decoration: none;
     color: #105cb6;
-    border: 1px solid #9aafe5; }
+    border: 1px solid #e5e5e5; }
     .digg_pagination a:hover, .digg_pagination a:focus {
       color: #000033;
-      border-color: #000033; }
+      border-color: #8BAFCE; }
   .digg_pagination .page_info {
     background: #2e6ab1;
     color: white;

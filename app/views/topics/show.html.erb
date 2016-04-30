@@ -12,7 +12,9 @@
 
       </div>
 
-      <h1 class="panel-title topic-title"><%= @topic.title %></h1>
+      <div class="media-heading">
+        <h1 class="panel-title topic-title"><%= @topic.title %></h1>
+      </div>
 
       <div class="votes">
         <%= link_to toggle_up_vote_topic_path(@topic), {class: "vote #{@topic.vote_up?(current_user) ? 'active' : ''}",remote:true,method: :post} do %>
