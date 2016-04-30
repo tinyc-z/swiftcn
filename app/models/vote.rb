@@ -1,6 +1,7 @@
 class Vote < ActiveRecord::Base
 
   include CounterStat #统计
+  include ActivityAble
 
   belongs_to :topic#, :counter_cache => true #have a bug
   belongs_to :reply#, :counter_cache => true
