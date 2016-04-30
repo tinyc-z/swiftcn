@@ -7,24 +7,24 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find params_id
-    @replies = @user.replies.last(20)
-    @topics = @user.topics.last(20)
+    @replies = @user.replies.includes(:topic).last(20)
+    @topics = @user.topics.includes(:node).last(20)
   end
 
   def replies
     @user = User.find params_id
-    @replies = @user.replies.paginate(:page => params[:page])
+    @replies = @user.replies.includes(:topic).paginate(:page => params[:page])
   end
 
   def topics
     @user = User.find params_id
-    @topics = @user.topics.paginate(:page => params[:page])
+    @topics = @user.topics.includes(:node).paginate(:page => params[:page])
   end
 
   def favorites
     @user = User.find params_id
     @favorites = @user.favorites.paginate(:page => params[:page])
-    @topics = Topic.where(id:@favorites.pluck(:topic_id)).includes(:user)
+    @topics = Topic.where(id:@favorites.pluck(:topic_id)).includes(:node)
   end
 
   def login
