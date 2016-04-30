@@ -1,0 +1,14 @@
+<ul class="list-group">
+<% topics.each do |topic| %>
+  <li class="list-group-item" >
+      <%= link_to topic.title.truncate(80),topic %>
+      <span class="meta">
+        <%= link_to topic.node.name,topic.node %>
+        <span> • </span>
+        <%= topic.replies_count %> <%= lang('site.Replies') %>
+        <span> • </span>
+        <span class="timeago"><%= topic.created_at %></span>
+      </span>
+  </li>
+<% end %>
+</ul>

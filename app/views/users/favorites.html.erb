@@ -1,0 +1,26 @@
+<%= render :layout => 'content_layout', :locals => {:title => 'some title'} do %>
+<div class="panel panel-default">
+    <%= render 'infonav' %>
+    <div class="panel-body remove-padding-vertically remove-padding-horizontal">
+        <!-- Tab panes -->
+        <div class="tab-content">
+        
+        <%if @topics.present? %>
+          <%= render partial:'topics',locals:{topics:@topics} %>
+
+          <!-- Pager -->
+          <div class="pull-right" style="margin-right: 12px">
+            <div class="digg_pagination">
+                <%= will_paginate @favorites,inner_window:1,outer_window:0%>
+            </div>
+          </div>
+
+        <%else%>
+          <div class="empty-block"><%= lang('site.Dont have any favorites yet ~~') %></div>
+        <%end%>
+
+      </div>
+    </div>
+  </div>
+
+<% end %>

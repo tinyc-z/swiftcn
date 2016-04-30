@@ -1,0 +1,73 @@
+<div style="text-align: center;">
+  <a href="">
+    <%=image_tag(@user.avatar,size: "206", alt: @user.name, class:"img-thumbnail users-show-avatar",style:"width: 206px;margin: 4px 4px 15px;min-height:190px")%>
+  </a>
+</div>
+
+<dl class="dl-horizontal">
+
+  <dt><lable>ID:</lable></dt><dd><%= @user.id %></dd>
+
+  <dt><label><%=lang('site.Username')%>:</label></dt><dd><strong><%= @user.name %></strong></dd>
+
+  <% if @user.try(:real_name).present? %>
+    <dt class="adr"><label> <%= lang('site.Real Name') %>:</label></dt><dd><span class="org"><%= @user.real_name %></span></dd>
+  <% end %>
+
+  <%if @user.github.present? %>
+    <dt><label>Github:</label></dt>
+    <dd>
+      <a href="https://github.com/<%= @user.github.github_name %>" rel="nofollow" target="_blank">
+        <i class="fa fa-github-alt"></i> <%= @user.github.github_name %>
+      </a>
+    </dd>
+  <% end %>
+
+  <% if @user.company.present? %>
+    <dt class="adr"><label> <%= lang('site.Company') %>:</label></dt><dd><span class="org"><%= @user.company %></span></dd>
+  <% end %>
+
+  <% if @user.city.present? %>
+    <dt class="adr"><label> <%= lang('site.City') %>:</label></dt><dd><span class="org"><i class="fa fa-map-marker"></i> <%= @user.city %></span></dd>
+  <% end %>
+
+  <% if @user.twitter_account.present? %>
+  <dt><label><span>Twitter</span>:</label></dt>
+  <dd>
+    <a href="https://twitter.com/<%= @user.twitter_account %>" rel="nofollow" class="twitter" target="_blank"><i class="fa fa-twitter"></i> <%= '@' + @user.twitter_account %>
+    </a>
+  </dd>
+  <% end %>
+
+  <% if @user.personal_website.present? %>
+  <dt><label><%= lang('site.Blog') %>:</label></dt>
+  <dd>
+    <a href="http://<%= @user.personal_website %>" rel="nofollow" target="_blank" class="url">
+      <i class="fa fa-globe"></i> <%= @user.personal_website.truncate 22 %>
+    </a>
+  </dd>
+  <% end %>
+
+  <% if @user.signature.present? %>
+    <dt><label><%= lang('site.Signature') %>:</label></dt><dd><span><%= @user.signature %></span></dd>
+  <% end %>
+
+  <dt>
+    <label><%=lang('site.Since')%>:</label>
+  </dt>
+  <dd><span><%= @user.created_at.strftime("%Y-%m-%d") %></span></dd>
+
+</dl>
+<div class="clearfix"></div>
+
+<% if can? :update, @user %>
+  <a class="btn btn-primary btn-block" href="<%= edit_user_path %>" id="user-edit-button">
+    <i class="fa fa-edit"></i> <%= lang('site.Edit Profile') %>
+  </a>
+<% end %>
+<% if can? :manage, @user %>
+  <%= link_to (@user.ban? ? free_user_path(@user) : ban_user_path(@user)),{method:'put',data: { confirm: "Are you sure?" },class:"btn btn-#{@user.ban? ? 'warning' : 'danger'} btn-block"} do %>
+      <i class="fa fa-times"></i>
+      <%= @user.ban? ? lang('site.Unblock User') : lang('site.Block User') %>
+  <% end %>
+<% end %>

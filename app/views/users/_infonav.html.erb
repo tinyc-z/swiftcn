@@ -1,0 +1,14 @@
+<ul class="nav nav-tabs user-info-nav" role="tablist">
+  <li class="<%= active_for_page?(user_path(@user)) %>">
+    <%= link_to lang('site.Basic Info'),@user %>
+  </li>
+  <li class="<%= active_for_page?(replies_user_path(@user)) %>">
+      <%= link_to lang('site.Replies'),replies_user_path(@user) %>
+  </li>
+  <li class="<%= active_for_page?(topics_user_path(@user)) %>">
+    <%= link_to lang('site.Topics'),topics_user_path(@user) %>
+  </li>
+  <li class="<%= active_for_page?(favorites_user_path(@user)) %>">
+    <%= link_to lang('site.Favorite'),favorites_user_path(@user) %>
+  </li>
+</ul>

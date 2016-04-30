@@ -1,0 +1,25 @@
+<div id="cal-heatmap" style="overflow-x: scroll;"></div>
+<script type="text/javascript">
+  var cal = new CalHeatMap();
+  cal.init({
+    itemSelector: "#cal-heatmap",
+    animationDuration: 200,
+    domain: "month",
+    subDomain: 'day',
+    rowLimit: 7,
+    domainGutter: 0,
+    data: '<%=activities_user_path(user,format: :json)%>',
+    start: new Date(2015, 5, 1),
+    legendHorizontalPosition: 'right',
+    legendColors: ["#E2FBAE", "#01840E"],
+    // subDomainTextFormat: "%d",
+    domainLabelFormat: "%b",
+    legend: [1, 5, 10, 15],
+    itemName: ['event', 'events'],
+    highlight: 'now',
+    label: {
+      position: 'top'
+    },
+    displayLegend: true
+  });
+</script>

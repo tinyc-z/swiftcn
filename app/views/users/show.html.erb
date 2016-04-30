@@ -1,0 +1,60 @@
+<%= render :layout => 'content_layout', :locals => {:title => 'some title'} do %>
+  <div class="panel panel-default">
+      <%= render 'infonav' %>
+      <div class="panel-body remove-padding-vertically remove-padding-horizontal">
+        <!-- Tab panes -->
+        <div class="tab-content">
+        <div  class="panel-body">
+          <%=render partial:'user_heatmap',locals:{user:@user} %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="panel panel-default">
+      <ul class="nav nav-tabs user-info-nav" role="tablist">
+        <li class="active"><a href="#recent_replies" role="tab" data-toggle="tab"><%= lang('site.Recent Replies') %></a></li>
+        <li><a href="#recent_topics" role="tab" data-toggle="tab"><%= lang('site.Recent Topics') %></a></li>
+        <% if @user.introduction.present? %>
+          <li><a href="#user_introduction" role="tab" data-toggle="tab"><%= lang('site.Introduction') %></a></li>
+        <% end %>
+      </ul>
+
+      <div class="panel-body remove-padding-vertically remove-padding-horizontal">
+        <!-- Tab panes -->
+        <div class="tab-content">
+
+          <div class="tab-pane active" id="recent_replies">
+
+          <%if @replies.present? %>
+              <%= render partial:'replies',locals:{replies:@replies} %>
+          <%else%>
+              <div class="empty-block"><%= lang('site.Dont have any comment yet') %>~~</div>
+          <%end%>
+
+          </div>
+
+          <div class="tab-pane" id="recent_topics">
+            <%if @topics.present? %>
+                <%= render partial:'topics',locals:{topics:@topics} %>
+            <%else%>
+                <div class="empty-block"><%= lang('site.Dont have any data Yet ~~') %></div>
+            <%end%>
+          </div>
+          <% if @user.introduction.present? %>
+            <div class="tab-pane" id="user_introduction">
+              <p>
+                <div class="text-center"><%= @user.introduction %></div>
+              </p>
+            </div>
+          <% end %>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+<% end %>

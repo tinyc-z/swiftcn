@@ -1,0 +1,21 @@
+<ul class="list-group">
+  
+  <% replies.each do |reply| %>
+
+    <li class="list-group-item">
+    <%if reply.topic.present? %>
+        <%= link_to reply.topic.title,reply.topic,class:'remove-padding-left' %>
+        <span class="meta">
+           <%=lang('site.at')%> <span class="timeago"><%= reply.created_at %></span>
+        </span>
+        <div class="reply-body markdown-reply content-body">
+          <%=raw reply.body %>
+        </div>
+    <% else %>
+      <div class="deleted text-center"><%= lang('site.Data has been deleted') %></div>
+    <% end %>
+  </li>
+   
+  <% end %>
+
+</ul>

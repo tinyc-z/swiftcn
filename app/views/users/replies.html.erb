@@ -1,0 +1,26 @@
+<%= render :layout => 'content_layout', :locals => {:title => 'some title'} do %>
+<div class="panel panel-default">
+    <%= render 'infonav' %>
+    <div class="panel-body remove-padding-vertically remove-padding-horizontal">
+        <!-- Tab panes -->
+        <div class="tab-content">
+        
+        <%if @replies.present? %>
+          <%= render partial:'replies',locals:{replies:@replies} %>
+
+          <!-- Pager -->
+          <div class="pull-right" style="margin-right: 12px">
+            <div class="digg_pagination">
+                <%= will_paginate @replies,inner_window:1,outer_window:0%>
+            </div>
+          </div>
+
+        <%else%>
+          <div class="empty-block"><%= lang('site.Dont have any data Yet ~~') %></div>
+        <%end%>
+
+      </div>
+    </div>
+  </div>
+
+<% end %>
