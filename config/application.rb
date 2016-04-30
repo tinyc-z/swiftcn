@@ -30,7 +30,7 @@ module SwiftcnRuby
     end
 
     # cdn
-    config.action_controller.asset_host = '/'
+    # config.action_controller.asset_host = '/'
 
   end
 

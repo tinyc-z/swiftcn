@@ -32,7 +32,18 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users
+  resources :users do 
+    member do
+      put :ban
+      put :free
+
+      get :activities
+
+      get :replies
+      get :topics
+      get :favorites
+    end
+  end
 
   
 

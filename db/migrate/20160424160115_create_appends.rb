@@ -8,5 +8,6 @@ class CreateAppends < ActiveRecord::Migration
       t.datetime :deleted_at
       t.timestamps null: false
     end
+    add_index :appends, :topic_id
   end
 end

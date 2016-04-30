@@ -28,7 +28,7 @@
         </div>
 
         <div class="form-group">
-          <%=f.text_field :title,{placeholder:lang('site.Please write down a topic'),class:'form-control',required:"true" } %>
+          <%=f.text_field :title, {placeholder:lang('site.Please write down a topic'), class:'form-control', required:"true" } %>
         </div>
 
         <%=render "composing_help_block" %>
@@ -38,6 +38,7 @@
                                           'rows' => 20,
                                           'style' => "overflow:hidden",
                                           'placeholder' => lang('site.Please using markdown'),
+                                          'required'=>"true",
                                           'id' => 'body_original'}
                                             %>
                                                                       

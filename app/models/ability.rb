@@ -44,14 +44,19 @@ class Ability
 
             can :create, Topic
             can :update, Topic, :user_id => user.id
+
+            can :create, Reply
+            can :destroy, Reply, :user_id => user.id
+            
             can :update, Vote
+
+            can :create, User
+            can :update, User,  :id => user.id
 
             # can :update, Topic do |topic|
             #   (topic.user_id == 1)
             # end
-
-            can :create, Reply
-            can :destroy, Reply, :user_id => user.id
+            
             # byebug
         end     
     end    

@@ -33,6 +33,7 @@ class Topic < ActiveRecord::Base
   include FavoriteAble #收藏
   include BodyPipeline #生成body
   include ExistsAble
+  include ActivityAble
   
   belongs_to :user, :counter_cache => true
   belongs_to :node, :counter_cache => true
@@ -42,10 +43,10 @@ class Topic < ActiveRecord::Base
   validates :user, :presence => true
   validates :node, :presence => true
 
-  has_many :appends, dependent: :destroy
-  has_many :replies, dependent: :destroy
-  has_many :attentions , dependent: :destroy
-  has_many :favorites , dependent: :destroy
+  has_many :appends#, dependent: :destroy
+  has_many :replies#, dependent: :destroy
+  has_many :attentions#, dependent: :destroy
+  has_many :favorites#, dependent: :destroy
 
   has_one :last_reply_user, class_name: 'User', primary_key: :last_reply_user_id,foreign_key: :id
 

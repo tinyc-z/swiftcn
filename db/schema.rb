@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427071505) do
+ActiveRecord::Schema.define(version: 20160430183246) do
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.string   "entity_id",   limit: 255
+    t.string   "entity_type", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
 
   create_table "appends", force: :cascade do |t|
     t.integer  "topic_id",   limit: 4

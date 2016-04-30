@@ -5,6 +5,7 @@ class Reply < ActiveRecord::Base
   include VoteAble #点赞
   include BodyPipeline #生成body
   include ExistsAble
+  include ActivityAble
 
   validates :body, :presence => true
   validates :user, :presence => true
@@ -15,7 +16,6 @@ class Reply < ActiveRecord::Base
   has_many :votes, as: :votable, dependent: :destroy
 
   default_scope { where(is_blocked: false) }
-
 
   private
   after_create :set_last_reply_user

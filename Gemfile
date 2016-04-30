@@ -1,5 +1,5 @@
-# source 'https://ruby.taobao.org'
-source 'https://gems.ruby-china.org'
+source 'https://ruby.taobao.org'
+# source 'https://gems.ruby-china.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 
@@ -48,12 +48,13 @@ gem 'will_paginate-bootstrap'
 gem 'marked-rails'
 gem 'momentjs-rails'
 
-gem 'webshims-rails', '~> 1.15'
-
 gem 'html-pipeline', '~> 2.4'
 gem 'github-markdown'
 gem 'sanitize'
 # gem 'rails_admin'
+
+gem 'd3_rails'
+gem 'cal-heatmap-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

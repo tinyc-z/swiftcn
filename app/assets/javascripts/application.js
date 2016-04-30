@@ -15,6 +15,8 @@
 //= require moment
 //= require moment/zh-cn
 //= require emojify.min
+//= require d3
+//= require cal-heatmap
 // = require_tree .
 
 function log(str){

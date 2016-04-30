@@ -137,24 +137,22 @@ window._topic_ =
           hljs.highlightBlock(block);
       });
     },
+    init : function(){
+      var self = this
+      self.initTextareaAutoResize()
+      self.initReplyOnPressKey()
+      self.initAutocompleteAtUser()
+      self.initLightBox()
+      self.initLocalStorage()
+      self.initEditorPreview()
+      self.initHeightLight()
+      
+      $('#body_original').keyup(function(){
+          self.runPreview()
+      });
 
-  init : function(){
-    var self = this
-    self.initTextareaAutoResize()
-    self.initReplyOnPressKey()
-    self.initAutocompleteAtUser()
-    self.initLightBox()
-    self.initLocalStorage()
-    self.initEditorPreview()
-    self.initHeightLight()
-    $('#body_original').keyup(function(){
-        self.runPreview()
-    });
-
-    webshim.polyfill('forms');
-
-    log('_topic_ inited');
-  }
+      log('_topic_ inited');
+    }
 }
 
 

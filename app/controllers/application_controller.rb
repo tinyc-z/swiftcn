@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   if Rails.env.development?
     before_filter :fake_sign_in
     def fake_sign_in
-      sign_in(:user, User.find(8)) #if !user_signed_in?
+      sign_in(:user, User.find(2)) #if !user_signed_in?
     end
   end
 

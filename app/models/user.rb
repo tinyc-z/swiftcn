@@ -38,6 +38,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
           :rememberable,:registerable, :trackable, :omniauthable, omniauth_providers:[:github]
 
+  delegate :github_name, :goodbye, to: :authentication
+
   acts_as_paranoid
 
   include CounterStat #统计
@@ -45,15 +47,29 @@ class User < ActiveRecord::Base
   include ExistsAble
   
   belongs_to :role
-  has_many :topics, dependent: :destroy
-  has_many :sttentions, dependent: :destroy
-  has_many :favorites, dependent: :destroy
+  has_many :topics#, dependent: :destroy
+  has_many :replies#, dependent: :destroy
+
+  has_many :sttentions#, dependent: :destroy
+  has_many :favorites#, dependent: :destroy
+
+  has_many :activities
+
+  has_one :github,->{where(provider:'github')},class_name:'Authentication'
   
   before_create :set_default_role
   
   # def to_param
   #   "#{name}"
   # end
+
+  def activities_data
+    Rails.cache.fetch("#{cache_key}/activities_data",expires_in:5.minutes) do
+      activities = self.activities.where("created_at > ?",1.years.ago).group("date(created_at)").count
+      activities.map { |date,count| [date.to_time.to_i,count] }.to_h
+    end
+  end
+
 
   private
   def set_default_role
