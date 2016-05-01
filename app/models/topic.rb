@@ -54,6 +54,8 @@ class Topic < ActiveRecord::Base
   has_many :votes, as: :votable, dependent: :destroy
 
   default_scope { where(is_blocked: false) }
+  
+  before_save :build_excerpt
 
   # def to_param
   #   "#{id}-#{URI.encode(title.gsub(".", "").gsub(" ", "-"))}" 
@@ -76,10 +78,33 @@ class Topic < ActiveRecord::Base
     Favorite.exists?(user_id:self.id,topic_id:topic.id)
   end
 
+  def self.filter(name)
+    if name == 'recent' #最近发表
+      order('id DESC')
+    elsif name == 'excellent' #精华主题
+      where(is_excellent:true).order('id DESC')
+    elsif name == 'vote' #最多投票
+      order('votes_count DESC') 
+    elsif name == 'noreply' #最多投票
+      order('replies_count') 
+    else
+      order('updated_at DESC')
+    end
+  end
+
   def fix_last_reply_user
     reply = Reply.where(topic_id:self.id).last
     if reply.present?
       self.update_column(:last_reply_user_id,reply.user_id)
+    end
+  end
+
+  protected
+  def build_excerpt
+    if body.present?
+      _excerpt = body.gsub(/<\/?[^>]*>/, '').gsub(/\n\n+/, "\n")
+      _excerpt = _excerpt.gsub(/^\n|\n$/, '').gsub(/\s\s+/, ' ').truncate(110)
+      self.excerpt = _excerpt
     end
   end
 

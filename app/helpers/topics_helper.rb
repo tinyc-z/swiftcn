@@ -28,4 +28,9 @@ module TopicsHelper
     'display: none;' unless display
   end
 
+  def filter_attr(filter_name)
+    selected = (params[:filter] == filter_name)
+    "href=\"?filter=#{filter_name}\" #{selected ? 'class="selected"' : ''}"
+  end
+
 end

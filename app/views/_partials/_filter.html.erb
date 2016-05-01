@@ -1,28 +1,28 @@
 <ul class="pull-right list-inline remove-margin-bottom topic-filter">
 
     <li>
-        <a>
+        <a <%=raw filter_attr('recent')%> >
             <i class="glyphicon glyphicon-time"></i> <%= lang 'site.Recent' %>
         </a>
         <span class="divider"></span>
     </li>
 
     <li>
-        <a>
+        <a <%=raw filter_attr('excellent')%> >
             <i class="glyphicon glyphicon-ok"> </i> <%= lang 'site.Excellent' %>
         </a>
         <span class="divider"></span>
     </li>
 
     <li>
-        <a>
+        <a <%=raw filter_attr('vote')%> >
             <i class="glyphicon glyphicon-thumbs-up"> </i> <%= lang 'site.Vote' %>
         </a>
         <span class="divider"></span>
     </li>
 
     <li>
-        <a>
+        <a <%=raw filter_attr('noreply')%> >
             <i class="glyphicon glyphicon-eye-open"></i> <%= lang 'site.Noreply' %>
         </a>
     </li>

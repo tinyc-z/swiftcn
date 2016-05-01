@@ -8,8 +8,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @replies = @user.replies.includes(:topic).last(20)
-    @topics = @user.topics.includes(:node).last(20)
+    @replies = @user.replies.order('id DESC').includes(:topic).last(20)
+    @topics = @user.topics.order('id DESC').includes(:node).last(20)
   end
 
   def edit
@@ -21,15 +21,15 @@ class UsersController < ApplicationController
   end
 
   def replies
-    @replies = @user.replies.includes(:topic).paginate(params_page)
+    @replies = @user.replies.order('id DESC').includes(:topic).paginate(params_page)
   end
 
   def topics
-    @topics = @user.topics.includes(:node).paginate(params_page)
+    @topics = @user.topics.order('id DESC').includes(:node).paginate(params_page)
   end
 
   def favorites
-    @favorites = @user.favorites.paginate(params_page)
+    @favorites = @user.favorites.order('id DESC').paginate(params_page)
     @topics = Topic.where(id:@favorites.pluck(:topic_id)).includes(:node)
   end
 

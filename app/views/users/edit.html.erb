@@ -9,9 +9,8 @@
       <%= lang('site.avatar_notice') %>
     </div>
 
-    <% @errors = @errors || flash[:errors] %>
-    <% if @errors.present? %>
-      <%= render partial: "layouts/errors",locals:{errors:@errors}  %>
+    <% if flash[:errors].present? %>
+      <%= render partial: "layouts/errors",locals:{errors:flash[:errors]}  %>
     <% end %>
 
     <%= form_for @user do |f| %>

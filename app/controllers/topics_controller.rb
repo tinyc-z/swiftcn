@@ -38,7 +38,7 @@ class TopicsController < ApplicationController
 
   def index
     @nodes = Node.is_parent.includes(:childs)
-    @topics = Topic.order('updated_at DESC').includes(:user,:node,:last_reply_user).paginate(params_page)
+    @topics = Topic.filter(params[:filter]).includes(:user,:node,:last_reply_user).paginate(params_page)
     @links = Link.all
     # @filter
     # topics
