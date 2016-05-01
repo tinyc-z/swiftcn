@@ -3,7 +3,7 @@ class RepliesController < ApplicationController
 
   def create
     authorize! :create, Reply
-    topic = Topic.find(params[:topic])
+    topic = Topic.find(params[:topic_id])
     reply = topic.replies.build(create_params)
     reply.user = current_user
     reply.save

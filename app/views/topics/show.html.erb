@@ -88,7 +88,7 @@
 
     <%= render 'composing_help_block' %>
 
-    <%= form_tag(replies_path(topic:@topic.id),method:'post') do %>
+    <%= form_tag(replies_path(topic_id:@topic.id)) do %>
 
         <div class="form-group">
           <% 

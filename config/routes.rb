@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       post :toggle_up_vote
       post :toggle_attention
       post :toggle_favorit
+      post :append
 
       put :toggle_recomend
       put :toggle_wiki
