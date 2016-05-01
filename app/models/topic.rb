@@ -38,7 +38,9 @@ class Topic < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   belongs_to :node, :counter_cache => true
 
-  validates :title, :presence => true
+  validates_length_of :title, :minimum => 5, :maximum => 120, :allow_blank => false
+
+  validates :title, :uniqueness => true
   validates :body, :presence => true
   validates :user, :presence => true
   validates :node, :presence => true

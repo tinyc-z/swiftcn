@@ -5,8 +5,8 @@ class CreateAuthentications < ActiveRecord::Migration
       t.integer :user_id
       t.integer :uid
 
-      t.string :provider, null: false, limit:190
-      t.string :access_token, limit:190
+      t.string :provider, null: false
+      t.string :access_token
 
       t.datetime :expires_at
 

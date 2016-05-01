@@ -2,8 +2,8 @@ class CreateNodes < ActiveRecord::Migration
   def change
     create_table :nodes do |t|
 
-      t.string :name, limit:190
-      t.string :sulg, limit:190
+      t.string :name
+      t.string :sulg
 
       t.integer :parent_node 
       t.integer :topics_count, default:0

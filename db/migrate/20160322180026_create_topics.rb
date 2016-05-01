@@ -2,7 +2,7 @@ class CreateTopics < ActiveRecord::Migration
   def change
     create_table :topics do |t|
 
-      t.string :title, null: false, limit:190
+      t.string :title, null: false
 
       t.text :body
       t.text :body_original

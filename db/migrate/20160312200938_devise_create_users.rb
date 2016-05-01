@@ -2,10 +2,10 @@ class DeviseCreateUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
       ## Database authenticatable
-      t.string :email,              null: false, default: "",limit:190
+      t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
-      t.string :name,               null: false,limit:190
+      t.string :name,               null: false
 
       t.boolean :is_banned,         null: false, default:false
       
@@ -29,7 +29,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.datetime :deleted_at
 
       ## Recoverable
-      t.string   :reset_password_token,limit:190
+      t.string   :reset_password_token
       t.datetime :reset_password_sent_at
 
       ## Rememberable
