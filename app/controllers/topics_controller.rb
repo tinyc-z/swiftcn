@@ -24,7 +24,7 @@ class TopicsController < ApplicationController
   def append
     @topic = Topic.find(params_id)
     authorize! :update, @topic
-    append = @topic.appends.create(params.require(:append).permit(:body_original))
+    append = @topic.appends.create(params.require(:append).permit(:content))
     redirect_to @topic, :flash => { :errors => append.errors.full_messages }
   end
 

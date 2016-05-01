@@ -40,7 +40,7 @@
             <span class="meta"><%= "lang('site.Append')  #{index}" %> &nbsp;·&nbsp; <abbr class="timeago"><%= append.created_at %></abbr></span>
             <div class="sep5"></div>
             <div class="markdown-reply append-content">
-                <%=raw append.body %>
+                <%= append.content %>
             </div>
         </div>
     <% end %>
