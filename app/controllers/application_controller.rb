@@ -23,6 +23,9 @@ class ApplicationController < ActionController::Base
     params[:id]
   end
 
+  def params_page
+    {:page => params[:page]}
+  end
 
   if Rails.env.development?
     before_filter :fake_sign_in

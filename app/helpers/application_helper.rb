@@ -4,7 +4,7 @@ module ApplicationHelper
   # end
 
   def lang(str)
-    t(str,default:str.split('.').last)
+    str.lang
   end
 
   def current_url(encode=false)

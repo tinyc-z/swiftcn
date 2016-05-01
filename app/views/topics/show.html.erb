@@ -17,7 +17,7 @@
       </div>
 
       <div class="votes">
-        <%= link_to toggle_up_vote_topic_path(@topic), {class: "vote #{@topic.vote_up?(current_user) ? 'active' : ''}",remote:true,method: :post} do %>
+        <%= link_to toggle_up_vote_topic_path, {class: "vote #{@topic.vote_up?(current_user) ? 'active' : ''}",remote:true,method: :post} do %>
           &nbsp;<li class="fa fa-thumbs-o-up"></li>&nbsp;<span id="vote_up_count"><%= votes_count(@topic.votes_count) %></span>
         <% end %>
       </div>

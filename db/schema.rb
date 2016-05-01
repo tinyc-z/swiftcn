@@ -11,24 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501071239) do
-
-  create_table "activities", force: :cascade do |t|
-    t.integer  "user_id",     limit: 4
-    t.string   "entity_id",   limit: 191
-    t.string   "entity_type", limit: 191
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
-
-  add_index "activities", ["user_id"], name: "index_activities_on_user_id", using: :btree
+ActiveRecord::Schema.define(version: 20160501114537) do
 
   create_table "appends", force: :cascade do |t|
-    t.integer  "topic_id",      limit: 4
-    t.text     "content",          limit: 65535
+    t.integer  "topic_id",   limit: 4
+    t.text     "content",    limit: 65535
     t.datetime "deleted_at"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_index "appends", ["topic_id"], name: "index_appends_on_topic_id", using: :btree
@@ -56,6 +46,16 @@ ActiveRecord::Schema.define(version: 20160501071239) do
   add_index "authentications", ["access_token"], name: "index_authentications_on_access_token", using: :btree
   add_index "authentications", ["uid"], name: "index_authentications_on_uid", using: :btree
   add_index "authentications", ["user_id"], name: "index_authentications_on_user_id", using: :btree
+
+  create_table "event_logs", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.string   "entity_id",   limit: 191
+    t.string   "entity_type", limit: 191
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "event_logs", ["user_id"], name: "index_event_logs_on_user_id", using: :btree
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "user_id",    limit: 4

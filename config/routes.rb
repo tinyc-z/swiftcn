@@ -39,7 +39,7 @@ Rails.application.routes.draw do
       put :ban
       put :free
 
-      get :activities
+      get :calendar
 
       get :replies
       get :topics

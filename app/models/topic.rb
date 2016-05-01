@@ -33,7 +33,7 @@ class Topic < ActiveRecord::Base
   include FavoriteAble #收藏
   include BodyPipeline #生成body
   include ExistsAble
-  include ActivityAble
+  include EventLogAble
   
   belongs_to :user, :counter_cache => true
   belongs_to :node, :counter_cache => true

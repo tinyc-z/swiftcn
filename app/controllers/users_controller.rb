@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:ban, :free]
+  before_action :load_resource, except: [:index]
 
   def index
     @site_stat = Stat.singleton
@@ -6,24 +8,20 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find params_id
     @replies = @user.replies.includes(:topic).last(20)
     @topics = @user.topics.includes(:node).last(20)
   end
 
   def replies
-    @user = User.find params_id
-    @replies = @user.replies.includes(:topic).paginate(:page => params[:page])
+    @replies = @user.replies.includes(:topic).paginate(params_page)
   end
 
   def topics
-    @user = User.find params_id
-    @topics = @user.topics.includes(:node).paginate(:page => params[:page])
+    @topics = @user.topics.includes(:node).paginate(params_page)
   end
 
   def favorites
-    @user = User.find params_id
-    @favorites = @user.favorites.paginate(:page => params[:page])
+    @favorites = @user.favorites.paginate(params_page)
     @topics = Topic.where(id:@favorites.pluck(:topic_id)).includes(:node)
   end
 
@@ -31,23 +29,30 @@ class UsersController < ApplicationController
   
   end
 
-  def activities
-    @user = User.find params_id
-    render :json => @user.activities_data
+  def calendar
+    render :json => @user.calendar_data
   end
 
   def ban
-    user = User.find params_id
-    authorize! :manage, user
-    user.ban!
-    redirect_to user
+    authorize! :manage, @user
+    @user.ban!
+    redirect_to @user
   end
 
   def free
-    user = User.find params_id
-    authorize! :manage, user
-    user.free!
-    redirect_to user
+    authorize! :manage, @user
+    @user.free!
+    redirect_to @user
+  end
+
+  protected
+  def load_resource
+     # 处理有大写字母的情况
+    if params_id != params_id.downcase
+      redirect_to request.path.downcase, status: 301
+      return
+    end
+    @user = User.find(params_id)
   end
 
 end

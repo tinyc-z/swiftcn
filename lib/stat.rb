@@ -1,4 +1,5 @@
 class Stat
+
   attr_accessor :topic_count, :reply_count, :user_count
 
   def self.singleton
@@ -7,7 +8,6 @@ class Stat
       stat.topic_count = Topic.count
       stat.reply_count = Reply.count
       stat.user_count  = User.count
-      # p "StatReadCache"
       stat
     end
   end

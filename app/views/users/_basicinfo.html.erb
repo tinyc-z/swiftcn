@@ -66,7 +66,7 @@
   </a>
 <% end %>
 <% if can? :manage, @user %>
-  <%= link_to (@user.ban? ? free_user_path(@user) : ban_user_path(@user)),{method:'put',data: { confirm: "Are you sure?" },class:"btn btn-#{@user.ban? ? 'warning' : 'danger'} btn-block"} do %>
+  <%= link_to (@user.ban? ? free_user_path : ban_user_path),{method:'put',data: { confirm: "Are you sure?" },class:"btn btn-#{@user.ban? ? 'warning' : 'danger'} btn-block"} do %>
       <i class="fa fa-times"></i>
       <%= @user.ban? ? lang('site.Unblock User') : lang('site.Block User') %>
   <% end %>

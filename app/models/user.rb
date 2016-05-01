@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   has_many :sttentions#, dependent: :destroy
   has_many :favorites#, dependent: :destroy
 
-  has_many :activities
+  has_many :event_logs
 
   has_one :github,->{where(provider:'github')},class_name:'Authentication'
   
@@ -63,10 +63,10 @@ class User < ActiveRecord::Base
   #   "#{name}"
   # end
 
-  def activities_data
+  def calendar_data
     Rails.cache.fetch("#{cache_key}/activities_data",expires_in:5.minutes) do
-      activities = self.activities.where("created_at > ?",1.years.ago).group("date(created_at)").count
-      activities.map { |date,count| [date.to_time.to_i,count] }.to_h
+      event_logs = self.event_logs.where("created_at > ?",1.years.ago).group("date(created_at)").count
+      event_logs.map { |date,count| [date.to_time.to_i,count] }.to_h
     end
   end
 

@@ -5,7 +5,7 @@ class Reply < ActiveRecord::Base
   include VoteAble #点赞
   include BodyPipeline #生成body
   include ExistsAble
-  include ActivityAble
+  include EventLogAble
 
   validates :body, :presence => true
   validates :user, :presence => true

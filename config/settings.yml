@@ -1,0 +1,23 @@
+#域名
+HOST: 'swiftcn.io'
+
+#数据库
+DB_NAME: 'db_name'
+DB_USER: 'db_user'
+DB_PASSWORD: 'db_pwd'
+DB_HOST: 127.0.0.1
+
+#GiHtub授权
+GITHUB_KEY: 'xxxxx'
+GITHUB_SECRET: 'xxxx'
+
+#cdn 地址
+CDN_DOMAIN: ''
+# JOB 节点ids
+JOB_NODES: [17,18,19,25,26,27]
+#每页加载多少
+PER_PAGE: 20 
+#时区
+TIME_ZONE: 'Beijing' 
+#语言
+DEFAULT_LOCALE: 'zh-CN'
