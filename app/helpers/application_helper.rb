@@ -3,8 +3,8 @@ module ApplicationHelper
   #   content_tag :span, nil, hash.merge(class: "glyphicon glyphicon-#{icon_name_postfix.to_s.gsub('_','-')}")
   # end
 
-  def lang(str)
-    str.lang
+  def lang(str,hash={})
+    str.lang(hash)
   end
 
   def current_url(encode=false)

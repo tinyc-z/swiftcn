@@ -3,11 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SwiftcnRuby</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
+  <% if params[:page].to_i > 1 %>
+    <% meta_title = "#{lang('site.which page',page: params[:page].to_i)} - #{lang('site.name')}" %>
+  <% else %>
+    <% meta_title = lang('site.name') %>
+  <% end %>
+
+  <%= display_meta_tags :site => meta_title, :separator=>'-', :reverse => true %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= render 'layouts/config.js' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
 </head>
 <body id="body" data-action="<%="#{controller.controller_name}@#{controller.action_name}"%>">
   <div id="wrap">
@@ -16,13 +25,11 @@
 
       <div class="container">
 
-        <!-- @include('flash::message') -->
-
         <%= yield %>
 
         <!-- for weixing share-->
         <div style="display: none">
-            <img src="/logo-300.jpg"/>
+            <img src="/logo-300.jpg" alt="" />
         </div>
 
       </div>
@@ -40,7 +47,6 @@
 
       </div>
     </div>
-
 
 </body>
 </html>
