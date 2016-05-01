@@ -10,12 +10,13 @@ module BodyPipeline
         gfm: true
       }
       pipeline = HTML::Pipeline.new([
-        HTML::Pipeline::ImageFilter,
         HTML::Pipeline::MarkdownFilter,
+        # HTML::Pipeline::ImageFilter,
         HTML::Pipeline::SanitizationFilter,
         PipelineLinkFilter,
         HTML::Pipeline::MentionFilter
       ], context)
+
       result = pipeline.call(text)
       self.body = result[:output].to_html
     end
