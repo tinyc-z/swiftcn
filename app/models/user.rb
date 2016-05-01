@@ -45,6 +45,13 @@ class User < ActiveRecord::Base
   include CounterStat #统计
   include RoleAble
   include ExistsAble
+
+  validates_length_of :city, :maximum => 50, :allow_blank => true
+  validates_length_of :company, :maximum => 50, :allow_blank => true
+  validates_length_of :twitter_account, :maximum => 191, :allow_blank => true
+  validates_length_of :personal_website, :maximum => 191, :allow_blank => true
+  validates_length_of :signature, :maximum => 191, :allow_blank => true
+  validates_length_of :introduction, :maximum => 191, :allow_blank => true
   
   belongs_to :role
   has_many :topics#, dependent: :destroy

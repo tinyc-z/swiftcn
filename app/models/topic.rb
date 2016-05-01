@@ -40,7 +40,6 @@ class Topic < ActiveRecord::Base
 
   validates_length_of :title, :minimum => 5, :maximum => 120, :allow_blank => false
 
-  validates :title, :uniqueness => true
   validates :body, :presence => true
   validates :user, :presence => true
   validates :node, :presence => true

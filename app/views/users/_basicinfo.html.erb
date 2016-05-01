@@ -1,5 +1,5 @@
 <div style="text-align: center;">
-  <a href="">
+  <a href="<%=user_path%>">
     <%=image_tag(@user.avatar,size: "206", alt: @user.name, class:"img-thumbnail users-show-avatar",style:"width: 206px;margin: 4px 4px 15px;min-height:190px")%>
   </a>
 </div>
@@ -8,11 +8,7 @@
 
   <dt><lable>ID:</lable></dt><dd><%= @user.id %></dd>
 
-  <dt><label><%=lang('site.Username')%>:</label></dt><dd><strong><%= @user.name %></strong></dd>
-
-  <% if @user.try(:real_name).present? %>
-    <dt class="adr"><label> <%= lang('site.Real Name') %>:</label></dt><dd><span class="org"><%= @user.real_name %></span></dd>
-  <% end %>
+  <dt><label><%=lang('site.UserName')%>:</label></dt><dd><strong><%= @user.name %></strong></dd>
 
   <%if @user.github.present? %>
     <dt><label>Github:</label></dt>
@@ -66,7 +62,7 @@
   </a>
 <% end %>
 <% if can? :manage, @user %>
-  <%= link_to (@user.ban? ? free_user_path : ban_user_path),{method:'put',data: { confirm: "Are you sure?" },class:"btn btn-#{@user.ban? ? 'warning' : 'danger'} btn-block"} do %>
+  <%= link_to (@user.ban? ? free_user_path : ban_user_path),{method:'post',data: { confirm: "Are you sure?" },class:"btn btn-#{@user.ban? ? 'warning' : 'danger'} btn-block"} do %>
       <i class="fa fa-times"></i>
       <%= @user.ban? ? lang('site.Unblock User') : lang('site.Block User') %>
   <% end %>

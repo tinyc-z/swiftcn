@@ -36,8 +36,8 @@ Rails.application.routes.draw do
 
   resources :users do 
     member do
-      put :ban
-      put :free
+      post :ban
+      post :free
 
       get :calendar
 

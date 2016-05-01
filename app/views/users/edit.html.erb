@@ -1,0 +1,55 @@
+<%= render :layout => 'content_layout', :locals => {basicinfo_class:'hidden-in-mobile'} do %>
+<div class="panel panel-default">
+
+  <div class="panel-body ">
+
+    <div class="alert alert-warning">
+      <%= lang('site.avatar_notice') %>
+    </div>
+
+    <% @errors = @errors || flash[:errors] %>
+    <% if @errors.present? %>
+      <%= render partial: "layouts/errors",locals:{errors:@errors}  %>
+    <% end %>
+
+    <%= form_for @user do |f| %>
+
+      <div class="form-group">
+        <%=f.text_field :city,{class: 'form-control', placeholder: lang('site.City')} %>
+      </div>
+
+      <div class="form-group">
+        <%=f.text_field :company,{class: 'form-control', placeholder: lang('site.Company')} %>
+      </div>
+
+      <div class="form-group">
+        <%=f.text_field :twitter_account,{class: 'form-control', placeholder: lang('site.twitter_placeholder')} %>
+      </div>
+
+      <div class="form-group">
+        <%=f.text_field :personal_website,{class: 'form-control', placeholder: lang('site.personal_website_placebolder')} %>
+      </div>
+
+      <div class="form-group">
+        <%=f.text_area :signature,{class: 'form-control',
+                                   rows: 3,
+                                   placeholder: lang('site.signature_placeholder')} %>
+      </div>
+
+      <div class="form-group">
+        <%=f.text_area :introduction,{class: 'form-control',
+                                      rows: 3,
+                                      placeholder: lang('site.introduction_placeholder')} %>
+      </div>
+
+      <div class="form-group status-post-submit">
+        <%= f.submit lang('site.Save'), {class: 'btn btn-primary'} %>
+      </div>
+
+
+    <%end%>
+
+  </div>
+
+</div>
+<% end %>

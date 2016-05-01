@@ -1,6 +1,6 @@
 <div class="users-show">
 
-  <div class="col-md-3 box" style="padding: 15px 15px;">
+  <div class="col-md-3 box <%=defined?(basicinfo_class) ? basicinfo_class : '' %>" style="padding: 15px 15px;">
     <%= render "basicinfo" %>
   </div>
 

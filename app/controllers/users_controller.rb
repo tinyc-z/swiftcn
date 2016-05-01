@@ -12,6 +12,14 @@ class UsersController < ApplicationController
     @topics = @user.topics.includes(:node).last(20)
   end
 
+  def edit
+  end
+
+  def update
+    @user.update_attributes(update_params)
+    redirect_to edit_user_path, :flash => { :errors => @user.errors.full_messages }
+  end
+
   def replies
     @replies = @user.replies.includes(:topic).paginate(params_page)
   end
@@ -53,6 +61,10 @@ class UsersController < ApplicationController
       return
     end
     @user = User.find(params_id)
+  end
+
+  def update_params
+    params.require(:user).permit(:city,:company,:twitter_account,:personal_website,:signature,:introduction)
   end
 
 end

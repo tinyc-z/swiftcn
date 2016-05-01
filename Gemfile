@@ -56,6 +56,9 @@ gem 'sanitize'
 gem 'd3_rails'
 gem 'cal-heatmap-rails'
 
+# Search Engine Optimization (SEO) plugin for Ruby on Rails applications.
+gem 'meta-tags' 
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
