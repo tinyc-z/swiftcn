@@ -11,7 +11,7 @@ module BodyPipeline
         gfm: true
       }
       pipeline = HTML::Pipeline.new([
-        HTML::Pipeline::ImageFilter,
+        # HTML::Pipeline::ImageFilter,
         HTML::Pipeline::MarkdownFilter,
         HTML::Pipeline::SanitizationFilter,
         PipelineLinkFilter,
