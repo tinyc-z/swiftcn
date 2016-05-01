@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateTips < ActiveRecord::Migration
   def change
     create_table :tips do |t|

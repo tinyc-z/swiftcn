@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module AttentionAble
   extend ActiveSupport::Concern
 

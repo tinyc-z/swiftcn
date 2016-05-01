@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateAuthentications < ActiveRecord::Migration
   def change
     create_table :authentications do |t|

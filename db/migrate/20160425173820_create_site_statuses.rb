@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateSiteStatuses < ActiveRecord::Migration
   def change
     create_table :site_statuses do |t|

@@ -1,3 +1,16 @@
+# -*- encoding : utf-8 -*-
+# == Schema Information
+#
+# Table name: event_logs
+#
+#  id          :integer          not null, primary key
+#  user_id     :integer
+#  entity_id   :string(191)
+#  entity_type :string(191)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class EventLog < ActiveRecord::Base
 
   belongs_to :user

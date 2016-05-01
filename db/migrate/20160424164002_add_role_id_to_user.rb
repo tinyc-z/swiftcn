@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AddRoleIdToUser < ActiveRecord::Migration
   def change
     add_reference :users, :role, index: true, foreign_key: true

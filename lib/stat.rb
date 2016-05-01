@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Stat
 
   attr_accessor :topic_count, :reply_count, :user_count

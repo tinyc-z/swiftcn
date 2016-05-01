@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class String
   def lang(pars={})
     I18n.t(self,{default:self.split('.').last}.merge(pars))

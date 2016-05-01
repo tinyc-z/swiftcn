@@ -16,7 +16,7 @@
           <abbr class="timeago" ><%= reply.created_at %></abbr>
           <span> •  </span>
           <% floorIndex = reply_floor_from_index(index) %>
-          <a name="reply<%=floorIndex%>" class="anchor" href="#reply<%=floorIndex%>" aria-hidden="true">#<%=floorIndex%></a>
+          <a name="reply<%=reply.id%>" class="anchor" href="#reply<%=reply.id%>" aria-hidden="true">#<%=floorIndex%></a>
           <span class="operate pull-right">
             <%= link_to toggle_up_vote_reply_path(reply), {remote:true,method: :post} do %>
               <i class="fa fa-thumbs-o-up" style="font-size:14px;"></i> 

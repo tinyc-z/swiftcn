@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class TopicsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_resource, except: [:new,:create,:index]

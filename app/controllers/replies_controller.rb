@@ -1,5 +1,6 @@
+# -*- encoding : utf-8 -*-
 class RepliesController < ApplicationController
-  before_action :authenticate_user! #, except: [:index, :show]
+  before_action :authenticate_user!
   before_action :load_resource, except: [:create]
 
   def create

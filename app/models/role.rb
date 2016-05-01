@@ -1,3 +1,14 @@
+# -*- encoding : utf-8 -*-
+# == Schema Information
+#
+# Table name: roles
+#
+#  id         :integer          not null, primary key
+#  name       :string(191)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 # ['registered', 'banned', 'editer', 'admin']
 
 class Role < ActiveRecord::Base

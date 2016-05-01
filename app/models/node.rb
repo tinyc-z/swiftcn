@@ -1,10 +1,11 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: nodes
 #
 #  id             :integer          not null, primary key
-#  name           :string(190)
-#  sulg           :string(190)
+#  name           :string(191)
+#  sulg           :string(191)
 #  parent_node_id :integer
 #  topics_count   :integer          default("0")
 #  sort           :integer          default("0")
@@ -15,8 +16,7 @@
 
 class Node < ActiveRecord::Base
   acts_as_paranoid
-  
-  include ExistsAble
+
 
   has_many :topics
   has_many :childs, class_name: 'Node', foreign_key: :parent_node_id

@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# -*- encoding : utf-8 -*-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501114537) do
+ActiveRecord::Schema.define(version: 20160501161214) do
 
   create_table "appends", force: :cascade do |t|
     t.integer  "topic_id",   limit: 4
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20160501114537) do
     t.datetime "updated_at",              null: false
   end
 
-  add_index "event_logs", ["user_id"], name: "index_event_logs_on_user_id", using: :btree
+  add_index "event_logs", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -89,6 +89,17 @@ ActiveRecord::Schema.define(version: 20160501114537) do
 
   add_index "nodes", ["name"], name: "index_nodes_on_name", using: :btree
   add_index "nodes", ["parent_node_id"], name: "index_nodes_on_parent_node_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "from_user_id", limit: 4
+    t.integer  "user_id",      limit: 4
+    t.integer  "topic_id",     limit: 4
+    t.integer  "reply_id",     limit: 4
+    t.text     "body",         limit: 65535
+    t.string   "notify_type",  limit: 191
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "replies", force: :cascade do |t|
     t.integer  "user_id",       limit: 4

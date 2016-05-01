@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # user
 # Factory.define :user do |user|
 #   user.first_name Faker::Name::first_name

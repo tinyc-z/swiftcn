@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateReplies < ActiveRecord::Migration
   def change
     create_table :replies do |t|

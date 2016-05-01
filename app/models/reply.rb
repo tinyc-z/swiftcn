@@ -1,10 +1,26 @@
+# -*- encoding : utf-8 -*-
+# == Schema Information
+#
+# Table name: replies
+#
+#  id            :integer          not null, primary key
+#  user_id       :integer
+#  topic_id      :integer
+#  body          :text(65535)
+#  body_original :text(65535)
+#  is_blocked    :boolean          default("0")
+#  votes_count   :integer          default("0")
+#  deleted_at    :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 class Reply < ActiveRecord::Base
   acts_as_paranoid
 
   include CounterStat #统计
   include VoteAble #点赞
   include BodyPipeline #生成body
-  include ExistsAble
   include EventLogAble
 
   validates :body, :presence => true

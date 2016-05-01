@@ -1,9 +1,10 @@
+# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: topics
 #
 #  id                 :integer          not null, primary key
-#  title              :string(190)      not null
+#  title              :string(191)      not null
 #  body               :text(65535)
 #  body_original      :text(65535)
 #  excerpt            :text(65535)

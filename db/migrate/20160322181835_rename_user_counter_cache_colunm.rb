@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class RenameUserCounterCacheColunm < ActiveRecord::Migration
   def change
     rename_column :users ,:topic_count ,:topics_count
