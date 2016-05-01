@@ -72,6 +72,7 @@ zh-CN:
     'Preview': '预览'
     'No content.': '没有内容'
     'Please using markdown': '请使用 Markdown 格式书写 ;-)'
+    'Please using plantext': '请使用纯文本书写 ;-)'
     'Current Node': '当前节点'
     'Pick a node': '请选择节点'
     'Please write down a topic': '请填写标题'
