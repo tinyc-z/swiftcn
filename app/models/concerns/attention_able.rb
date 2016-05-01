@@ -3,15 +3,15 @@ module AttentionAble
   extend ActiveSupport::Concern
 
   def did_attention?(user)
-    self.attentions.where(user_id:user.id).exists? if user
+    attentions.where(user:user).exists? if user
   end
 
   def remove_attention(user)
-    self.attentions.where(user_id:user.id).destroy_all
-  end  
+    attentions.where(user:user).destroy_all
+  end
 
   def add_attention(user)
-    self.attentions.find_or_create_by(user_id:user.id)
+    attentions.find_or_create_by(user:user)
   end
 end
 

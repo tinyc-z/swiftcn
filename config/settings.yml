@@ -15,6 +15,7 @@ GITHUB_SECRET: 'xxxx'
 CDN_DOMAIN: ''
 # JOB 节点ids
 JOB_NODES: [17,18,19,25,26,27]
+JOB_DEFAULT_NODE: 26 # job 发帖时默认node
 #每页加载多少
 PER_PAGE: 20 
 #时区

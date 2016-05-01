@@ -53,7 +53,7 @@ class Topic < ActiveRecord::Base
 
   has_many :votes, as: :votable, dependent: :destroy
 
-  default_scope { where(is_blocked: false) }
+  default_scope -> { where(is_blocked: false) }
   
   before_save :build_excerpt
 
@@ -62,7 +62,7 @@ class Topic < ActiveRecord::Base
   # end
 
   def similar_topics(limit=8,shuffle=false)
-    topics = Topic.where(node_id:self.node_id).where.not(id: self.id)
+    topics = Topic.where(node:node).where.not(id:id)
     if shuffle
       topics.limit(limit*5).sample(limit)
     else
@@ -71,11 +71,7 @@ class Topic < ActiveRecord::Base
   end
 
   def has_reply?
-    self.replies_count > 0
-  end
-
-  def did_favorited_topic?(topic)
-    Favorite.exists?(user_id:self.id,topic_id:topic.id)
+    replies_count > 0
   end
 
   def self.filter(name)
@@ -93,9 +89,9 @@ class Topic < ActiveRecord::Base
   end
 
   def fix_last_reply_user
-    reply = Reply.where(topic_id:self.id).last
+    reply = Reply.where(topic:self).last
     if reply.present?
-      self.update_column(:last_reply_user_id,reply.user_id)
+      self.update_column(:last_reply_user,reply.user)
     end
   end
 

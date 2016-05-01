@@ -27,14 +27,14 @@ class Role < ActiveRecord::Base
   end
 
   def registered?
-    self.name == 'registered'
+    name == 'registered'
   end
 
   def editer?
-    self.name == 'editer'
+    name == 'editer'
   end
 
   def admin?
-    self.name == 'admin'
+    name == 'admin'
   end
 end

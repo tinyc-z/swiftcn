@@ -22,4 +22,8 @@ class Notification < ActiveRecord::Base
   has_one :topic
   has_one :reply
 
+  def self.topic_attent(topic,user)
+    new(from_user:user,topic:topic,)
+  end
+
 end

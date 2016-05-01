@@ -7,7 +7,7 @@ module EventLogAble
   end
   
   def log_create_event
-    EventLog.create(user_id:self.user_id,entity_id:self.id,entity_type:"create_#{self.class.to_s.underscore}")
+    EventLog.create(user:user,entity_id:id,entity_type:"create_#{self.class.to_s.underscore}")
   end
 
 end

@@ -3,15 +3,15 @@ module VoteAble
   extend ActiveSupport::Concern
 
   def vote_up?(user)
-    self.votes.where(user_id:user.id).exists? if user
+    votes.where(user:user).exists? if user
   end
 
   def vote_up(user)
-    self.votes.find_or_create_by(user_id:user.id)
+    votes.find_or_create_by(user:user)
   end
 
   def cancel_vote_up(user)
-    self.votes.where(user_id:user.id).destroy_all
+    votes.where(user:user).destroy_all
   end
 
 end

@@ -12,5 +12,5 @@
 
 class Favorite < ActiveRecord::Base
   belongs_to :topic
-  has_one :user
+  belongs_to :user
 end

@@ -10,15 +10,6 @@ class CreateActivities < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-
     add_index :activities, :user_id
-
-    Topic.find_each do |single|
-      Activity.create(user_id:single.user_id,entity_id:single.id,entity_type:"create_#{single.class.to_s.underscore}",created_at:single.created_at);
-    end
-    Reply.find_each do |single|
-      Activity.create(user_id:single.user_id,entity_id:single.id,entity_type:"create_#{single.class.to_s.underscore}",created_at:single.created_at);
-    end
-    
   end
 end
