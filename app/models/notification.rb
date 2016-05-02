@@ -24,11 +24,17 @@ class Notification < ActiveRecord::Base
 
   validate :user_not_eq_from_user
 
+  after_save :inc_user_unread_count
+
   def bodyDigest(c)
     body
   end
 
   protected
+  def inc_user_unread_count
+    User.increment_counter(:unread_notification_count,user_id)
+  end
+
   def user_not_eq_from_user
     if user_id == from_user_id
       errors.add(:user, "eq to from_user")

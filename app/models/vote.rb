@@ -21,15 +21,31 @@ class Vote < ActiveRecord::Base
   belongs_to :reply#, :counter_cache => true
   belongs_to :user
 
-  after_save :touch_counter_cache
-  after_destroy :touch_counter_cache
+  after_create :increment_counter_cache
+  after_destroy :decrement_counter_cache
 
-  def touch_counter_cache
-    votes_count = Vote.where(votable_id:self.votable_id,votable_type:votable_type).count
-    if votable_type == 'Topic'
-      Topic.where(id:self.votable_id).update_all({votes_count:votes_count})
-    elsif votable_type == 'Reply'
-      Reply.where(id:self.votable_id).update_all({votes_count:votes_count})
+  protected
+  def increment_counter_cache
+    if self.votable_id.present?
+      if votable_type == 'Topic'
+        # Topic.where(id:self.votable_id).update_all({votes_count:votes_count})
+        Topic.increment_counter(:votes_count,self.votable_id)
+      elsif votable_type == 'Reply'
+        # Reply.where(id:self.votable_id).update_all({votes_count:votes_count})
+        Reply.increment_counter(:votes_count,self.votable_id)
+      end
+    end
+  end
+
+  def decrement_counter_cache
+    if self.votable_id.present?
+      if votable_type == 'Topic'
+        # Topic.where(id:self.votable_id).update_all({votes_count:votes_count})
+        Topic.decrement_counter(:votes_count,self.votable_id)
+      elsif votable_type == 'Reply'
+        # Reply.where(id:self.votable_id).update_all({votes_count:votes_count})
+        Reply.decrement_counter(:votes_count,self.votable_id)
+      end
     end
   end
 
