@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   root 'topics#index'
   
   get 'login' => 'users#login'
+  post 'logout' => 'users#logout'
   get 'about' => 'pages#about'
   get 'jobs' => 'nodes#jobs'
 
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :replies do 
+  resources :replies,only:[:create,:destroy] do 
     member do
       post :toggle_up_vote
     end
@@ -47,6 +48,8 @@ Rails.application.routes.draw do
       get :favorites
     end
   end
+
+  resources :notifications, only:[:index]
 
   
 

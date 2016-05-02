@@ -67,6 +67,7 @@ class TopicsController < ApplicationController
       @topic.cancel_vote_up(current_user)
     else
       @topic.vote_up(current_user)
+      NotifyCenter.topic_upvote(current_user,@topic)
     end
     @topic.reload
   end
@@ -77,6 +78,7 @@ class TopicsController < ApplicationController
       @topic.remove_attention(current_user)
     else
       @topic.add_attention(current_user)
+      NotifyCenter.topic_attent(current_user,@topic)
     end
   end
 
@@ -86,18 +88,21 @@ class TopicsController < ApplicationController
       @topic.remove_favorit(current_user)
     else
       @topic.add_favorit(current_user)
+      NotifyCenter.topic_favorite(current_user,@topic)
     end
   end
 
   def toggle_recomend
     authorize! :manage, @topic
     @is_excellent = !@topic.is_excellent
+    NotifyCenter.topic_mark_excellent(current_user,@topic) if @is_excellent
     @topic.update_attribute(:is_excellent,@is_excellent)
   end
 
   def toggle_wiki
     authorize! :manage, @topic
     @is_wiki = !@topic.is_wiki
+    NotifyCenter.topic_mark_wiki(current_user,@topic) if @is_wiki
     @topic.update_attribute(:is_wiki,@is_wiki)
   end
 

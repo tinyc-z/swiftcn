@@ -8,7 +8,9 @@ class RepliesController < ApplicationController
     topic = Topic.find(params[:topic_id])
     reply = topic.replies.build(create_params)
     reply.user = current_user
-    reply.save
+    if reply.save
+      NotifyCenter.topic_replied(topic,reply)
+    end
     redirect_to topic, :flash => { :errors => reply.errors.full_messages }
   end
 
@@ -19,6 +21,7 @@ class RepliesController < ApplicationController
       @reply.cancel_vote_up(current_user)
     else
       @reply.vote_up(current_user)
+      NotifyCenter.reply_upvote(current_user,@reply)
     end
     @reply.reload
   end

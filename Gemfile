@@ -72,7 +72,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'faker'
   gem 'factory_girl_rails'
-  # gem 'annotate' #生成model注释,配合magic_encoding用
+  gem 'annotate' #生成model注释,配合magic_encoding用
 end
 
 group :development do

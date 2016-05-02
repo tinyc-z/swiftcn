@@ -1,7 +1,7 @@
 <ul class="list-group row">
 
   <% @replies.each_with_index do |reply,index| %>
-    <li class="list-group-item media" <%= reply.votes_count >= 2 ? 'style="margin-top: 0px; background-color: #fffce9"' : 'style="margin-top: 0px;"' %> >
+    <li class="list-group-item media" <%=raw reply.votes_count >= 2 ? 'style="margin-top: 0px; background-color: #fffce9"' : 'style="margin-top: 0px;"' %> >
 
       <div class="avatar pull-left">
         <%= link_to reply.user do %>

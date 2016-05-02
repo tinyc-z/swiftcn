@@ -18,9 +18,9 @@
 
                 <% if !@filter %>
                     <% if topic.order > 0 %>
-                        <span class="label label-warning topic-pin-label"><%= lang('Stick') %></span>
+                        <span class="label label-warning topic-pin-label"><%= lang('site.Stick') %></span>
                     <% elsif topic.is_excellent? %>
-                            <span class="label label-success topic-recommend-label"><%= lang('Recommended') %></span>
+                            <span class="label label-success topic-recommend-label"><%= lang('site.Recommended') %></span>
                     <% end %>
                 <% end %>
 

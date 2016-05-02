@@ -17,13 +17,23 @@
 class Notification < ActiveRecord::Base
 
   belongs_to :user, :counter_cache => true
-  has_one :from_user,class_name: 'User', foreign_key: :from_user_id
+  belongs_to :from_user,class_name: 'User', foreign_key: :from_user_id
 
-  has_one :topic
-  has_one :reply
+  belongs_to :topic
+  belongs_to :reply
 
-  def self.topic_attent(topic,user)
-    new(from_user:user,topic:topic,)
+  validate :user_not_eq_from_user
+
+  def bodyDigest(c)
+    body
+  end
+
+  protected
+  def user_not_eq_from_user
+    if user_id == from_user_id
+      errors.add(:user, "eq to from_user")
+      false
+    end
   end
 
 end

@@ -6,59 +6,57 @@
       <%= lang('site.My Notifications') %>
     </div>
 
-      <% if @notifications.present? %>
-        <div class="panel-body remove-padding-horizontal notification-index">
-            <ul class="list-group row">
-                <% @notifications.each do |notification| %>
-                  
-                 <li class="list-group-item media" style="margin-top: 0px;">
-                 
-                    <%if notification.topic.present? %>
-                        <div class="avatar pull-left">
-                            <%= link_to notification.fromUser do %>
-                              <%=image_tag(notification.fromUser,size: "38", alt: notification.fromUser.name, class:"media-object img-thumbnail avatar")%>
-                            <% end %>
-                        </div>
-                        
-                        <div class="infos">
-
-                          <div class="media-heading">
-
-                            <a href="{{ route('users.show', [$notification->fromUser->name]) }}">
-                                <% notification.fromUser.name %>
-                            </a>
-                            <%#= $notification->present()->lableUp %>:
-
-                            <a href="{{ route('topics.show', [$notification->topic->id]) }}{{{ !empty($notification->reply_id) ? '#reply' . $notification->reply_id : '' }}}" title="{{{ $notification->topic->title }}}">
-                                <%= notification.topic.title.truncate(50) %>
-                            </a>
-
-                            <span class="meta">
-                                 • <%= lang('site.at') %> • <span class="timeago"><%= notification.created_at %></span>
-                            </span>
-                          </div>
-                          <div class="media-body markdown-reply content-body">
-                                <%= notification.bodyDigest(240) %>
-                          </div>
-                        </div>
-                    <% else %>
-                      <div class="deleted text-center"><%= lang('site.Data has been deleted.') %></div>
-                    <% end %>
-                </li>
+    <% if @notifications.present? %>
+      <div class="panel-body remove-padding-horizontal notification-index">
+        <ul class="list-group row">
+          <% @notifications.each do |notify| %>
+            
+           <li class="list-group-item media" style="margin-top: 0px;">
+           
+            <%if notify.topic.present? %>
+              <div class="avatar pull-left">
+                <%= link_to notify.from_user do %>
+                  <%=image_tag(notify.from_user.avatar,size: "38", alt: notify.from_user.name, class:"media-object img-thumbnail avatar")%>
                 <% end %>
-            </ul>
+              </div>
+              
+              <div class="infos">
 
-        </div>
+                <div class="media-heading">
 
-        <div class="panel-footer text-right remove-padding-horizontal pager-footer">
-            <!-- Pager -->
-            {{ $notifications->links(); }}
+                  <%= link_to notify.from_user.name,notify.from_user%>
+                  
+                  <%=  action_text(notify) %>
+                  :
+                  <%= link_to notify.topic.title.truncate(50),topic_path_with_reply(notify) %>
+
+                  <span class="meta"> • <%= lang('site.at') %> • <span class="timeago"><%= notify.created_at %></span>
+                  </span>
+                </div>
+                <div class="media-body markdown-reply content-body">
+                      <%= notify.bodyDigest(240) %>
+                </div>
+              </div>
+            <% else %>
+              <div class="deleted text-center"><%= lang('site.Data has been deleted.') %></div>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="panel-footer text-right remove-padding-horizontal pager-footer">
+        <!-- Pager -->
+        <div class="digg_pagination">
+          <%= will_paginate @replies,inner_window:1,outer_window:0%>
         </div>
+      </div>
 
     <% else %>
-        <div class="panel-body">
-            <div class="empty-block">{{ lang('You dont have any notice yet!') }}</div>
-        </div>
-    <% end %>
 
+      <div class="panel-body">
+        <div class="empty-block"><%= lang('site.You dont have any notice yet!') %></div>
+      </div>
+
+    <% end %>
 </div>

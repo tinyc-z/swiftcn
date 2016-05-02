@@ -16,14 +16,38 @@
           <%= text_field_tag :keyword,nil,placeholder:lang("site.Search"),class:'form-control search-input mac-style' %>
         <% end %>
         
-        <%= menu_item nil, '/login#some',class:'text-warning' do %>
-          <span class="badge badge-important">
-              &nbsp;<i class="fa fa-envelope-o"></i>&nbsp;1
-              </span>
-        <% end %>
-        <%= menu_item nil, '/login#',class:'btn btn-info login-btn github-login',id:'login-btn' do %>
-          <i class="fa fa-github-alt"></i>
-          <%= lang('site.Login')%>
+        <% if user_signed_in? %>
+          <%= menu_item nil, notifications_path,class:'text-warning' do %>
+            <span class="badge <%=current_user.unread_notification_count>0 ? 'badge-important' : 'badge-fade' %>">
+                &nbsp;<i class="fa fa-envelope-o"></i>&nbsp;
+                <%=current_user.unread_notification_count>0 ? current_user.unread_notification_count : '' %>
+            </span>
+          <% end %>
+
+          <%= menu_item nil, user_path(current_user) do %>
+            <span >
+                &nbsp;<i class="fa fa-github-alt"></i>&nbsp;
+                <%=current_user.name%>
+            </span>
+          <% end %>
+
+          <li>
+            <%=link_to '/logout',{method:'post',data: { confirm: "Are you sure?" }} do %>
+              <i class="fa fa-sign-out"></i>
+              退出
+            <% end %>
+          </li>
+
+        <% else %>
+          <%= menu_item nil, '/login#some',class:'text-warning' do %>
+            <span class="badge badge-important">
+                &nbsp;<i class="fa fa-envelope-o"></i>&nbsp;1
+            </span>
+          <% end %>
+          <%= menu_item nil, '/login#',class:'btn btn-info login-btn github-login',id:'login-btn' do %>
+            <i class="fa fa-github-alt"></i>
+            <%= lang('site.Login')%>
+          <% end %>
         <% end %>
 
       <% end %>
