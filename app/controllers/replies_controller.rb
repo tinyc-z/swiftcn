@@ -32,7 +32,6 @@ class RepliesController < ApplicationController
     redirect_to topic_path(@reply.topic_id)
   end
 
-
   protected
   def create_params
     params.permit(:body_original)

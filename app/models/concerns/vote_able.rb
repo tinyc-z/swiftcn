@@ -3,7 +3,7 @@ module VoteAble
   extend ActiveSupport::Concern
 
   def vote_up?(user)
-    votes.where(user:user).exists? if user
+    votes.exists?(user:user) if user
   end
 
   def vote_up(user)

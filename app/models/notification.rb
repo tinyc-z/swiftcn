@@ -23,6 +23,7 @@ class Notification < ActiveRecord::Base
   belongs_to :reply
 
   validate :user_not_eq_from_user
+  validate :uniq_record
 
   after_save :inc_user_unread_count
 
@@ -33,6 +34,13 @@ class Notification < ActiveRecord::Base
   protected
   def inc_user_unread_count
     User.increment_counter(:unread_notification_count,user_id)
+  end
+
+  def uniq_record
+    if Notification.exists?(user_id:user_id,from_user_id:from_user_id,topic_id:topic_id,reply_id:reply_id,notify_type:notify_type)
+      errors.add(:user, "notification record exists!")
+      false
+    end
   end
 
   def user_not_eq_from_user

@@ -26,25 +26,21 @@ class Vote < ActiveRecord::Base
 
   protected
   def increment_counter_cache
-    if self.votable_id.present?
+    if votable_id.present?
       if votable_type == 'Topic'
-        # Topic.where(id:self.votable_id).update_all({votes_count:votes_count})
-        Topic.increment_counter(:votes_count,self.votable_id)
+        Topic.increment_counter(:votes_count,votable_id)
       elsif votable_type == 'Reply'
-        # Reply.where(id:self.votable_id).update_all({votes_count:votes_count})
-        Reply.increment_counter(:votes_count,self.votable_id)
+        Reply.increment_counter(:votes_count,votable_id)
       end
     end
   end
 
   def decrement_counter_cache
-    if self.votable_id.present?
+    if votable_id.present?
       if votable_type == 'Topic'
-        # Topic.where(id:self.votable_id).update_all({votes_count:votes_count})
-        Topic.decrement_counter(:votes_count,self.votable_id)
+        Topic.decrement_counter(:votes_count,votable_id)
       elsif votable_type == 'Reply'
-        # Reply.where(id:self.votable_id).update_all({votes_count:votes_count})
-        Reply.decrement_counter(:votes_count,self.votable_id)
+        Reply.decrement_counter(:votes_count,votable_id)
       end
     end
   end

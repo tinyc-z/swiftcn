@@ -3,7 +3,7 @@ module AttentionAble
   extend ActiveSupport::Concern
 
   def did_attention?(user)
-    attentions.where(user:user).exists? if user
+    attentions.exists?(user:user) if user
   end
 
   def remove_attention(user)

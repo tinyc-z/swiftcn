@@ -3,7 +3,7 @@ module FavoriteAble
   extend ActiveSupport::Concern
 
   def did_favorit?(user)
-    favorites.where(user:user).exists? if user
+    favorites.exists?(user:user) if user
   end
 
   def remove_favorit(user)

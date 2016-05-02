@@ -33,6 +33,11 @@ class Reply < ActiveRecord::Base
 
   default_scope ->{ where(is_blocked: false) }
 
+  #BodyPipeline 回调
+  def can_mention_user?(login)
+    return User.exists?(name:login)
+  end
+
   private
   after_create :set_last_reply_user
   def set_last_reply_user

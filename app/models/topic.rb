@@ -61,6 +61,11 @@ class Topic < ActiveRecord::Base
   #   "#{id}-#{URI.encode(title.gsub(".", "").gsub(" ", "-"))}" 
   # end
 
+  #BodyPipeline 回调
+  def can_mention_user?(login)
+    return User.exists?(name:login)
+  end
+
   def similar_topics(limit=8,shuffle=false)
     topics = Topic.where(node:node).where.not(id:id)
     if shuffle
