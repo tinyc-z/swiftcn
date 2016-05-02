@@ -19,5 +19,12 @@ module ApplicationHelper
   def url_decode(url)
     URI.decode(url)
   end
+
+  def display_notice_and_alert
+    msg = ''
+    msg << (render partial: "layouts/notice",locals:{messages:notice}) if notice.present?
+    msg << (render partial: "layouts/alert",locals:{messages:alert}) if alert.present?
+    msg if msg.present?
+  end
   
 end

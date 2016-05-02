@@ -11,7 +11,7 @@ class RepliesController < ApplicationController
     if reply.save
       NotifyCenter.topic_replied(topic,reply)
     end
-    redirect_to topic, :flash => { :errors => reply.errors.full_messages }
+    redirect_to topic, alert: reply.errors.full_messages
   end
 
   def toggle_up_vote

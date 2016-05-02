@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
   def update
     @user.update_attributes(update_params)
-    redirect_to edit_user_path, :flash => { :errors => @user.errors.full_messages }
+    redirect_to edit_user_path, alert: @user.errors.full_messages
   end
 
   def replies

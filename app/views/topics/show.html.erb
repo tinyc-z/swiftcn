@@ -84,11 +84,8 @@
   <!-- Reply Box -->
   
   <div class="reply-box form box-block">
-    
-    <% @errors = @errors || flash[:errors] %>
-    <% if @errors.present? %>
-      <%= render partial: "layouts/errors",locals:{errors:@errors}  %>
-    <% end %>
+
+    <%=raw display_notice_and_alert %>
 
     <%= render 'composing_help_block' %>
 

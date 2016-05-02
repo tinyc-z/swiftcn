@@ -24,7 +24,7 @@ class TopicsController < ApplicationController
   def append
     authorize! :update, @topic
     append = @topic.appends.create(params.require(:append).permit(:content))
-    redirect_to @topic, :flash => { :errors => append.errors.full_messages }
+    redirect_to @topic, alert:append.errors.full_messages
   end
 
   def create
@@ -33,6 +33,7 @@ class TopicsController < ApplicationController
     if @topic.save
       redirect_to @topic
     else
+      flash.now[:alert] = @topic.errors.full_messages
       render 'new'
     end
   end
