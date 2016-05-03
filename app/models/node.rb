@@ -29,7 +29,7 @@ class Node < ActiveRecord::Base
   private
   def build_sulg
     if name_changed?
-      sulg = Pinyin.t(name, splitter: '-').downcase #=> "zhong-guo"  
+      self.sulg = Pinyin.t(name, splitter: '-').downcase #=> "zhong-guo"  
     end
   end
 

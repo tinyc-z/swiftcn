@@ -219,6 +219,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
+    truncate_html (0.9.3)
     turbolinks (2.5.3)
       coffee-rails
     twitter-bootstrap-rails (3.2.2)
@@ -276,6 +277,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   spring
   therubyracer
+  truncate_html
   turbolinks
   twitter-bootstrap-rails
   uglifier (>= 1.3.0)

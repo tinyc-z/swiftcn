@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160501220023) do
+ActiveRecord::Schema.define(version: 20160502194805) do
 
   create_table "appends", force: :cascade do |t|
     t.integer  "topic_id",   limit: 4
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160501220023) do
     t.datetime "deleted_at"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "user_id",    limit: 4
   end
 
   add_index "appends", ["topic_id"], name: "index_appends_on_topic_id", using: :btree
@@ -94,11 +95,12 @@ ActiveRecord::Schema.define(version: 20160501220023) do
     t.integer  "from_user_id", limit: 4
     t.integer  "user_id",      limit: 4
     t.integer  "topic_id",     limit: 4
-    t.integer  "reply_id",     limit: 4
+    t.integer  "entity_id",    limit: 4
     t.text     "body",         limit: 65535
     t.string   "notify_type",  limit: 191
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.text     "body_digest",  limit: 65535
   end
 
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree

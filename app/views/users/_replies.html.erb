@@ -2,7 +2,7 @@
   <% replies.each do |reply| %>
     <li class="list-group-item">
       <%if reply.topic.present? %>
-          <%= link_to reply.topic.title.truncate(80),reply.topic,class:'remove-padding-left' %>
+          <%= link_to reply.topic.title.truncate(80),topic_path_append_reply(reply.topic,reply),class:'remove-padding-left' %>
           <span class="meta">
              <%=lang('site.at')%> <span class="timeago"><%= reply.created_at %></span>
           </span>

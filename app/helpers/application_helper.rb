@@ -26,5 +26,9 @@ module ApplicationHelper
     msg << (render partial: "layouts/alert",locals:{messages:alert}) if alert.present?
     msg if msg.present?
   end
+
+  def topic_path_append_reply(topic,reply)
+    topic_path(topic,reply:reply.id)+"#reply#{reply.id}"
+  end
   
 end

@@ -42,7 +42,8 @@ class HTML::Pipeline::MentionFilter
 
   #根据源码改造
   # https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/@mention_filter.rb
-  MentionLogins = %w()
+  MentionLogins.clear
+  
   def link_to_mentioned_user(login)
     result[:not_mentioned_usernames] ||= []
     delegate = context[:delegate] 

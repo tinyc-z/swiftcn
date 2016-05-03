@@ -3,7 +3,7 @@ module EventLogAble
   extend ActiveSupport::Concern
 
   included do
-     after_create :log_create_event
+    after_create :log_create_event
   end
   
   def log_create_event

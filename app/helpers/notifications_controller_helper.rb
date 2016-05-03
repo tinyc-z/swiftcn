@@ -1,12 +1,11 @@
 module NotificationsControllerHelper
 
-  def topic_path_with_reply(notify)
+  def topic_path_with_notify(notify)
     if notify.reply_id.to_i > 0
       topic_path(notify.topic,reply:notify.reply_id)+"#reply#{notify.reply_id}"
     else
       topic_path(notify.topic)
     end
-    
   end
 
   def action_text(notify) 
@@ -22,9 +21,9 @@ module NotificationsControllerHelper
       when 'topic_attent'
         lang('site.Attented your topic:')
       when 'topic_upvote'
-        lang('site.Up Vote your topic')
+        lang('site.Up Vote your topic:')
       when 'reply_upvote'
-        lang('site.Up Vote your reply')
+        lang('site.Up Vote your reply:')
       when 'topic_mark_wiki'
         lang('site.has mark your topic as wiki:')
       when 'topic_mark_excellent'

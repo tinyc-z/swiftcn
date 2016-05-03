@@ -3,7 +3,7 @@ module CounterStat
   extend ActiveSupport::Concern
 
   included do
-     after_create :for_stat
+    after_create :for_stat
   end
   
   def for_stat

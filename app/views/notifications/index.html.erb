@@ -27,14 +27,13 @@
                   <%= link_to notify.from_user.name,notify.from_user%>
                   
                   <%=  action_text(notify) %>
-                  :
-                  <%= link_to notify.topic.title.truncate(50),topic_path_with_reply(notify) %>
+                  <%= link_to notify.topic.title.truncate(50),topic_path_with_notify(notify) %>
 
                   <span class="meta"> • <%= lang('site.at') %> • <span class="timeago"><%= notify.created_at %></span>
                   </span>
                 </div>
                 <div class="media-body markdown-reply content-body">
-                      <%= notify.bodyDigest(240) %>
+                      <%=raw notify.body_digest %>
                 </div>
               </div>
             <% else %>

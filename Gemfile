@@ -58,6 +58,7 @@ gem 'cal-heatmap-rails'
 
 # Search Engine Optimization (SEO) plugin for Ruby on Rails applications.
 gem 'meta-tags' 
+gem 'truncate_html'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
