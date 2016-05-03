@@ -103,9 +103,7 @@ class Topic < ActiveRecord::Base
   protected
   def build_excerpt
     if body.present?
-      _excerpt = body.gsub(/<\/?[^>]*>/, '').gsub(/\n\n+/, "\n")
-      _excerpt = _excerpt.gsub(/^\n|\n$/, '').gsub(/\s\s+/, ' ').truncate(110)
-      self.excerpt = _excerpt
+      self.excerpt = ActionController::Base.helpers.sanitize(body,:tags=>[]).squish.truncate(110)
     end
   end
 
