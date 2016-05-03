@@ -1,17 +1,17 @@
 # -*- encoding : utf-8 -*-
 class RepliesController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_resource, except: [:create]
+  load_resource
 
   def create
     authorize! :create, Reply
     topic = Topic.find(params[:topic_id])
-    reply = topic.replies.build(create_params)
-    reply.user = current_user
-    if reply.save
-      NotifyCenter.topic_replied(topic,reply)
+    @reply.topic = topic
+    @reply.user = current_user
+    if @reply.save
+      NotifyCenter.topic_replied(topic,@reply)
     end
-    redirect_to topic, alert: reply.errors.full_messages
+    redirect_to topic, alert: @reply.errors.full_messages
   end
 
   def toggle_up_vote
@@ -37,7 +37,4 @@ class RepliesController < ApplicationController
     params.permit(:body_original)
   end
 
-  def load_resource
-    @reply = Reply.find(params_id)
-  end
 end

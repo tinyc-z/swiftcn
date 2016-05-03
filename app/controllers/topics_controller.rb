@@ -1,10 +1,9 @@
 # -*- encoding : utf-8 -*-
 class TopicsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :load_resource, except: [:new,:create,:index]
+  load_resource
 
   def new
-    @topic = Topic.new
     @topic.node_id = params[:node_id]
   end
 
@@ -32,7 +31,6 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = Topic.new(create_params)
     @topic.user = current_user
     if @topic.save
       redirect_to @topic
@@ -44,10 +42,8 @@ class TopicsController < ApplicationController
 
   def index
     @nodes = Node.is_parent.includes(:childs)
-    @topics = Topic.filter(params[:filter]).includes(:user,:node,:last_reply_user).paginate(params_page)
+    @topics = @topics.filter(params[:filter]).includes(:user,:node,:last_reply_user).paginate(params_page)
     @links = Link.all
-    # @filter
-    # topics
   end
 
   def show
@@ -78,6 +74,7 @@ class TopicsController < ApplicationController
   end
 
   def toggle_attention
+    authorize! :update, Attention
     @did_attention = @topic.did_attention?(current_user)
     if @did_attention
       @topic.remove_attention(current_user)
@@ -88,6 +85,7 @@ class TopicsController < ApplicationController
   end
 
   def toggle_favorit
+    authorize! :update, Favorite
     @did_favorit = @topic.did_favorit?(current_user)
     if @did_favorit
       @topic.remove_favorit(current_user)
@@ -126,10 +124,6 @@ class TopicsController < ApplicationController
   protected
   def create_params
     params.require(:topic).permit(:body_original,:title).merge(node_id:params[:node_id])
-  end
-
-  def load_resource
-    @topic = Topic.find(params_id)
   end
 
 end

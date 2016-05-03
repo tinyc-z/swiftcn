@@ -1,11 +1,12 @@
 # -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:ban, :free]
-  before_action :load_resource, except: [:index]
+  before_action :user_name_downcase
+  before_action :authenticate_user!, only: [:edit,:update,:ban,:free]
+  load_resource
 
   def index
     @site_stat = Stat.singleton
-    @users = User.last(48);
+    @users = @users.last(48);
   end
 
   def show
@@ -55,13 +56,11 @@ class UsersController < ApplicationController
   end
 
   protected
-  def load_resource
+  def user_name_downcase
      # 处理有大写字母的情况
     if params_id != params_id.downcase
       redirect_to request.path.downcase, status: 301
-      return
     end
-    @user = User.find(params_id)
   end
 
   def update_params

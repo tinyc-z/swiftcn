@@ -37,10 +37,16 @@ class Ability
     unless user.ban?
         if user.admin?
             can :manage, :all
-        # elsif user.editer?
-        #     can :manage, Topic
-        #     can :manage, Reply
-        #     can :manage, User
+        elsif user.editer?
+            can :manage, Topic
+            can :manage, Reply
+            can :manage, Vote
+            can :manage, Favorite
+            can :manage, Attention
+            can :manage, User
+
+            cannot :destroy, User
+
         elsif user.is_member?
 
             can :create, Topic
@@ -50,6 +56,8 @@ class Ability
             can :destroy, Reply, :user_id => user.id
             
             can :update, Vote
+            can :update, Favorite
+            can :update, Attention
 
             can :create, User
             can :update, User,  :id => user.id

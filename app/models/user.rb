@@ -74,6 +74,10 @@ class User < ActiveRecord::Base
   #   "#{name}"
   # end
 
+  # def self.find(input)
+  #   find_by_name(input) || find_by_id(input)
+  # end
+
   def calendar_data
     Rails.cache.fetch("#{cache_key}/activities_data",expires_in:5.minutes) do
       event_logs = self.event_logs.where("created_at > ?",1.years.ago).group("date(created_at)").count
