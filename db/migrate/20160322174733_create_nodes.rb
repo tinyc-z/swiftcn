@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CreateNodes < ActiveRecord::Migration
   def change
     create_table :nodes do |t|

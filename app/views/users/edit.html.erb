@@ -11,7 +11,12 @@
 
     <%=raw display_notice_and_alert %>
 
-    <%= form_for @user do |f| %>
+    <%= form_for @user, :html => {:multipart => true} do |f| %>
+      
+      <div class="form-group">
+        <%= f.file_field :avator %>
+        <%= f.hidden_field :avator_cache %>
+      </div>
 
       <div class="form-group">
         <%=f.text_field :city,{class: 'form-control', placeholder: lang('site.City')} %>

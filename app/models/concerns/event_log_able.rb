@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 module EventLogAble
   extend ActiveSupport::Concern
 

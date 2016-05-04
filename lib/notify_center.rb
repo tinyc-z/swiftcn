@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class NotifyCenter
 
   def self.create_if_needed(scope)

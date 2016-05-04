@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 module TopicsHelper
   def url_for_share_to_weibo(topic)
     "http://service.weibo.com/share/share.php?type=3&pic=&url=#{current_url(true)}&title="+url_encode("#{topic.title} @Swift-CN")

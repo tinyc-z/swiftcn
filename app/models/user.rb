@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # == Schema Information
 #
 # Table name: users
@@ -42,6 +41,8 @@ class User < ActiveRecord::Base
           :rememberable,:registerable, :trackable, :omniauthable, omniauth_providers:[:github]
 
   delegate :github_name, :goodbye, to: :authentication
+
+  mount_uploader :avatar, AvatorUploader
 
   acts_as_paranoid
 

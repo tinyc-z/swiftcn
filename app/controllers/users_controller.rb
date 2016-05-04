@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
   before_action :user_name_downcase, except: [:index]
   before_action :authenticate_user!, only: [:edit,:update,:ban,:free]

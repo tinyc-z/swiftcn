@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class PipelineLinkFilter < HTML::Pipeline::Filter
   def call
     site_host = Settings.HOST

@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class CreateAttentions < ActiveRecord::Migration
   def change
     create_table :attentions do |t|

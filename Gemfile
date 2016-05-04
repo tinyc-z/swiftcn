@@ -55,6 +55,7 @@ gem 'sanitize'
 
 gem 'd3_rails'
 gem 'cal-heatmap-rails'
+gem 'carrierwave'
 
 # Search Engine Optimization (SEO) plugin for Ruby on Rails applications.
 gem 'meta-tags' 

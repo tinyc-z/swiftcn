@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class RepliesController < ApplicationController
   before_action :authenticate_user!
   load_resource

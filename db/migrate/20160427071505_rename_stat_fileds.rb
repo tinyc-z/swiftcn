@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 class RenameStatFileds < ActiveRecord::Migration
   def change
     rename_column :site_statuses, :vote_up_count,:vote_count
