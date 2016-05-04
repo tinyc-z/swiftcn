@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
-  before_action :user_name_downcase
+  before_action :user_name_downcase, except: [:index]
   before_action :authenticate_user!, only: [:edit,:update,:ban,:free]
-  load_resource
+  load_resource find_by: :name
 
   def index
     @site_stat = Stat.singleton

@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class NodesController < ApplicationController
-  
+  load_resource except: [:jobs]
+
   def show
-    @node = Node.find params_id
     @topics = @node.topics.includes(:user,:node,:last_reply_user).filter(params[:filter]).paginate(params_page)
   end
 

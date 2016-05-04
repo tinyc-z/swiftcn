@@ -74,11 +74,13 @@ group :development, :test do
   gem 'faker'
   gem 'factory_girl_rails'
   gem 'annotate' #生成model注释,配合magic_encoding用
+  gem 'quiet_assets'
+  gem 'pry-rails'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 3.0'
 
   gem 'byebug'
   # gem "pry-rails"

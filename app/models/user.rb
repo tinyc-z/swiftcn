@@ -70,13 +70,9 @@ class User < ActiveRecord::Base
   
   before_create :set_default_role
   
-  # def to_param
-  #   "#{name}"
-  # end
-
-  # def self.find(input)
-  #   find_by_name(input) || find_by_id(input)
-  # end
+  def to_param
+    "#{name}"
+  end
 
   def calendar_data
     Rails.cache.fetch("#{cache_key}/activities_data",expires_in:5.minutes) do
