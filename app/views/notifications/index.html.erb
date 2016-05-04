@@ -16,7 +16,7 @@
             <%if notify.topic.present? %>
               <div class="avatar pull-left">
                 <%= link_to notify.from_user do %>
-                  <%=image_tag(notify.from_user.avatar,size: "38", alt: notify.from_user.name, class:"media-object img-thumbnail avatar")%>
+                  <%=image_tag(notify.from_user.avatar.try(:thumb),size: "38", alt: notify.from_user.name, class:"media-object img-thumbnail avatar")%>
                 <% end %>
               </div>
               

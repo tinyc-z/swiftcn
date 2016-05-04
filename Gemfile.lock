@@ -131,6 +131,7 @@ GEM
     mime-types (3.0)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0221)
+    mini_magick (4.5.1)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     momentjs-rails (2.11.1)
@@ -279,6 +280,7 @@ DEPENDENCIES
   less-rails
   marked-rails
   meta-tags
+  mini_magick
   momentjs-rails
   mysql2 (~> 0.3.18)
   nprogress-rails

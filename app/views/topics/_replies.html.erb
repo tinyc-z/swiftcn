@@ -5,7 +5,7 @@
 
       <div class="avatar pull-left">
         <%= link_to reply.user do %>
-            <%=image_tag(reply.user.avatar,size: "48", alt: reply.user.name, class:"media-object img-thumbnail avatar")%>
+            <%=image_tag(reply.user.avatar.try(:thumb),size: "48", alt: reply.user.name, class:"media-object img-thumbnail avatar")%>
         <% end %>
       </div>
 

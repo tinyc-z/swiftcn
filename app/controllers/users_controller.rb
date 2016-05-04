@@ -63,7 +63,7 @@ class UsersController < ApplicationController
   end
 
   def update_params
-    params.require(:user).permit(:city,:company,:twitter_account,:personal_website,:signature,:introduction)
+    params.require(:user).permit(:avatar,:city,:company,:twitter_account,:personal_website,:signature,:introduction)
   end
 
 end

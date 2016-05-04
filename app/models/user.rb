@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
   delegate :github_name, :goodbye, to: :authentication
 
-  mount_uploader :avatar, AvatorUploader
+  mount_uploader :avatar, AvatarUploader
 
   acts_as_paranoid
 
