@@ -603,6 +603,17 @@ box-shadow:         4px 4px 5px 0px rgba(50, 50, 50, 0.19);
 
 }
 
+.github-login:hover {
+  background-color: #54b0cb !important;
+}
+
+.active>.github-login:hover {
+  background-color: #54b0cb !important;
+}
+
+.active>.github-login {
+  background-color: #5bc0de !important;
+}
 
 // ipad below
 @media (max-width: 1180px) {

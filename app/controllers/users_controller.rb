@@ -34,10 +34,6 @@ class UsersController < ApplicationController
     @topics = Topic.where(id:@favorites.pluck(:topic_id)).includes(:node)
   end
 
-  def login
-  
-  end
-
   def calendar
     render :json => @user.calendar_data
   end

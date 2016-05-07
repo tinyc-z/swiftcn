@@ -38,9 +38,11 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
    # :registerable,:recoverable,
   devise :database_authenticatable,
-          :rememberable,:registerable, :trackable, :omniauthable, omniauth_providers:[:github]
-
-  delegate :github_name, :goodbye, to: :authentication
+         :rememberable,
+         :registerable, 
+         :trackable,
+         :omniauthable, 
+         omniauth_providers:[:github]
 
   mount_uploader :avatar, AvatarUploader
 
@@ -70,6 +72,7 @@ class User < ActiveRecord::Base
   has_one :github,->{where(provider:'github')},class_name:'Authentication'
   
   before_create :set_default_role
+  after_commit :asyn_download_avatar, on: :create
   
   def to_param
     "#{name}"
@@ -82,6 +85,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def asyn_download_avatar
+    if self[:avatar].start_with?("http")
+      #has the remote image url
+      self.remote_avatar_url = self[:avatar]
+      self.save
+    end
+  end
 
   private
   def set_default_role

@@ -1,15 +1,12 @@
 Rails.application.routes.draw do
 
-  devise_for :users, controllers: {
+  devise_for :users, path: 'accounts', controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations',
-    sessions: "users/sessions"
   }
 
   root 'topics#index'
   
-  get 'login' => 'users#login'
-  post 'logout' => 'users#logout'
   get 'about' => 'pages#about'
   get 'jobs' => 'nodes#jobs'
 

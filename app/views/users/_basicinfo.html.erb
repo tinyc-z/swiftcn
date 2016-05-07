@@ -13,8 +13,8 @@
   <%if @user.github.present? %>
     <dt><label>Github:</label></dt>
     <dd>
-      <a href="https://github.com/<%= @user.github.github_name %>" rel="nofollow" target="_blank">
-        <i class="fa fa-github-alt"></i> <%= @user.github.github_name %>
+      <a href="https://github.com/<%= @user.github.try(:uname) %>" rel="nofollow" target="_blank">
+        <i class="fa fa-github-alt"></i> <%= @user.github.try(:uname) %>
       </a>
     </dd>
   <% end %>
@@ -61,6 +61,13 @@
     <i class="fa fa-edit"></i> <%= lang('site.Edit Profile') %>
   </a>
 <% end %>
+
+<% if current_user == @user %>
+  <%=link_to destroy_user_session_path ,{method:'delete',data: { confirm: "Are you sure?" },class:"btn btn-warning btn-block"} do %>
+      <%= lang('site.Logout') %>
+  <% end %>
+<% end %>
+
 <% if can? :manage, @user %>
   <%= link_to (@user.ban? ? free_user_path : ban_user_path),{method:'post',data: { confirm: "Are you sure?" },class:"btn btn-#{@user.ban? ? 'warning' : 'danger'} btn-block"} do %>
       <i class="fa fa-times"></i>

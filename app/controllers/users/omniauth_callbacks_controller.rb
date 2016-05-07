@@ -31,21 +31,35 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
 
   def omniauth_process
-    binding.pry
-    omniauth = request.env['omniauth.auth']
-    authentication = Authentication.where(provider: omniauth.provider, uid: omniauth.uid.to_s).first
 
-    if authentication
-      set_flash_message(:notice, :signed_in)
+    if current_user
+      sign_out(:user, current_user)
+    end
+
+    omniauth = request.env['omniauth.auth']
+    info = omniauth.except("extra")["info"]
+
+    authentication = Authentication.find_or_initialize_by(provider: omniauth.provider, uid: omniauth.uid.to_s)
+    authentication.access_token = omniauth.credentials.token
+    authentication.uname = info["nickname"]
+    authentication.save
+
+    if authentication.user
+      # set_flash_message(:notice, :signed_in)
       sign_in(:user, authentication.user)
       redirect_to root_path
-    elsif current_user
-      authentication = Authentication.create_from_hash(current_user.id, omniauth)
-      set_flash_message(:notice, :add_provider_success)
-      redirect_to authentications_path
     else
-      session[:omniauth] = omniauth.except("extra")
-      set_flash_message(:notice, :fill_your_email)
+      raw_info = omniauth.except("info")["extra"]["raw_info"]
+      session[:omniauth] = {
+        avatar: info["image"],
+        nickname: info["nickname"],
+        name: info["name"],
+        emails: [info["email"],(raw_info ? raw_info["email"] : nil)].compact,
+        uid: omniauth.uid,
+        provider: omniauth.provider,
+        access_token: omniauth.credentials.token,
+      }
+      # set_flash_message(:notice, :fill_your_email)
       redirect_to new_user_registration_path
     end
   end

@@ -85,8 +85,7 @@
   
   <div class="reply-box form box-block">
 
-    <%=raw display_notice_and_alert %>
-
+    <%=raw display_alert %>
     <%= render 'composing_help_block' %>
 
     <%= form_tag(replies_path(topic_id:@topic.id)) do %>

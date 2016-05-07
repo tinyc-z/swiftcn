@@ -8,7 +8,7 @@
           <%= menu_item lang("site.Topics"), root_path %>
           <%= menu_item lang("site.Jobs"), jobs_path %>
           <%= menu_item lang("site.About"), about_path ,class:'hidden-in-mobile'  %>
-          <%= menu_item lang("site.Document"), 'http://baidu.com' ,class:'hidden-in-mobile' %>
+          <%= menu_item lang("site.Document"), 'http://swiftcn.io/doc/', target:"_blank", class:'hidden-in-mobile' %>
       <% end %>
     
       <%= menu_group :pull => :right do %>
@@ -31,20 +31,20 @@
             </span>
           <% end %>
 
-          <li>
-            <%=link_to '/logout',{method:'post',data: { confirm: "Are you sure?" }} do %>
+          <li class="hidden-in-mobile">
+            <%=link_to destroy_user_session_path ,{method:'delete',data: { confirm: "Are you sure?" }} do %>
               <i class="fa fa-sign-out"></i>
-              退出
+              <%= lang('site.Logout') %>
             <% end %>
           </li>
 
         <% else %>
-          <%= menu_item nil, '/login#some',class:'text-warning' do %>
+          <%= menu_item nil, new_user_session_path(some:'some') ,class:'text-warning' do %>
             <span class="badge badge-important">
                 &nbsp;<i class="fa fa-envelope-o"></i>&nbsp;1
             </span>
           <% end %>
-          <%= menu_item nil, '/login#',class:'btn btn-info login-btn github-login',id:'login-btn' do %>
+          <%= menu_item nil, new_user_session_path ,class:'btn btn-info login-btn github-login',id:'login-btn' do %>
             <i class="fa fa-github-alt"></i>
             <%= lang('site.Login')%>
           <% end %>

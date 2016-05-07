@@ -1,8 +1,8 @@
 module NotificationsControllerHelper
 
   def topic_path_with_notify(notify)
-    if notify.reply_id.to_i > 0
-      topic_path(notify.topic,reply:notify.reply_id)+"#reply#{notify.reply_id}"
+    if notify.entity_id.to_i > 0
+      topic_path(notify.topic,reply:notify.entity_id)+"#reply#{notify.entity_id}"
     else
       topic_path(notify.topic)
     end

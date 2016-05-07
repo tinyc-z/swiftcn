@@ -4,40 +4,62 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    binding.pry
-    super
+    omniauth = session[:omniauth]
+    if omniauth.present?
+      @nickname = omniauth["nickname"]
+      @name = @nickname.present? ? @nickname : omniauth["nickname"]
+      @emails = omniauth["emails"]
+      @avatar = omniauth["avatar"]
+      @user = User.new(name:@name)
+    else
+      redirect_to root_path  
+    end
   end
 
   # POST /resource
+  # https://robohash.org/etesseofficiis.png?size=300x300&set=set1
   def create
-    super
+    omniauth = session[:omniauth]
+    authentication = Authentication.where(provider: omniauth["provider"], uid: omniauth["uid"].to_s).first
+    if authentication.user.blank?
+      user = User.new(sign_up_params.merge(email:params[:email]))
+      user[:avatar] = params[:avatar]
+      #先设置远程图片，然后延迟下载
+      user.transaction do
+        user.save!
+        authentication.user = user
+        authentication.save!
+        sign_in(:user, user)
+      end
+    end
+    redirect_to root_path
   end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+  end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+  end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
   # in to be expired now. This is useful if the user wants to
   # cancel oauth signing in/up in the middle of the process,
   # removing all OAuth session data.
-  # def cancel
-  #   super
-  # end
+  def cancel
+  end
 
-  # protected
+  protected
+
+  def sign_up_params
+    params.require(:user).permit(:name,:password)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params

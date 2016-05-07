@@ -27,11 +27,11 @@ class ApplicationController < ActionController::Base
     {:page => params[:page]}
   end
 
-  if Rails.env.development?
-    before_filter :fake_sign_in
-    def fake_sign_in
-      sign_in(:user, User.find(2)) #if !user_signed_in?
-    end
-  end
+  # if Rails.env.development?
+  #   before_filter :fake_sign_in
+  #   def fake_sign_in
+  #     sign_in(:user, User.find(2)) #if !user_signed_in?
+  #   end
+  # end
 
 end

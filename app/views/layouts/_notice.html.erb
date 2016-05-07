@@ -1,8 +1,12 @@
 <div class="alert alert-dismissable alert-info">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <ul>
-      <% messages.each do |message| %>
-        <li><%= message %></li>
+      <% if messages.is_a?(Array) %>
+        <% messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      <% elsif messages.is_a?(String) %>
+        <li><%= messages %></li>
       <% end %>
     </ul>
 </div>

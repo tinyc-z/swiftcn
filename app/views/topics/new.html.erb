@@ -9,7 +9,7 @@
           <%= lang('site.be_nice') %>
       </div>
 
-      <%=raw display_notice_and_alert %>
+      <%=raw display_alert %>
 
       <%=form_for @topic do |f| %>
 
@@ -54,7 +54,7 @@
     </div>
   </div>
 
-  <div class="col-md-4 side-bar">
+  <div class="col-md-4 side-bar hidden-in-mobile">
 
     <div class="panel panel-default corner-radius help-box">
       <div class="panel-heading text-center">

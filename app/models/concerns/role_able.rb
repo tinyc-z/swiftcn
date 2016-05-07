@@ -2,15 +2,15 @@ module RoleAble
   extend ActiveSupport::Concern
 
   def admin?
-    role.admin?
+    role&&role.admin?
   end
 
   def editer?
-    role.editer?
+    role&&role.editer?
   end
 
   def is_member?
-    role.registered?
+    role&&role.registered?
   end
 
   def ban?
