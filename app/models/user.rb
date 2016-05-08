@@ -51,6 +51,12 @@ class User < ActiveRecord::Base
   include CounterStat #统计
   include RoleAble
 
+  validates :name, format: { with: /\A[a-zA-Z0-9]+\Z/ }, :allow_blank => false
+  validates :email, format: { with: /\A[^@]+@[^@]+\z/ }, :allow_blank => false
+
+  validates_uniqueness_of :name
+  validates_uniqueness_of :email
+
   validates_length_of :city, :maximum => 50, :allow_blank => true
   validates_length_of :company, :maximum => 50, :allow_blank => true
   validates_length_of :twitter_account, :maximum => 191, :allow_blank => true
@@ -79,7 +85,7 @@ class User < ActiveRecord::Base
   end
 
   def calendar_data
-    Rails.cache.fetch("#{cache_key}/activities_data",expires_in:5.minutes) do
+    Rails.cache.fetch("#{cache_key}/calendar_data",expires_in:5.minutes) do
       event_logs = self.event_logs.where("created_at > ?",1.years.ago).group("date(created_at)").count
       event_logs.map { |date,count| [date.to_time.to_i,count] }.to_h
     end

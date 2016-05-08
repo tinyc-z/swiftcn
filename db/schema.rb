@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20160507181355) do
     t.datetime "updated_at",              null: false
   end
 
-  add_index "event_logs", ["user_id"], name: "index_events_on_user_id", using: :btree
+  add_index "event_logs", ["user_id"], name: "index_event_logs_on_user_id", using: :btree
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "user_id",    limit: 4

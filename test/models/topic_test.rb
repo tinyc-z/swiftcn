@@ -26,7 +26,9 @@
 require 'test_helper'
 
 class TopicTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "the truth" do
+    topic = Topic.new
+    assert_not topic.save, "Saved the topic without a title"
+    assert true
+  end
 end
