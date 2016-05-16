@@ -20,6 +20,9 @@ class Node < ActiveRecord::Base
   has_many :childs, class_name: 'Node', foreign_key: :parent_node_id
   belongs_to :parent, class_name: 'Node', foreign_key: :parent_node_id
 
+  validates :name, :presence => true
+  validates_uniqueness_of :name
+
   scope :is_parent, ->{where(parent_node_id: nil)}
 
   before_save :build_sulg

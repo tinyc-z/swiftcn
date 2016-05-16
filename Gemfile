@@ -79,6 +79,7 @@ group :development, :test do
   gem 'annotate' #生成model注释,配合magic_encoding用
   gem 'quiet_assets'
   gem 'pry-rails'
+  gem 'rspec-rails'
 end
 
 group :development do
