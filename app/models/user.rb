@@ -92,7 +92,7 @@ class User < ActiveRecord::Base
   end
 
   def asyn_download_avatar
-    if self[:avatar].start_with?("http")
+    if self[:avatar].present? && self[:avatar].start_with?("http")
       #has the remote image url
       self.remote_avatar_url = self[:avatar]
       self.save

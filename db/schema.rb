@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160507181355) do
+ActiveRecord::Schema.define(version: 20160517063218) do
 
   create_table "appends", force: :cascade do |t|
     t.integer  "topic_id",   limit: 4
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20160507181355) do
 
   create_table "nodes", force: :cascade do |t|
     t.string   "name",           limit: 191
-    t.string   "sulg",           limit: 191
+    t.string   "slug",           limit: 191
     t.integer  "parent_node_id", limit: 4
     t.integer  "topics_count",   limit: 4,   default: 0
     t.integer  "sort",           limit: 4,   default: 0

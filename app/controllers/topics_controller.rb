@@ -19,16 +19,6 @@ class TopicsController < ApplicationController
     end
   end
 
-  def append
-    authorize! :update, @topic
-    append = @topic.appends.new(params.require(:append).permit(:content))
-    append.user = current_user
-    if append.save
-      NotifyCenter.topic_append(@topic,append)
-    end
-    redirect_to @topic, alert:append.errors.full_messages
-  end
-
   def create
     @topic.user = current_user
     if @topic.save
@@ -70,28 +60,6 @@ class TopicsController < ApplicationController
       NotifyCenter.topic_upvote(current_user,@topic)
     end
     @topic.reload
-  end
-
-  def toggle_attention
-    authorize! :update, Attention
-    @did_attention = @topic.did_attention?(current_user)
-    if @did_attention
-      @topic.remove_attention(current_user)
-    else
-      @topic.add_attention(current_user)
-      NotifyCenter.topic_attent(current_user,@topic)
-    end
-  end
-
-  def toggle_favorit
-    authorize! :update, Favorite
-    @did_favorit = @topic.did_favorit?(current_user)
-    if @did_favorit
-      @topic.remove_favorit(current_user)
-    else
-      @topic.add_favorit(current_user)
-      NotifyCenter.topic_favorite(current_user,@topic)
-    end
   end
 
   def toggle_recomend

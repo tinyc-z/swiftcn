@@ -15,16 +15,25 @@ Rails.application.routes.draw do
   resources :topics do 
     member do
       post :toggle_up_vote
-      post :toggle_attention
-      post :toggle_favorit
-      post :append
 
       put :toggle_recomend
       put :toggle_wiki
       put :toggle_pin
       put :toggle_sink
     end
+
+    resources :appends, only: [:create]
+
+    resources :favorits do
+      post :toggle_favorit, on: :collection
+    end
+
+    resources :attentions do
+      post :toggle_attention, on: :collection
+    end
+
   end
+
 
   resources :replies,only:[:create,:destroy] do 
     member do

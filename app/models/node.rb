@@ -4,7 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  name           :string(191)
-#  sulg           :string(191)
+#  slug           :string(191)
 #  parent_node_id :integer
 #  topics_count   :integer          default("0")
 #  sort           :integer          default("0")
@@ -25,12 +25,12 @@ class Node < ActiveRecord::Base
 
   scope :is_parent, ->{where(parent_node_id: nil)}
 
-  before_save :build_sulg
+  before_save :build_slug
 
   private
-  def build_sulg
+  def build_slug
     if name_changed?
-      self.sulg = Pinyin.t(name, splitter: '-').downcase #=> "zhong-guo"  
+      self.slug = Pinyin.t(name, splitter: '-').downcase #=> "zhong-guo"  
     end
   end
 

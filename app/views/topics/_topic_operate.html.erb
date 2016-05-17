@@ -17,14 +17,14 @@
 
   <div class="pull-right">
 
-    <%= link_to toggle_attention_topic_path, {method: :post, remote: true, class:active_class(topic.did_attention?(current_user)), id:"topic-attent-button"} do %>
+    <%= link_to toggle_attention_topic_attentions_path(topic), {method: :post, remote: true, class:active_class(topic.did_attention?(current_user)), id:"topic-attent-button"} do %>
       <i class="glyphicon glyphicon-eye-open"></i> 
       <span>
         <%= topic.did_attention?(current_user)? lang('site.Cancel') : lang('site.Attent') %>
       </span>
     <% end %>
 
-    <%= link_to toggle_favorit_topic_path, {method: :post, remote: true, class:active_class(topic.did_favorit?(current_user)), id:"topic-favorit-button"} do %>
+    <%= link_to toggle_favorit_topic_favorits_path(topic), {method: :post, remote: true, class:active_class(topic.did_favorit?(current_user)), id:"topic-favorit-button"} do %>
       <i class="glyphicon glyphicon-bookmark"></i> 
       <span>
         <%= topic.did_favorit?(current_user)? lang('site.Cancel') : lang('site.Favorite') %>
