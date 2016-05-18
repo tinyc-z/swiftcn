@@ -78,7 +78,6 @@ class User < ActiveRecord::Base
   has_one :github,->{where(provider:'github')},class_name:'Authentication'
   
   before_create :set_default_role
-  after_commit :asyn_download_avatar, on: :create
   
   def to_param
     "#{name}"
@@ -90,13 +89,17 @@ class User < ActiveRecord::Base
       event_logs.map { |date,count| [date.to_time.to_i,count] }.to_h
     end
   end
-
-  def asyn_download_avatar
-    if self[:avatar].present? && self[:avatar].start_with?("http")
-      #has the remote image url
-      self.remote_avatar_url = self[:avatar]
-      self.save
+  
+  def download_remote_avatar
+    url = self[:avatar]
+    if url.present? && url.start_with?("http")
+      self.remote_avatar_url = url  
+      self.save(validate: false)
     end
+  end
+
+  def send_welcome_mail
+    Sendcloud::Mail.send_template(to: 'test@example.com', from: 'test@example.com', subject: 'test', html: 'test')
   end
 
   def avatar=(str)

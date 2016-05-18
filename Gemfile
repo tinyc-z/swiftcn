@@ -62,8 +62,12 @@ gem 'mini_magick'
 gem 'meta-tags' 
 gem 'truncate_html'
 
-# Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+# sidekiq
+gem 'sidekiq'
+gem 'sinatra', :require => nil
+
+# sendcloud
+gem 'sendcloud', '~> 0.2'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -80,6 +84,9 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'pry-rails'
   gem 'rspec-rails'
+
+  # Use ActiveModel has_secure_password
+  # gem 'bcrypt', '~> 3.1.7'  
 end
 
 group :development do

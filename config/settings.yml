@@ -11,6 +11,10 @@ DB_HOST: 127.0.0.1
 GITHUB_KEY: 'xxxxx'
 GITHUB_SECRET: 'xxxx'
 
+#发邮件sendcloud
+SEND_CLOUD_USER: 'xxx'
+SEND_CLOUD_KEY: 'xxx'
+
 #cdn 地址
 CDN_DOMAIN: ''
 # JOB 节点ids

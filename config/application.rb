@@ -30,6 +30,9 @@ module SwiftcnRuby
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
 
+    config.active_job.queue_adapter = :sidekiq #:inline
+
+
     # cdn
     cdn_host = Settings.CDN_DOMAIN
     if cdn_host.present?
