@@ -4,7 +4,9 @@ class NotificationsController < ApplicationController
   def index
     user = User.find 23
     @notifications = user.notifications.paginate(params_page)
-    user.update_column(:unread_notification_count,0)
+    if user.unread_notification_count > 0
+      user.update_column(:unread_notification_count,0)  
+    end
   end
 
   def unread_count
