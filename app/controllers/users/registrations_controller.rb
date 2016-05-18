@@ -22,8 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     omniauth = session[:omniauth]
     authentication = Authentication.where(provider: omniauth["provider"], uid: omniauth["uid"].to_s).first
     if authentication.user.blank?
-      user = User.new(sign_up_params.merge(email:params[:email]))
-      user[:avatar] = params[:avatar]
+      user = User.new(sign_up_params.merge(email:params[:email],avatar:params[:avatar]))
       #先设置远程图片，然后延迟下载
       user.transaction do
         user.save!

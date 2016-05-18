@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :user_name_downcase, except: [:index]
+  # before_action :user_name_downcase, except: [:index]
   before_action :authenticate_user!, only: [:edit,:update,:ban,:free]
   load_resource find_by: :name
 
@@ -51,12 +51,12 @@ class UsersController < ApplicationController
   end
 
   protected
-  def user_name_downcase
-     # 处理有大写字母的情况
-    if params_id != params_id.downcase
-      redirect_to request.path.downcase, status: 301
-    end
-  end
+  # def user_name_downcase
+  #    # 处理有大写字母的情况
+  #   if params_id != params_id.downcase
+  #     redirect_to request.path.downcase, status: 301
+  #   end
+  # end
 
   def update_params
     params.require(:user).permit(:avatar,:city,:company,:twitter_account,:personal_website,:signature,:introduction)

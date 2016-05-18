@@ -19,12 +19,11 @@ end
 case Rails.env
 when 'development','test'
     100.times do |t|
-      u = User.new({
+      u = User.create!({
         name:Pinyin.t(Faker::Name.name, splitter: '')+t.to_s,
         email:Faker::Internet.email,
+        avatar:Faker::Avatar.image
       })
-      u[:avatar] = Faker::Avatar.image
-      u.save!
     end
 
     nodes = Node.where('parent_node_id > ?',0)

@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :node do
-    name '测试'
+    name  { Faker::Name.name }
   end
 end

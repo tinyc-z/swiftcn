@@ -15,7 +15,7 @@ RSpec.describe Node, type: :model do
   end
 
   it "create node sulg" do
-    expect(node.sulg).to eq('ce-shi')
+    expect(node.slug).to eq(Pinyin.t(node.name, splitter: '-').downcase)
   end
 
 end

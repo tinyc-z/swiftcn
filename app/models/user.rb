@@ -99,6 +99,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def avatar=(str)
+    if str.is_a?(String)
+      self[:avatar] = str
+    else
+      super
+    end
+  end
+
   private
   def set_default_role
     self.role = Role.registered
