@@ -18,9 +18,11 @@
         
         <% if user_signed_in? %>
           <%= menu_item nil, notifications_path,class:'text-warning' do %>
-            <span class="badge <%=current_user.unread_notification_count>0 ? 'badge-important' : 'badge-fade' %>">
+            <span class="badge <%=current_user.unread_notification_count>0 ? 'badge-important' : '' %> badge-fade ">
                 &nbsp;<i class="fa fa-envelope-o"></i>&nbsp;
-                <%=current_user.unread_notification_count>0 ? current_user.unread_notification_count : '' %>
+                <span id='unread_notification_label'>
+                  <%=current_user.unread_notification_count > 0 ? current_user.unread_notification_count : '' %>
+                </span>
             </span>
           <% end %>
 

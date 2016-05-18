@@ -36,13 +36,30 @@ $(function(){
             this.refresh_moment();
             this.initEmoji();
             this.initScrollToTop();
-            // this.initEditorPreview();
+            this.fetch_unread();
             // this.initHeightLight();
             // this.initReplyOnPressKey();
             // this.initDeleteForm();
             // this.initInlineAttach();
             // this.snowing();
             // this.forceImageDataType();
+        },
+        fetch_unread: function(){
+          if (window.fetch_unread_timer) {
+            clearTimeout(window.fetch_unread_timer)  
+            $.getJSON(Settings.unread_count_url , function( data ) {
+                if (data['unread']>0) {
+                    $('#unread_notification_label').text(data['unread'])
+                    $('#unread_notification_label').parent().addClass('badge-important')
+                }else{
+                    $('#unread_notification_label').text("")
+                    $('#unread_notification_label').parent().removeClass('badge-important')  
+                }
+            });
+          }
+          if (Settings.logined) {
+            window.fetch_unread_timer=setTimeout('self.fetch_unread()', 5000);  
+          }
         },
         /**
          * Scroll to top in one click.

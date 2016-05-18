@@ -54,9 +54,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :notifications, only:[:index]
-
-  
+  resources :notifications, only:[:index] do
+    get :unread_count, on: :collection
+  end
 
   require 'sidekiq/web'
   authenticate :user, ->(u) { u.admin? } do
