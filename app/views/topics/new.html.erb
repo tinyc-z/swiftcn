@@ -11,7 +11,7 @@
 
       <%=raw display_alert %>
 
-      <%=form_for @topic do |f| %>
+      <%=form_for @topic, html:{id:'topic-create-form'} do |f| %>
 
         <div class="form-group">
           <select required class="selectpicker form-control" name="node_id" >

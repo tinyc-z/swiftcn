@@ -130,7 +130,7 @@ window._topic_ =
       })
 
       // Clear Local Storage on submit
-      $(".topic_create form").submit(function(event){
+      $("#topic-create-form").submit(function(event){
           localforage.removeItem('topic_create_content');
           localforage.removeItem('topic_title');
       });
