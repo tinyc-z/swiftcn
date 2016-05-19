@@ -86,7 +86,7 @@
     <%=raw display_alert %>
     <%= render 'composing_help_block' %>
 
-    <%= form_tag(replies_path(topic_id:@topic.id)) do %>
+    <%= form_tag(replies_path(topic_id:@topic.id),id:"reply-form") do %>
 
         <div class="form-group">
           <% 

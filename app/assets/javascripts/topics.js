@@ -128,6 +128,16 @@ window._topic_ =
               localforage.setItem('body_original', $(this).val());
           });
       })
+
+      // Clear Local Storage on submit
+      $(".topic_create form").submit(function(event){
+          localforage.removeItem('topic_create_content');
+          localforage.removeItem('topic_title');
+      });
+      $("#reply-form").submit(function(event){
+          localforage.removeItem('body_original');
+      });
+
     },
 
     initHeightLight: function(){
