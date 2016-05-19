@@ -149,8 +149,8 @@ window._topic_ =
         'right-trim': true,
         // 'break-lines': 80,
         'indent': 0,
-        // 'remove-initial-line-feed': true,
-        'tabs-to-spaces': 4,
+        'remove-initial-line-feed': true,
+        'tabs-to-spaces': 2,
         // 'spaces-to-tabs': 4
       });
 

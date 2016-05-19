@@ -18,15 +18,16 @@
           <% floorIndex = reply_floor_from_index(index) %>
           <a name="reply<%=reply.id%>" class="anchor" href="#reply<%=reply.id%>" aria-hidden="true">#<%=floorIndex%></a>
           <span class="operate pull-right">
-            <%= link_to toggle_up_vote_reply_path(reply), {remote:true,method: :post} do %>
-              <i class="fa fa-thumbs-o-up" style="font-size:14px;"></i> 
-              <span id="reply-vote-<%=reply.id%>">
-                <%= votes_count(reply.votes_count) %>
-              </span>
+            <% if reply.user != current_user %>
+              <%= link_to toggle_up_vote_reply_path(reply), {remote:true,method: :post} do %>
+                <i class="fa fa-thumbs-o-up" style="font-size:14px;"></i> 
+                <span id="reply-vote-<%=reply.id%>">
+                  <%= votes_count(reply.votes_count) %>
+                </span>
+              <% end %>
+              <span>•</span>
             <% end %>
-
-            <span>•</span>
-
+            
             <% if can? :destroy, reply %>
                 <%=link_to reply,{method: :delete, data: { confirm: "Are you sure?" }} do %>
                   <i class="fa fa-trash-o"></i>
