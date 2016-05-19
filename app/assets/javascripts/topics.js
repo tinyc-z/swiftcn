@@ -77,12 +77,12 @@ window._topic_ =
   initEditorPreview: function() {
       var self = this;
       $("#body_original").focus(function(event) {
+        log('focus')
           $("#reply_notice").fadeIn(1500);
           $("#preview-box").fadeIn(1500);
           $("#preview-lable").fadeIn(1500);
-
-          if (!$("#body_original").val()) {
-              $("html, body").animate({ scrollTop: $(document).height()}, 1800);
+          if (!$(this).val()) {
+              $("html, body").animate({ scrollTop: $(document).height()}, 600);
           }
       });
       $('#body_original').keyup(function(){
@@ -97,13 +97,13 @@ window._topic_ =
       $("#body_original").focus(function(event) {
 
           // Topic Title ON Topic Creation View
-          localforage.getItem('topic-title', function(err, value) {
-              if ($('.topic_create #topic-title').val() == '' && !err) {
-                  $('.topic_create #topic-title').val(value);
+          localforage.getItem('topic_title', function(err, value) {
+              if ($('.topic_create #topic_title').val() == '' && !err) {
+                  $('.topic_create #topic_title').val(value);
               };
           });
-          $('.topic_create #topic-title').keyup(function(){
-              localforage.setItem('topic-title', $(this).val());
+          $('.topic_create #topic_title').keyup(function(){
+              localforage.setItem('topic_title', $(this).val());
           });
 
           // Topic Content ON Topic Creation View
@@ -159,7 +159,7 @@ window._topic_ =
       self.initReplyOnPressKey()
       self.initAutocompleteAtUser()
       self.initLightBox()
-      // self.initLocalStorage()
+      self.initLocalStorage()
       self.initEditorPreview()
       self.initHeightLight()
       self.initInlineattach()
