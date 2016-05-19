@@ -141,15 +141,28 @@ window._topic_ =
     },
 
     initHeightLight: function(){
+      
+      Prism.plugins.NormalizeWhitespace.setDefaults({
+        'remove-trailing': true,
+        'remove-indent': true,
+        'left-trim': true,
+        'right-trim': true,
+        // 'break-lines': 80,
+        'indent': 0,
+        // 'remove-initial-line-feed': true,
+        'tabs-to-spaces': 4,
+        // 'spaces-to-tabs': 4
+      });
+
       // add language class
       $('pre>code').addClass('language-swift')
 
       // line-numbers
       $('pre:has(code)').addClass('line-numbers')
       $('pre:has(code)').attr('data-start',0)
-
       Prism.highlightAll();
     },
+
     initInlineattach: function(){
       var self = this;
       $('#body_original').inlineattachment({
