@@ -13,7 +13,7 @@ module TopicsHelper
   end
 
   def reply_floor_from_index(index)
-    ([0,params[:page].to_i-1].max)*Topic.per_page+index+1
+    ([0,params[:page].to_i-1].max)*Topic.default_per_page+index+1
   end
 
   def votes_count(count)

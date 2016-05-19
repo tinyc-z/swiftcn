@@ -43,8 +43,6 @@ gem 'chinese_pinyin'
 gem 'cancancan', '~> 1.10'
 # gem "squeel"
 
-gem 'will_paginate', '~> 3.1.0'
-gem 'will_paginate-bootstrap'
 gem 'marked-rails'
 gem 'momentjs-rails'
 
@@ -68,6 +66,10 @@ gem 'sinatra', :require => nil
 
 # sendcloud
 gem 'sendcloud', '~> 0.2'
+
+# rails_admin
+gem 'rails_admin'
+gem 'kaminari'
 
 # server
 # gem 'puma'

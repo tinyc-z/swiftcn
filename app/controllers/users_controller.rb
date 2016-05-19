@@ -22,15 +22,15 @@ class UsersController < ApplicationController
   end
 
   def replies
-    @replies = @user.replies.order('id DESC').includes(:topic).paginate(params_page)
+    @replies = @user.replies.order('id DESC').includes(:topic).page(params_page)
   end
 
   def topics
-    @topics = @user.topics.order('id DESC').includes(:node).paginate(params_page)
+    @topics = @user.topics.order('id DESC').includes(:node).page(params_page)
   end
 
   def favorites
-    @favorites = @user.favorites.order('id DESC').paginate(params_page)
+    @favorites = @user.favorites.order('id DESC').page(params_page)
     @topics = Topic.where(id:@favorites.pluck(:topic_id)).includes(:node)
   end
 

@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def params_page
-    {:page => params[:page]}
+    params[:page]
   end
 
   # if Rails.env.development?

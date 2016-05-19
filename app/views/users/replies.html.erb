@@ -12,9 +12,7 @@
 
           <!-- Pager -->
           <div class="pull-right" style="margin-right: 12px">
-            <div class="digg_pagination">
-                <%= will_paginate @replies,inner_window:1,outer_window:0%>
-            </div>
+            <%= paginate @replies %>
           </div>
 
         <%else%>

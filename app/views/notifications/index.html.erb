@@ -46,9 +46,7 @@
 
       <div class="panel-footer text-right remove-padding-horizontal pager-footer">
         <!-- Pager -->
-        <div class="digg_pagination">
-          <%= will_paginate @replies,inner_window:1,outer_window:0%>
-        </div>
+        <%= paginate @replies %>
       </div>
 
     <% else %>

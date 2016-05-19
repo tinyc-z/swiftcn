@@ -32,12 +32,12 @@ class TopicsController < ApplicationController
 
   def index
     @nodes = Node.is_parent.includes(:childs)
-    @topics = @topics.filter(params[:filter]).includes(:user,:node,:last_reply_user).paginate(params_page)
+    @topics = @topics.filter(params[:filter]).includes(:user,:node,:last_reply_user).page(params_page)
     @links = Link.all
   end
 
   def show
-    @replies = @topic.has_reply? ? @topic.replies.includes(:user).paginate(params_page) : []
+    @replies = @topic.has_reply? ? @topic.replies.includes(:user).page(params_page) : []
     @similar_topics = @topic.similar_topics(8,true)
     @tip = Tip.first
     @reply = Reply.new

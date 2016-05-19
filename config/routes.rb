@@ -60,11 +60,13 @@ Rails.application.routes.draw do
 
   resources :photos,only:[:create]
 
+
   require 'sidekiq/web'
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

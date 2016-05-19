@@ -40,7 +40,5 @@ module SwiftcnRuby
     end
 
   end
-
-  WillPaginate.per_page = Settings.PER_PAGE
   
 end
