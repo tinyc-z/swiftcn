@@ -374,7 +374,8 @@
     background-color: #e8f2fb;
     border-radius: 0px;
     color: #fff;
-    border: 0px solid #c9e1f6;
+    border: 0px solid #c9e1f6 !important;
+    border-radius: 0px !important;
     border-left: 2px solid #c9e1f6;
     margin: 1.2em -15px !important;
   }

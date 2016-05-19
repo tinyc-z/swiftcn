@@ -141,11 +141,14 @@ window._topic_ =
     },
 
     initHeightLight: function(){
-      // Prism.highlightAll();
-      // hljs.initHighlightingOnLoad();
-      $('pre code').each(function(i, block) {
-          hljs.highlightBlock(block);
-      });
+      // add language class
+      $('pre>code').addClass('language-swift')
+
+      // line-numbers
+      $('pre:has(code)').addClass('line-numbers')
+      $('pre:has(code)').attr('data-start',0)
+
+      Prism.highlightAll();
     },
     initInlineattach: function(){
       var self = this;
