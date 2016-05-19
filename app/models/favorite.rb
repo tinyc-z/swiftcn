@@ -10,6 +10,9 @@
 #
 
 class Favorite < ActiveRecord::Base
+  
+  include BaseModel
+
   belongs_to :topic
   belongs_to :user  
 end

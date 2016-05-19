@@ -50,6 +50,7 @@ class User < ActiveRecord::Base
 
   include CounterStat #统计
   include RoleAble
+  include BaseModel
 
   validates :name, format: { with: /\A[a-zA-Z0-9]+\Z/ }, :allow_blank => false
   validates :email, format: { with: /\A[^@]+@[^@]+\z/ }, :allow_blank => false

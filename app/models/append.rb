@@ -11,6 +11,9 @@
 #
 
 class Append < ActiveRecord::Base
+  
+  include BaseModel
+
   acts_as_paranoid
   
   belongs_to :topic

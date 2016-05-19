@@ -21,6 +21,7 @@ class Reply < ActiveRecord::Base
   include VoteAble #点赞
   include BodyPipeline #生成body
   include EventLogAble
+  include BaseModel
 
   validates :body, :presence => true
   validates :user, :presence => true

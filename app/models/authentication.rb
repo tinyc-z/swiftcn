@@ -15,6 +15,8 @@
 class Authentication < ActiveRecord::Base
   # attr_accessible :user_id, :provider, :uid, :access_token
 
+  include BaseModel
+  
   belongs_to :user
 
   validates :provider, :uid, :access_token, presence: true

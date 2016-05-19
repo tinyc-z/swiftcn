@@ -15,6 +15,8 @@
 
 class Notification < ActiveRecord::Base
 
+  include BaseModel
+
   belongs_to :user, :counter_cache => true
   belongs_to :from_user,class_name: 'User', foreign_key: :from_user_id
 

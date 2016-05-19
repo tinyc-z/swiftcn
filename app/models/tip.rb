@@ -9,4 +9,8 @@
 #
 
 class Tip < ActiveRecord::Base
+  include BaseModel
+
+  scope :rand_one, ->{ offset(rand(self.count)).first }
+
 end

@@ -9,8 +9,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @replies = @user.replies.order('id DESC').includes(:topic).last(20)
-    @topics = @user.topics.order('id DESC').includes(:node).last(20)
+    @replies = @user.replies.desc.includes(:topic).last(20)
+    @topics = @user.topics.desc.includes(:node).last(20)
   end
 
   def edit
@@ -22,16 +22,16 @@ class UsersController < ApplicationController
   end
 
   def replies
-    @replies = @user.replies.order('id DESC').includes(:topic).page(params_page)
+    @replies = @user.replies.desc.includes(:topic).page(params_page)
   end
 
   def topics
-    @topics = @user.topics.order('id DESC').includes(:node).page(params_page)
+    @topics = @user.topics.desc.includes(:node).page(params_page)
   end
 
   def favorites
-    @favorites = @user.favorites.order('id DESC').page(params_page)
-    @topics = Topic.where(id:@favorites.pluck(:topic_id)).includes(:node)
+    @favorites = @user.favorites.desc.page(params_page)
+    @topics = Topic.where(id:@favorites.pluck(:topic_id)).desc.includes(:node)
   end
 
   def calendar

@@ -32,14 +32,15 @@ class TopicsController < ApplicationController
 
   def index
     @nodes = Node.is_parent.includes(:childs)
-    @topics = @topics.filter(params[:filter]).includes(:user,:node,:last_reply_user).page(params_page)
+    @topics = @topics.desc('`order`').filter(params[:filter]).includes(:user,:node,:last_reply_user).page(params_page)
     @links = Link.all
+    @tip = Tip.rand_one
   end
 
   def show
     @replies = @topic.has_reply? ? @topic.replies.includes(:user).page(params_page) : []
     @similar_topics = @topic.similar_topics(8,true)
-    @tip = Tip.first
+    @tip = Tip.rand_one
     @reply = Reply.new
     Topic.increment_counter(:view_count,@topic.id)
     # @links = Link.all

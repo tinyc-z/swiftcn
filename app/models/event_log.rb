@@ -12,6 +12,8 @@
 
 class EventLog < ActiveRecord::Base
 
+  include BaseModel
+  
   belongs_to :user
 
   def self.build_histroy_events

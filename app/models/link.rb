@@ -12,4 +12,7 @@
 #
 
 class Link < ActiveRecord::Base
+
+  mount_uploader :cover, FriendLinkUploader
+  
 end

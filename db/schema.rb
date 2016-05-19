@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519052834) do
+ActiveRecord::Schema.define(version: 20160519182213) do
 
   create_table "appends", force: :cascade do |t|
     t.integer  "topic_id",   limit: 4
@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 20160519052834) do
     t.integer  "user_count",  limit: 4, default: 0
     t.integer  "topic_count", limit: 4, default: 0
     t.integer  "reply_count", limit: 4, default: 0
-    t.integer  "image_count", limit: 4, default: 0
+    t.integer  "photo_count", limit: 4, default: 0
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.integer  "vote_count",  limit: 4, default: 0

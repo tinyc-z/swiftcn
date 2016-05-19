@@ -16,6 +16,8 @@
 class Node < ActiveRecord::Base
   acts_as_paranoid
 
+  include BaseModel
+
   has_many :topics
   has_many :childs, class_name: 'Node', foreign_key: :parent_node_id
   belongs_to :parent, class_name: 'Node', foreign_key: :parent_node_id

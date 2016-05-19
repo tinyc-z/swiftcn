@@ -10,6 +10,7 @@ class AvatarUploader < BaseUploader
   # end
 
   # Process files as they are uploaded:
+  process :resize_to_fill => [320, 320]
   process :resize_and_pad => [320, 320, "#FFFFFF"]
   #
   # def scale(width, height)
@@ -40,7 +41,7 @@ class AvatarUploader < BaseUploader
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
     if super.present?
-      "#{model.id}_#{@name}.#{file.extension.downcase}"
+      "#{model.id}.#{file.extension.downcase}"
     end
   end
 
