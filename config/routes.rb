@@ -58,6 +58,8 @@ Rails.application.routes.draw do
     get :unread_count, on: :collection
   end
 
+  resources :photos,only:[:create]
+
   require 'sidekiq/web'
   authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/sidekiq'

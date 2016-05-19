@@ -1,8 +1,7 @@
 <script>
     Settings = {
         'cdn_domain': "<%= Rails.application.config.action_controller.asset_host %>",
-        'user_id': "<%= current_user ? current_user.id : nil %>",
-        'logined': "<%= current_user ? true : false %>",
+        'logined': <%= current_user ? true : false %>,
         'unread_count_url' : "<%= unread_count_notifications_path %>"
     };
 </script>

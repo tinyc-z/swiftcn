@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160517063218) do
+ActiveRecord::Schema.define(version: 20160519052834) do
 
   create_table "appends", force: :cascade do |t|
     t.integer  "topic_id",   limit: 4
@@ -105,6 +105,13 @@ ActiveRecord::Schema.define(version: 20160517063218) do
   end
 
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
+
+  create_table "photos", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.string   "image",      limit: 191, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "replies", force: :cascade do |t|
     t.integer  "user_id",       limit: 4

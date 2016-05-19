@@ -45,6 +45,7 @@ $(function(){
             // this.forceImageDataType();
         },
         fetch_unread: function(){
+          if (!Settings.logined) { return }
           if (window.fetch_unread_timer) {
             clearTimeout(window.fetch_unread_timer)  
             $.getJSON(Settings.unread_count_url , function( data ) {
@@ -57,9 +58,7 @@ $(function(){
                 }
             });
           }
-          if (Settings.logined) {
-            window.fetch_unread_timer=setTimeout('self.fetch_unread()', 5000);  
-          }
+          window.fetch_unread_timer=setTimeout('self.fetch_unread()', 5000);  
         },
         /**
          * Scroll to top in one click.

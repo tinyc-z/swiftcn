@@ -30,8 +30,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
         authentication.save!
         sign_in(:user, user)
         
-        UserAvatarDownloaderJob.perform_later user.id 
-        SendWelcomeMailJob.set(wait: 10.minute).perform_later
+        UserAvatarDownloaderJob.perform_later user 
+        SendWelcomeMailJob.set(wait: 10.minute).perform_later user
+        
       end
     end
     redirect_to root_path

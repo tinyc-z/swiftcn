@@ -22,6 +22,7 @@ class TopicsController < ApplicationController
   def create
     @topic.user = current_user
     if @topic.save
+      SendAdminNotifiMailJob.perform_later(topics_url(@topic))
       redirect_to @topic
     else
       flash.now[:alert] = @topic.errors.full_messages

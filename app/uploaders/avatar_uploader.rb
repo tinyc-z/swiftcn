@@ -1,28 +1,5 @@
 # encoding: utf-8
-
-class AvatarUploader < CarrierWave::Uploader::Base
-
-  # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
-  include CarrierWave::MiniMagick
-
-  # Choose what kind of storage to use for this uploader:
-  storage :file
-  # storage :fog
-
-  # Override the directory where uploaded files will be stored.
-  # This is a sensible default for uploaders that are meant to be mounted:
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
-
-  def url
-    if model.avatar_identifier.present? && model.avatar_identifier.start_with?('http')
-      model.avatar_identifier
-    else
-      super
-    end
-  end
+class AvatarUploader < BaseUploader
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
@@ -44,19 +21,32 @@ class AvatarUploader < CarrierWave::Uploader::Base
     process :resize_and_pad => [76, 76, "#FFFFFF"]
   end
 
-  # Add a white list of extensions which are allowed to be uploaded.
-  # For images you might use something like this:
-  def extension_white_list
-    %w(jpg jpeg png)
+  # Override the directory where uploaded files will be stored.
+  # This is a sensible default for uploaders that are meant to be mounted:
+  # def url
+  def url
+    if model.avatar_identifier.present? && model.avatar_identifier.start_with?('http')
+      model.avatar_identifier
+    else
+      super
+    end
+  end
+
+  def default_url
+    "default_avatar.jpg"
   end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
-    if original_filename
-      hash = Digest::MD5.hexdigest(File.dirname(current_path))
-      @name ||= "#{hash}#{file.extension.blank? ? '' : '.' + file.extension}"
+    if super.present?
+      "#{model.id}_#{@name}.#{file.extension.downcase}"
     end
   end
+
+  def store_dir
+    "uploads/avatars"
+  end
+
 
 end

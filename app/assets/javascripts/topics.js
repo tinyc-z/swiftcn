@@ -137,15 +137,32 @@ window._topic_ =
           hljs.highlightBlock(block);
       });
     },
+    initInlineattach: function(){
+      var self = this;
+      $('#body_original').inlineattachment({
+          uploadUrl: "/photos",
+          jsonFieldName: 'url',
+          extraHeaders:{'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+          uploadFieldName: "file",
+          progressText: "\n![Uploading file...]()",
+          urlText: "\n![file]({filename})",
+          allowedTypes:['image/jpeg','image/png','image/jpg','image/gif'],
+          onFileUploaded: function(response) {
+            self.runPreview()
+          },
+      });
+    },
+
     init : function(){
       var self = this
       self.initTextareaAutoResize()
       self.initReplyOnPressKey()
       self.initAutocompleteAtUser()
       self.initLightBox()
-      self.initLocalStorage()
+      // self.initLocalStorage()
       self.initEditorPreview()
       self.initHeightLight()
+      self.initInlineattach()
       
       $('#body_original').keyup(function(){
           self.runPreview()

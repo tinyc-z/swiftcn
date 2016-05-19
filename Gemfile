@@ -69,6 +69,10 @@ gem 'sinatra', :require => nil
 # sendcloud
 gem 'sendcloud', '~> 0.2'
 
+# server
+# gem 'puma'
+
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

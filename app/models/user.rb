@@ -98,10 +98,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def send_welcome_mail
-    Sendcloud::Mail.send_template(to: 'test@example.com', from: 'test@example.com', subject: 'test', html: 'test')
-  end
-
   def avatar=(str)
     if str.is_a?(String)
       self[:avatar] = str
