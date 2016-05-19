@@ -18,6 +18,7 @@ namespace :php2ruby do
     end
 
     #nodes
+    Node.delete_all
     ActiveRecord::Base.connection.select_all("select * from #{odb}.nodes").each do |e|
       Node.create!({
         id:e['id'],
@@ -50,7 +51,8 @@ namespace :php2ruby do
         name:e['name'],
         is_banned:e['is_banned'],
         avatar:e['image_url'],
-        password:'0',
+        encrypted_password:e['password'].sub('$2y$10','$2a$10'),
+        # password:'0',
         topics_count:e['topic_count'],
         replies_count:e['reply_count'],
         city:e['city'],
@@ -64,8 +66,6 @@ namespace :php2ruby do
         updated_at:e['updated_at'],
         deleted_at:e['deleted_at'],
       })
-      u.encrypted_password=e['password'].sub('$2y$10','$2a$10')
-      u.save!
 
       Authentication.create!({
         user_id:e['id'],
