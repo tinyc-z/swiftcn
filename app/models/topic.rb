@@ -7,15 +7,15 @@
 #  body               :text(65535)
 #  body_original      :text(65535)
 #  excerpt            :text(65535)
-#  is_excellent       :boolean          default("0")
-#  is_wiki            :boolean          default("0")
-#  is_blocked         :boolean          default("0")
-#  replies_count      :integer          default("0")
-#  view_count         :integer          default("0")
-#  favorites_count    :integer          default("0")
-#  votes_count        :integer          default("0")
+#  is_excellent       :boolean          default(FALSE)
+#  is_wiki            :boolean          default(FALSE)
+#  is_blocked         :boolean          default(FALSE)
+#  replies_count      :integer          default(0)
+#  view_count         :integer          default(0)
+#  favorites_count    :integer          default(0)
+#  votes_count        :integer          default(0)
 #  last_reply_user_id :integer
-#  order              :integer          default("0")
+#  order              :integer          default(0)
 #  node_id            :integer          not null
 #  user_id            :integer          not null
 #  created_at         :datetime         not null
@@ -38,7 +38,7 @@ class Topic < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   belongs_to :node, :counter_cache => true
 
-  validates_length_of :title, :minimum => 5, :maximum => 120, :allow_blank => false
+  # validates_length_of :title, :minimum => 5, :maximum => 120, :allow_blank => false
 
   validates :body, :presence => true
   validates :user, :presence => true

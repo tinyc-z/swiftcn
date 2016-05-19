@@ -24,7 +24,7 @@ class AvatarUploader < BaseUploader
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
-  # def url
+
   def url
     if model.avatar_identifier.present? && model.avatar_identifier.start_with?('http')
       model.avatar_identifier

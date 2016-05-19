@@ -4,13 +4,13 @@
 #
 #  id          :integer          not null, primary key
 #  day_at      :datetime
-#  user_count  :integer          default("0")
-#  topic_count :integer          default("0")
-#  reply_count :integer          default("0")
-#  image_count :integer          default("0")
+#  user_count  :integer          default(0)
+#  topic_count :integer          default(0)
+#  reply_count :integer          default(0)
+#  photo_count :integer          default(0)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  vote_count  :integer          default("0")
+#  vote_count  :integer          default(0)
 #
 
 class SiteStatus < ActiveRecord::Base

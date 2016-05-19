@@ -6,8 +6,8 @@
 #  name           :string(191)
 #  slug           :string(191)
 #  parent_node_id :integer
-#  topics_count   :integer          default("0")
-#  sort           :integer          default("0")
+#  topics_count   :integer          default(0)
+#  sort           :integer          default(0)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  deleted_at     :datetime
@@ -23,7 +23,7 @@ class Node < ActiveRecord::Base
   belongs_to :parent, class_name: 'Node', foreign_key: :parent_node_id
 
   validates :name, :presence => true
-  validates_uniqueness_of :name
+  # validates_uniqueness_of :name
 
   scope :is_parent, ->{where(parent_node_id: nil)}
 

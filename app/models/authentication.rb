@@ -10,6 +10,8 @@
 #  expires_at   :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  uname        :string(191)
+#  provider_url :string(191)
 #
 
 class Authentication < ActiveRecord::Base
@@ -19,7 +21,8 @@ class Authentication < ActiveRecord::Base
   
   belongs_to :user
 
-  validates :provider, :uid, :access_token, presence: true
+  # validates :provider, :uid, :access_token, presence: true
+  validates :provider, :uid, presence: true
   validates :provider, uniqueness: { scope: :user_id }
 
 

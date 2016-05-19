@@ -18,29 +18,32 @@
               <div class="form-group">
                   <label class="control-label" for="name"><%= lang('site.UserName') %></label>
                   <%=f.text_field :name, class:'form-control',required:true %>
-                  <!-- {{ $errors->first('name', '<span class="help-block">:message</span>') }} -->
+                  <% if @user.errors[:name].present? %>
+                    <div style="color: red"><%=@user.errors[:name].first%></div>
+                  <% end %>
               </div>
 
               <div class="form-group {{{ $errors->has('github_name') ? 'has-error' : '' }}}">
                   <label class="control-label" for="github_name">Github Name</label>
 
                   <%= text_field_tag 'github_name', @name, class:'form-control',readonly:true %>
-
-                  <!-- {{ $errors->first('github_name', '<span class="help-block">:message</span>') }} -->
               </div>
 
               <div class="form-group {{{ $errors->has('email') ? 'has-error' : '' }}}">
                   <label class="control-label" for="email"><%= lang('site.Email') %></label>
                   <%=select_tag "email", options_for_select(@emails),class:'form-control' %>
-
-                  <!-- {{ $errors->first('email', '<span class="help-block">:message</span>') }} -->
+                  <% if @user.errors[:email].present? %>
+                    <div style="color: red"><%=@user.errors[:email].first%></div>
+                  <% end %>
 
               </div>
 
               <div class="form-group {{{ $errors->has('password') ? 'has-error' : '' }}}">
                   <label class="control-label" for="password"><%= lang('site.password') %></label>
                    <%=f.password_field :password,class:'form-control',required:true %>
-                  <!-- {{ $errors->first('password', '<span class="help-block">:message</span>') }} -->
+                  <% if @user.errors[:password].present? %>
+                    <div style="color: red"><%=@user.errors[:password].first%></div>
+                  <% end %>
               </div>
 
               <%=submit_tag lang('site.Since') ,class:"btn btn-lg btn-success btn-block" %>

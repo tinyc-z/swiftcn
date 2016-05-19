@@ -7,8 +7,8 @@
 #  topic_id      :integer
 #  body          :text(65535)
 #  body_original :text(65535)
-#  is_blocked    :boolean          default("0")
-#  votes_count   :integer          default("0")
+#  is_blocked    :boolean          default(FALSE)
+#  votes_count   :integer          default(0)
 #  deleted_at    :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -25,7 +25,7 @@ class Reply < ActiveRecord::Base
 
   validates :body, :presence => true
   validates :user, :presence => true
-  validates :topic, :presence => true
+  # validates :topic, :presence => true
   
   belongs_to :user, :counter_cache => true
   belongs_to :topic, :counter_cache => true

@@ -12,6 +12,14 @@ class FriendLinkUploader < BaseUploader
     end
   end
 
+  def url
+    if model.cover_identifier.present? && model.cover_identifier.start_with?('http')
+      model.cover_identifier
+    else
+      super
+    end
+  end
+
   def store_dir
     "uploads/friend_links"
   end

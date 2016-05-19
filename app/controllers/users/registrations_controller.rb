@@ -22,20 +22,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
     omniauth = session[:omniauth]
     authentication = Authentication.where(provider: omniauth["provider"], uid: omniauth["uid"].to_s).first
     if authentication.user.blank?
-      user = User.new(sign_up_params.merge(email:params[:email],avatar:params[:avatar]))
+      @user = User.new(sign_up_params.merge(email:params[:email],avatar:params[:avatar]))
       #先设置远程图片，然后延迟下载
-      user.transaction do
-        user.save!
-        authentication.user = user
-        authentication.save!
-        sign_in(:user, user)
-        
-        UserAvatarDownloaderJob.perform_later user 
-        SendWelcomeMailJob.set(wait: 10.minute).perform_later user
-        
+      if @user.valid? 
+        @user.transaction do
+          @user.save!
+          authentication.user = @user
+          authentication.save!
+          sign_in(:user, @user)
+          
+          UserAvatarDownloaderJob.perform_later @user 
+          SendWelcomeMailJob.set(wait: 10.minute).perform_later @user
+          
+        end
+        redirect_to root_path and return 
+      else
+        @nickname = omniauth["nickname"]
+        @name = @nickname.present? ? @nickname : omniauth["nickname"]
+        @emails = omniauth["emails"]
+        @avatar = omniauth["avatar"]
+        render 'new' and return 
       end
     end
-    redirect_to root_path
   end
 
   # GET /resource/edit

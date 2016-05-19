@@ -6,11 +6,12 @@
 #  from_user_id :integer
 #  user_id      :integer
 #  topic_id     :integer
-#  entity_id     :integer
+#  entity_id    :integer
 #  body         :text(65535)
 #  notify_type  :string(191)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  body_digest  :text(65535)
 #
 
 class Notification < ActiveRecord::Base
@@ -18,6 +19,7 @@ class Notification < ActiveRecord::Base
   include BaseModel
 
   belongs_to :user, :counter_cache => true
+
   belongs_to :from_user,class_name: 'User', foreign_key: :from_user_id
 
   belongs_to :topic
