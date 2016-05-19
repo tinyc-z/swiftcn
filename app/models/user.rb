@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
   has_many :topics#, dependent: :destroy
   has_many :replies#, dependent: :destroy
 
-  has_many :sttentions#, dependent: :destroy
+  has_many :attentions#, dependent: :destroy
   has_many :favorites#, dependent: :destroy
 
   has_many :notifications#, dependent: :destroy

@@ -36,6 +36,10 @@ class Ability
     unless user.ban?
         if user.admin?
             can :manage, :all
+
+            can :access, :rails_admin   # grant access to rails_admin
+            can :dashboard
+            
         elsif user.editer?
             can :manage, Topic
             can :manage, Reply
