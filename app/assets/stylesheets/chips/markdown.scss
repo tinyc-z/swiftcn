@@ -341,7 +341,7 @@
     border-radius: 3px;
     background-color: #e8f2fb;
     padding: 0px;
-    border: 1px solid #c9e1f6;
+    border: 0px solid #c9e1f6;
     max-width: 740px;
     overflow-x: auto;
   }
@@ -372,10 +372,11 @@
     overflow: auto;
     line-height: 1.45;
     background-color: #e8f2fb;
-    border-radius: 3px;
+    border-radius: 0px;
     color: #fff;
-    border: 1px solid #c9e1f6;
-    margin: 1.2em 0px !important;
+    border: 0px solid #c9e1f6;
+    border-left: 2px solid #c9e1f6;
+    margin: 1.2em -15px !important;
   }
 
 
