@@ -1,28 +1,29 @@
-== README
+Ruby On Rails 在Debian上部署
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##安装环境
 
-Things you may want to cover:
+一、 安装Ruby&RVM
+apt-get update
+更新完成后，开始安装RVM(Ruby Version Manager,一个很好的项目，可以让我们安装任何一个版本的Ruby.)
+curl -L get.rvm.io | bash -s stable
 
-* Ruby version
+安装完成后，更新配置，使之生效
+source /etc/profile.d/rvm.sh
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+在正式使用前，我们需要安装RVM的依赖包。
+rvm requirements
+除此之外，你还需要安装其他依赖包
+apt-get install build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+1. 安装Ruby
+在Rvm下安装Ruby十分简单
+rvm install 2.2.2
+将1.9.3设置为默认版本
+rvm use 2.2.2 --default
+2. 安装RubyGems(一个强大的包管理器)
+rvm rubygems current
+3. 安装Rails
+gem install rails
+
+https://segmentfault.com/a/1190000000475362

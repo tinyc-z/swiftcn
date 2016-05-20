@@ -1,20 +1,3 @@
-#域名
-HOST: 'swiftcn.io'
-
-#数据库
-DB_NAME: 'db_name'
-DB_USER: 'db_user'
-DB_PASSWORD: 'db_pwd'
-DB_HOST: 127.0.0.1
-
-#GiHtub授权
-GITHUB_KEY: 'xxxxx'
-GITHUB_SECRET: 'xxxx'
-
-#发邮件sendcloud
-SEND_CLOUD_USER: 'xxx'
-SEND_CLOUD_KEY: 'xxx'
-
 #cdn 地址
 CDN_DOMAIN: ''
 # JOB 节点ids

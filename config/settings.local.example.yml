@@ -1,0 +1,18 @@
+#域名
+HOST: 'dev.swiftcn.io'
+
+DB_NAME: 'swiftcnruby'
+DB_USER: 'root'
+DB_PASSWORD: '123'
+DB_HOST: 127.0.0.1
+
+#for devise
+GITHUB_KEY: 'xxx'
+GITHUB_SECRET: 'xxx'
+
+#send mail
+SEND_CLOUD_USER: 'xx'
+SEND_CLOUD_KEY: 'xxx'
+
+# rails secret run rake secret
+SECRET_KEY_BASE: 'xxx'

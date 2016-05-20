@@ -49,7 +49,8 @@ gem 'momentjs-rails'
 gem 'html-pipeline', '~> 2.4'
 gem 'github-markdown'
 gem 'sanitize'
-# gem 'rails_admin'
+
+gem 'redcarpet'
 
 gem 'd3_rails'
 gem 'cal-heatmap-rails'
@@ -60,9 +61,11 @@ gem 'mini_magick'
 gem 'meta-tags' 
 gem 'truncate_html'
 
+gem 'dalli' #use Memcached
+
 # sidekiq
 gem 'sidekiq'
-gem 'sinatra', :require => nil
+gem 'sinatra', require: false
 
 # sendcloud
 gem 'sendcloud', '~> 0.2'
@@ -71,9 +74,10 @@ gem 'sendcloud', '~> 0.2'
 gem 'rails_admin'
 gem 'kaminari'
 
-# server
-# gem 'puma'
-
+group :production do
+  gem 'puma'
+  gem 'mina'
+end
 
 # Use Unicorn as the app server
 # gem 'unicorn'

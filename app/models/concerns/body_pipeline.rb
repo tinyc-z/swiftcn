@@ -12,15 +12,19 @@ module BodyPipeline
 
   def body_original=(text)
     super
+    text = text.force_encoding('UTF-8')
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: false, tables: true)
+    markdown_text = markdown.render(text)
     if self.body_original_changed?
       pipeline = HTML::Pipeline.new([
         # HTML::Pipeline::ImageFilter,
-        HTML::Pipeline::MarkdownFilter,
+        # HTML::Pipeline::MarkdownFilter, #在有邮件地址时有bug，故改用Redcarpet（他俩一个作者，初步发现是autolink原因）
         HTML::Pipeline::SanitizationFilter,
         PipelineLinkFilter,
         HTML::Pipeline::MentionFilter
       ], context)
-      result = pipeline.call(text)
+
+      result = pipeline.call(markdown_text)
       @mention_users = result[:mentioned_usernames]
       self.body = result[:output].to_html
     end
@@ -28,7 +32,7 @@ module BodyPipeline
 
   def mention_users
     unless @mention_users
-      filter = HTML::Pipeline::MentionFilter.new(body_original,context)
+      filter = HTML::Pipeline::MentionFilter.new(body_original.force_encoding('UTF-8'),context)
       filter.call
       @mention_users = filter.result[:mentioned_usernames]
     end
@@ -42,6 +46,7 @@ class HTML::Pipeline::MentionFilter
   #根据源码改造
   # https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/@mention_filter.rb
   MentionLogins.clear
+  UsernamePattern = /[a-z0-9A-Z][A-Za-z0-9-]*/
   
   def link_to_mentioned_user(login)
     result[:not_mentioned_usernames] ||= []

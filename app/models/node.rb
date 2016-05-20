@@ -23,7 +23,7 @@ class Node < ActiveRecord::Base
   belongs_to :parent, class_name: 'Node', foreign_key: :parent_node_id
 
   validates :name, :presence => true
-  # validates_uniqueness_of :name
+  validates :name, uniqueness: { scope: :parent_node_id }
 
   scope :is_parent, ->{where(parent_node_id: nil)}
 

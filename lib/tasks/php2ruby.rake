@@ -3,6 +3,8 @@ namespace :php2ruby do
   desc "db"
   task :convert_db => :environment do
 
+    # return #防止误操作
+
     odb = 'swiftcn'
 
     #links
@@ -15,6 +17,7 @@ namespace :php2ruby do
         created_at:e['created_at'],
         updated_at:e['updated_at'],
       })
+      p "create Link #{e['id']}"
     end
 
     #nodes
@@ -31,6 +34,7 @@ namespace :php2ruby do
         updated_at:e['updated_at'],
         deleted_at:e['deleted_at'],
       })
+      p "create Node #{e['id']}"
     end
 
     #tips
@@ -41,6 +45,7 @@ namespace :php2ruby do
         created_at:e['created_at'],
         updated_at:e['updated_at'],
       })
+      p "create Tip #{e['id']}"
     end
 
     #user
@@ -74,6 +79,7 @@ namespace :php2ruby do
         uname:e['github_name'],
         provider_url:e['github_url']
       })
+      p "create User #{e['id']}"
     end
 
     # topics
@@ -83,7 +89,7 @@ namespace :php2ruby do
         title:e['title'],
         user_id:e['user_id'],
         node_id:e['node_id'],
-        body_original:e['body_original'],
+        body_original:e['body_original'].gsub('](http://swiftcn.io/users/','](/users/'),
         is_excellent:e['is_excellent'],
         is_wiki:e['is_wiki'],
         is_blocked:e['is_blocked'],
@@ -97,21 +103,25 @@ namespace :php2ruby do
         created_at:e['created_at'],
         updated_at:e['updated_at'],
       })
+      p "create Topic #{e['id']}"
     end
 
 
     #replies
     ActiveRecord::Base.connection.select_all("select * from #{odb}.replies").each do |e|
-      Reply.create!({
-        id:e['id'],
-        body_original:e['body_original'],
-        user_id:e['user_id'],
-        topic_id:e['topic_id'],
-        is_blocked:e['is_block'],
-        votes_count:e['vote_count'].to_i,
-        created_at:e['created_at'],
-        updated_at:e['updated_at'],
-      })
+      if Topic.where(id:e['topic_id']).first
+        Reply.create!({
+          id:e['id'],
+          body_original:e['body_original'].gsub('](http://swiftcn.io/users/','](/users/'),
+          user_id:e['user_id'],
+          topic_id:e['topic_id'],
+          is_blocked:e['is_block'],
+          votes_count:e['vote_count'].to_i,
+          created_at:e['created_at'],
+          updated_at:e['updated_at'],
+        })
+      end
+      p "create Reply #{e['id']}"
     end
 
     #votes
@@ -125,6 +135,7 @@ namespace :php2ruby do
         created_at:e['created_at'],
         updated_at:e['updated_at'],
       })
+      p "create Vote #{e['id']}"
     end
 
 
@@ -137,6 +148,7 @@ namespace :php2ruby do
         created_at:e['created_at'],
         updated_at:e['updated_at'],
       })
+      p "create Append #{e['id']}"
     end
 
     #assigned_roles
@@ -151,6 +163,7 @@ namespace :php2ruby do
         created_at:e['created_at'],
         updated_at:e['updated_at'],
       })
+      p "create Attention #{e['id']}"
     end
 
     #favorites
@@ -162,6 +175,7 @@ namespace :php2ruby do
         created_at:e['created_at'],
         updated_at:e['updated_at'],
       })
+      p "create Favorite #{e['id']}"
     end
 
 
@@ -178,9 +192,11 @@ namespace :php2ruby do
         created_at:e['created_at'],
         updated_at:e['updated_at'],
       })
+      p "create SiteStatus #{e['id']}"
     end
 
     #notifications 
+    Notification.delete_all
     ActiveRecord::Base.connection.select_all("select * from #{odb}.notifications").each do |e|
       Notification.create!({
         id:e['id'],
@@ -193,6 +209,7 @@ namespace :php2ruby do
         created_at:e['created_at'],
         updated_at:e['updated_at'],
       })
+      p "create Notification #{e['id']}"
     end
 
 

@@ -81,7 +81,7 @@ class NotifyCenter
     if topic.user_id != reply.user_id
       replied = {body:reply.body,user_id:topic.user_id,from_user_id:reply.user_id,entity_id:reply.id,topic_id:topic.id,notify_type:'new_reply'}
       if create_if_needed(replied)
-        SendUnreadMailJob.perform_later(topic.user)
+        SendUnreadMailJob.perform_later(topic.user) if Rails.env.production?
       end
     end
   end
@@ -94,7 +94,7 @@ class NotifyCenter
         mention_scope ||= {body:reply.body,from_user_id:reply.user_id,entity_id:reply.id,topic_id:topic.id,notify_type:'at'}
         scope = mention_scope.merge(user_id:mention_user.id)
         if create_if_needed(scope)
-          SendUnreadMailJob.perform_later(mention_user)
+          SendUnreadMailJob.perform_later(mention_user) if Rails.env.production?
         end
       end
     end
