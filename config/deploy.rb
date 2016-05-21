@@ -52,11 +52,11 @@ end
 # For Rails apps, we'll make some of the shared paths that are shared between
 # all releases.
 task :setup => :environment do
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/log"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/log"]
 
-  queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
+  %w{log tmp/pids tmp/sockets config}.each do |dir|
+    queue! %[mkdir -p "#{deploy_to}/#{shared_path}/#{dir}"]
+    queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/#{dir}"]
+  end
 
   queue! %[touch "#{deploy_to}/#{shared_path}/config/settings.local.yml"]
   queue  %[echo "-----> Be sure to edit '#{deploy_to}/settings.local.yml'."]

@@ -22,10 +22,7 @@ God.watch do |w|
   w.restart_grace = 10.seconds
   w.pid_file = "#{rails_root}/shared/tmp/pids/puma.pid"
 
-  w.log = '#{rails_root}/shared/log/god.log'
-
-  w.uid = app_name
-  w.gid = app_name
+  w.log = "#{rails_root}/shared/log/god.log"
 
   w.behavior(:clean_pid_file)
 
@@ -39,7 +36,7 @@ God.watch do |w|
   w.restart_if do |restart|
     restart.condition(:memory_usage) do |c|
       c.above = 100.megabytes
-      c.times = [3, 5] # 3 out of 5 intervals
+      c.times = [3, 5] # 5次里面有2次超过100MB，就restart
     end
 
     restart.condition(:cpu_usage) do |c|
@@ -47,7 +44,9 @@ God.watch do |w|
       c.times = 5
     end
   end
+  
   # lifecycle
+  # 假如watch在5分钟里被启动或者重启了5次，然后不再监视它。。。然后10分钟后，再次监视他看看是否只是一个临时的问题；假如进程在两小时里依然不稳定，然后彻底放弃监视。
   w.lifecycle do |on|
     on.condition(:flapping) do |c|
       c.to_state = [:start, :restart]
