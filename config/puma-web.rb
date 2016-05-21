@@ -29,7 +29,7 @@ on_restart do
 end
 
 on_worker_boot do
-  $redis.client.reconnect
+  # $redis.client.reconnect
   ActiveRecord::Base.connection.reconnect!
 end
 
