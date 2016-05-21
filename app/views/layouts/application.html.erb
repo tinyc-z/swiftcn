@@ -50,5 +50,10 @@
       </div>
     </div>
 
+  <% if Rails.env.production? %>
+    <!-- 统计 -->
+    <%=render 'layouts/analysis' %>
+  <% end %>
+
 </body>
 </html>

@@ -13,6 +13,6 @@ class Favorite < ActiveRecord::Base
   
   include BaseModel
 
-  belongs_to :topic
-  belongs_to :user  
+  belongs_to :topic, :counter_cache => true
+  belongs_to :user 
 end

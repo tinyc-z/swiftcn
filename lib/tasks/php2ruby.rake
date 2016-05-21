@@ -3,7 +3,7 @@ namespace :php2ruby do
   desc "db"
   task :convert_db => :environment do
 
-    # return #防止误操作
+    return #防止误操作
 
     odb = 'swiftcn'
 
@@ -124,6 +124,10 @@ namespace :php2ruby do
       p "create Reply #{e['id']}"
     end
 
+    Topic.pluck(:id).each do |id|
+      Topic.reset_counters(id,:replies)
+    end
+
     #votes
     ActiveRecord::Base.connection.select_all("select * from #{odb}.votes").each do |e|
       Vote.create!({
@@ -178,6 +182,9 @@ namespace :php2ruby do
       p "create Favorite #{e['id']}"
     end
 
+    Topic.pluck(:id).each do |id|
+      Topic.reset_counters(id,:favorites)
+    end
 
     #site_statuses
     SiteStatus.destroy_all

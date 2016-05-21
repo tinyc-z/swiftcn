@@ -1,5 +1,7 @@
 # /etc/god/conf.d/swiftcn.god file
 # doc https://ruby-china.org/topics/21354 or http://godrb.com/
+# 开机启动
+# source /etc/profile.d/rvm.sh && god -c /etc/god/conf.d/swiftcn.god
 
 app_name = "swiftcn"
 
