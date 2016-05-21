@@ -15,6 +15,8 @@ set :deploy_to, '/var/www/swiftcn'
 set :repository, 'git@github.com:iBcker/swiftcn.git'
 set :branch, 'master'
 
+set :god_name, 'swiftcn'
+
 # For system-wide RVM install.
 #   set :rvm_path, '/usr/local/rvm/bin/rvm'
 
@@ -58,6 +60,8 @@ task :setup => :environment do
   queue! %[touch "#{deploy_to}/#{shared_path}/config/settings.local.yml"]
   queue  %[echo "-----> Be sure to edit '#{deploy_to}/settings.local.yml'."]
 
+  invoke :'god:install'
+
   if repository
     repo_host = repository.split(%r{@|://}).last.split(%r{:|\/}).first
     repo_port = /:([0-9]+)/.match(repository) && /:([0-9]+)/.match(repository)[1] || '22'
@@ -88,9 +92,72 @@ task :deploy => :environment do
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
+
+      invoke :'god:syn_config'
+      invoke :'god:restart'
     end
   end
 end
+
+
+namespace :god do
+
+  desc 'install god gem'
+  task :install do
+    queue! %[gem install god]
+  end
+
+  desc 'syn god config'
+  task :syn_config do
+    queue! %[cp #{deploy_to}/#{current_path}/config/god/swiftcn.god /etc/god/conf.d/swiftcn.god]
+  end
+
+  desc 'start god'
+  task :start do
+    queue "sudo god start #{god_name}"
+  end
+
+  desc 'stop god'
+  task :stop do
+    queue "sudo god stop #{god_name}"
+  end
+
+  desc 'restart god'
+  task :restart do
+    queue "sudo god restart #{god_name}"
+  end
+
+end
+
+
+namespace :nginx do
+
+  desc 'syn nginx config'
+  task :syn_config do
+    queue! %[cp #{deploy_to}/#{current_path}/config/nginx/swiftcn.conf /etc/nginx/conf.d/swiftcn.conf]
+  end
+
+  desc 'start nginx'
+  task :start do
+    queue "service nginx start #{god_name}"
+  end
+
+  desc 'stop nginx'
+  task :stop do
+    queue "service nginx stop #{god_name}"
+  end
+
+  desc 'restart nginx'
+  task :restart do
+    queue "service nginx restart #{god_name}"
+  end
+
+  desc 'reload nginx'
+  task :reload do
+    queue "service nginx reload #{god_name}"
+  end
+end
+
 
 # For help in making your deploy script, see the Mina documentation:
 #

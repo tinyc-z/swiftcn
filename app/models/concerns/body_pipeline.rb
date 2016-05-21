@@ -46,7 +46,9 @@ class HTML::Pipeline::MentionFilter
   #根据源码改造
   # https://github.com/jch/html-pipeline/blob/master/lib/html/pipeline/@mention_filter.rb
   MentionLogins.clear
-  UsernamePattern = /[a-z0-9A-Z][A-Za-z0-9-]*/
+  
+  remove_const :UsernamePattern
+  const_set :UsernamePattern , /[a-z0-9A-Z][A-Za-z0-9-]*/
   
   def link_to_mentioned_user(login)
     result[:not_mentioned_usernames] ||= []
