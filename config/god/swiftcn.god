@@ -14,9 +14,9 @@ God.watch do |w|
 
   w.start = "cd #{rails_root}/current && bundle exec puma --config ./config/puma-web.rb -e #{rails_env} -d"
 
-  w.stop = "kill -TERM `cat #{rails_root}/shared/tmp/pids/puma.pid`"
+  w.stop = "pumactl -P #{rails_root}/shared/tmp/pids/puma.pid stop"
 
-  w.restart = "kill -USR2 `cat #{rails_root}/shared/tmp/pids/puma.pid`"
+  w.restart = "pumactl -P #{rails_root}/shared/tmp/pids/puma.pid restart"
 
   w.start_grace = 10.seconds
   w.restart_grace = 10.seconds

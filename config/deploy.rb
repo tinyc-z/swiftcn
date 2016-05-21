@@ -127,7 +127,7 @@ namespace :god do
   end
 
   desc 'restart god'
-  task :restart do
+  task :restart => :environment do
     queue! "god restart #{god_name}"
   end
 

@@ -34,11 +34,13 @@ module SwiftcnRuby
 
 
     # cdn
-    cdn_host = Settings.CDN_DOMAIN
-    if cdn_host.present?
-        config.action_controller.asset_host = cdn_host
+    if Rails.env.production?
+        cdn_host = Settings.CDN_DOMAIN
+        if cdn_host.present?
+            config.action_controller.asset_host = cdn_host
+        end    
     end
-
+    
   end
   
 end
