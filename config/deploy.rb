@@ -36,6 +36,13 @@ task :environment do
 
   # For those using RVM, use this to load an RVM version@gemset.
   # invoke :'rvm:use[ruby-1.9.3-p125@default]'
+
+  ruby_version = File.read('.ruby-version').strip
+  raise "Couldn't determine Ruby version: Do you have a file .ruby-version in your project root?" if ruby_version.empty?
+  queue %{
+    source /etc/profile.d/rvm.sh
+    rvm use #{ruby_version} || exit 1
+  }
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
