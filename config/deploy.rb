@@ -143,22 +143,22 @@ namespace :nginx do
 
   desc 'start nginx'
   task :start do
-    queue "service nginx start #{god_name}"
+    queue "service nginx start"
   end
 
   desc 'stop nginx'
   task :stop do
-    queue "service nginx stop #{god_name}"
+    queue "service nginx stop"
   end
 
   desc 'restart nginx'
   task :restart do
-    queue "service nginx restart #{god_name}"
+    queue "service nginx restart"
   end
 
   desc 'reload nginx'
   task :reload do
-    queue "service nginx reload #{god_name}"
+    queue "service nginx reload"
   end
 end
 
