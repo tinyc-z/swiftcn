@@ -1,5 +1,5 @@
 # /etc/god/conf.d/swiftcn.god file
-# doc https://beyondalbert.com/rails-with-god/ or http://godrb.com/
+# doc https://ruby-china.org/topics/21354 or http://godrb.com/
 
 app_name = "swiftcn"
 
@@ -8,7 +8,8 @@ rails_root = ENV['RAILS_ROOT'] || "/var/www/#{app_name}"
 
 
 God.watch do |w|
-  w.name = watch
+  
+  w.name = app_name
   w.interval = 30.seconds # default
 
   w.start = "cd #{rails_root}/current && bundle exec puma --config ./config/puma-web.rb -e #{rails_env} -d"
@@ -20,6 +21,8 @@ God.watch do |w|
   w.start_grace = 10.seconds
   w.restart_grace = 10.seconds
   w.pid_file = "#{rails_root}/shared/tmp/pids/puma.pid"
+
+  w.log = '#{rails_root}/shared/log/god.log'
 
   w.uid = app_name
   w.gid = app_name

@@ -45,6 +45,7 @@ task :environment do
     source /etc/profile.d/rvm.sh
     rvm use #{ruby_version} || exit 1
   }
+  
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
@@ -103,28 +104,31 @@ end
 namespace :god do
 
   desc 'install god gem'
-  task :install do
+  task :install => :environment do
     queue! %[gem install god]
+    queue! %[mkdir -p /etc/god/conf.d/]
   end
 
   desc 'syn god config'
-  task :syn_config do
-    queue! %[cp #{deploy_to}/#{current_path}/config/god/swiftcn.god /etc/god/conf.d/swiftcn.god]
+  task :syn_config => :environment do
+    queue! %[command cp #{deploy_to}/#{current_path}/config/god/swiftcn.god /etc/god/conf.d/#{god_name}.god]
+    #加载或者启动god
+    queue! %[god load /etc/god/conf.d/#{god_name}.god || god -c /etc/god/conf.d/#{god_name}.god]
   end
 
   desc 'start god'
-  task :start do
-    queue "sudo god start #{god_name}"
+  task :start => :environment do
+    queue! "god start #{god_name}"
   end
 
   desc 'stop god'
-  task :stop do
-    queue "sudo god stop #{god_name}"
+  task :stop => :environment do
+    queue! "god stop #{god_name}"
   end
 
   desc 'restart god'
   task :restart do
-    queue "sudo god restart #{god_name}"
+    queue! "god restart #{god_name}"
   end
 
 end
@@ -134,7 +138,7 @@ namespace :nginx do
 
   desc 'syn nginx config'
   task :syn_config do
-    queue! %[cp #{deploy_to}/#{current_path}/config/nginx/swiftcn.conf /etc/nginx/conf.d/swiftcn.conf]
+    queue! %[command cp #{deploy_to}/#{current_path}/config/nginx/swiftcn.conf /etc/nginx/conf.d/swiftcn.conf]
   end
 
   desc 'start nginx'
