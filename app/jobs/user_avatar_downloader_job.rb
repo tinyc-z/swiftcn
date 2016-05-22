@@ -5,7 +5,10 @@ class UserAvatarDownloaderJob < ActiveJob::Base
     retry_job wait: 5.seconds, queue: :low_priority
   end
 
-  def perform(user)
-    user.download_remote_avatar if user
+  def perform(user_id)
+    user = User.find_by_id(user_id)
+    if user.present?
+      user.download_remote_avatar
+    end
   end
 end
