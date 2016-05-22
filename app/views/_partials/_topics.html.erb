@@ -36,9 +36,6 @@
                     <span>•</span>
                 <% end %>
 
-                <!-- <a href="{{ route('nodes.show', [$topic->node->id]) }}" title="{{{ $topic->node->name }}}" {{ $topic->vote_count == 0 || 'class="remove-padding-left"'}}>
-                    {{{ $topic->node->name }}}
-                </a> -->
                 <% if topic.node.present? %>
                   <%=link_to topic.node.name,topic.node %>    
                 <% end %>
