@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160521225409) do
+ActiveRecord::Schema.define(version: 20160521231139) do
 
   create_table "appends", force: :cascade do |t|
     t.integer  "topic_id",   limit: 4
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20160521225409) do
     t.datetime "updated_at",               null: false
     t.string   "uname",        limit: 191
     t.string   "provider_url", limit: 191
+    t.string   "avatar_url",   limit: 191
   end
 
   add_index "authentications", ["access_token"], name: "index_authentications_on_access_token", using: :btree

@@ -28,6 +28,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         @user.transaction do
           @user.save!
           authentication.user = @user
+          authentication.avatar_url = params[:avatar]
           authentication.save!
           sign_in(:user, @user)
           

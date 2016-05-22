@@ -41,7 +41,7 @@ class AvatarUploader < BaseUploader
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
     if super.present?
-      "#{model.id}.#{file.extension.downcase}"
+      "#{model.id}_#{Digest::MD5.hexdigest(model.name||"")[0,8]}.#{file.extension.downcase}"
     end
   end
 
