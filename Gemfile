@@ -109,5 +109,4 @@ group :development do
   gem 'spring'
 
   gem 'mina'
-  gem 'mina-sidekiq'
 end

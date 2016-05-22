@@ -1,7 +1,6 @@
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
-require 'mina_sidekiq/tasks'
 # require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
@@ -164,6 +163,42 @@ namespace :nginx do
   task :reload do
     queue "service nginx reload"
   end
+end
+
+
+namespace :sidekiq do
+
+  # ### sidekiq:quiet
+  desc "Quiet sidekiq (stop accepting new work)"
+  task :quiet => :environment do
+    queue %[sidekiqctl quiet "#{deploy_to}/#{shared_path}/tmp/pids/sidekiq.pid"]
+  end
+
+  # ### sidekiq:stop
+  desc "Stop sidekiq"
+  task :stop => :environment do
+    queue %[sidekiqctl stop "#{deploy_to}/#{shared_path}/tmp/pids/sidekiq.pid"]
+  end
+
+  # ### sidekiq:start
+  desc "Start sidekiq"
+  task :start => :environment do
+    queue %[ruby --version]
+    queue %[cd #{deploy_to}/#{current_path} && bundle exec sidekiq -d -e production -C #{deploy_to}/#{current_path}/config/sidekiq.yml]
+  end
+
+  # ### sidekiq:restart
+  desc "Restart sidekiq"
+  task :restart do
+    invoke :'sidekiq:stop'
+    invoke :'sidekiq:start'
+  end
+
+  desc "Tail log from server"
+  task :log => :environment do
+    queue %[tail -f #{sidekiq_log}]
+  end
+
 end
 
 
