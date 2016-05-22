@@ -41,7 +41,9 @@ class AvatarUploader < BaseUploader
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   def filename
     if super.present?
-      "#{model.id}_#{Digest::MD5.hexdigest(model.name||"")[0,8]}.#{file.extension.downcase}"
+      # current_path 是 Carrierwave 上传过程临时创建的一个文件，有时间标记，所以它将是唯一的
+      @name ||= Digest::MD5.hexdigest(current_path)
+      "#{model.id}_#{@name}.#{file.extension.downcase}"
     end
   end
 
