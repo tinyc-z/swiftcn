@@ -37,7 +37,7 @@ God.watch do |w|
 
   w.restart_if do |restart|
     restart.condition(:memory_usage) do |c|
-      c.above = 100.megabytes
+      c.above = 200.megabytes
       c.times = [3, 5] # 5次里面有2次超过100MB，就restart
     end
 

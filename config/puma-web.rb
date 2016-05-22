@@ -5,7 +5,7 @@
 
 #rails的运行环境
 environment 'production'
-threads 2, 6
+threads 4, 10
 workers 1
 
 #项目名
