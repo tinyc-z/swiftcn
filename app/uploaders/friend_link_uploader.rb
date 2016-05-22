@@ -7,7 +7,7 @@ class FriendLinkUploader < BaseUploader
 
   def filename
     if super.present?
-      @name ||= Digest::MD5.hexdigest(current_path)
+      @name = Digest::MD5.hexdigest(File.dirname(current_path))
       model_id = model.id ||= "#{model.class.last.id+1}"
       "#{model_id}_#{@name}.#{file.extension.downcase}"
     end

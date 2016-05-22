@@ -5,7 +5,7 @@ class PhotoUploader < BaseUploader
 
   def filename
     if super.present?
-      @name ||= Digest::MD5.hexdigest(current_path)
+      @name = Digest::MD5.hexdigest(File.dirname(current_path))
       "#{Time.now.strftime('%Y%m')}/#{model.user_id}_#{@name}.#{file.extension.downcase}"
     end
   end
