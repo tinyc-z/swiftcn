@@ -33,6 +33,11 @@ class Notification < ActiveRecord::Base
 
   before_save :build_body_digest
 
+
+  def entity_exist?
+    topic.present? && ( !(['new_reply','reply_upvote'].include?(notify_type)) || reply.present? )
+  end
+
   protected
 
   def build_body_digest

@@ -13,7 +13,7 @@
             
            <li class="list-group-item media" style="margin-top: 0px;">
            
-            <%if notify.topic.present? %>
+            <%if notify.entity_exist? %>
               <div class="avatar pull-left">
                 <%= link_to notify.from_user do %>
                   <%=image_tag(notify.from_user.avatar.try(:thumb),size: "38", alt: notify.from_user.name, class:"media-object img-thumbnail avatar")%>
