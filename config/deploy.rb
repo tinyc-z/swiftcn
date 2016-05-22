@@ -1,6 +1,7 @@
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
+require 'mina_sidekiq/tasks'
 # require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
@@ -22,7 +23,7 @@ set :god_name, 'swiftcn'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['config/settings.local.yml','log','public/uploads']
+set :shared_paths, ['config/settings.local.yml', 'log', 'tmp', 'public/uploads']
 
 # Optional settings:
 #   set :user, 'foobar'    # Username in the server to SSH to.
@@ -83,6 +84,8 @@ task :deploy => :environment do
   deploy do
     # Put things that will set up an empty directory into a fully set-up
     # instance of your project.
+    invoke :'sidekiq:quiet'
+
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
@@ -96,6 +99,7 @@ task :deploy => :environment do
 
       invoke :'god:syn_config'
       invoke :'god:restart'
+      invoke :'sidekiq:restart'
     end
   end
 end
