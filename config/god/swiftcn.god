@@ -5,8 +5,8 @@
 
 app_name = "swiftcn"
 
-rails_env = ENV['RAILS_ENV'] || 'production'
-rails_root = ENV['RAILS_ROOT'] || "/var/www/#{app_name}"
+rails_env = 'production'
+rails_root = "/var/www/#{app_name}"
 
 
 God.watch do |w|
