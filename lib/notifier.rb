@@ -15,7 +15,7 @@ class Notifier
 
   def self.send_unread_email(user)
     vars = {to:[user.email],sub:{'%name%' => [user.name]}}.to_json
-    Sendcloud::Mail.send_template(template_invoke_name:'admin_notification', subject: '一条未读消息 - Swift中国', from: 'siri@mail.swiftcn.io', fromname: 'Siri', substitution_vars: vars)
+    Sendcloud::Mail.send_template(template_invoke_name:'swift_unread_msg', subject: '一条未读消息 - Swift中国', from: 'siri@mail.swiftcn.io', fromname: 'Siri', substitution_vars: vars)
   end
 
 end

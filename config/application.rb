@@ -32,7 +32,6 @@ module SwiftcnRuby
 
     config.active_job.queue_adapter = :sidekiq #:inline
 
-
     # cdn
     if Rails.env.production?
         cdn_host = Settings.CDN_DOMAIN
