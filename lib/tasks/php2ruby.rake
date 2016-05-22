@@ -219,6 +219,17 @@ namespace :php2ruby do
       p "create Notification #{e['id']}"
     end
 
+    Reply.all.each do |reply|
+      body_original = reply.body_original.gsub('clouddn.com/uploads/images/','clouddn.com/uploads/photos/')
+      reply.body_original = body_original
+      reply.save
+    end
+
+    Topic.all.each do |topic|
+      body_original = topic.body_original.gsub('clouddn.com/uploads/images/','clouddn.com/uploads/photos/')
+      topic.body_original = body_original
+      topic.save
+    end
 
     ActiveRecord::Base.connection.select_all("select * from #{odb}.topics").each do |e|
       topic = Topic.find_by_id(e['id'])
