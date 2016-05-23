@@ -7,7 +7,12 @@
   <% if params[:page].to_i > 1 %>
     <% meta_title = "#{lang('site.which page',page: params[:page].to_i)} - #{lang('site.name')}" %>
   <% else %>
-    <% meta_title = lang('site.name') %>
+    <% if  current_page?(root_url) %>
+      <% meta_title = "#{lang('site.name')} - #{lang('site.slogen')}" %>
+      <% set_meta_tags description: "#{lang('site.SiteDescription')}" %>
+    <% else %>
+      <% meta_title = lang('site.name') %>
+    <% end %>
   <% end %>
 
   <%= display_meta_tags :site => meta_title, :separator=>'-', :reverse => true %>

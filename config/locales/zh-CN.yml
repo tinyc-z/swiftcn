@@ -3,9 +3,10 @@ zh-CN:
   site:
     'name_mobile': "Swift"
     'name': "Swift中国"
+    'slogen': "做最好的Swift中文社区"
     'which page': "第%{page}页"
     'Motto': '做最好的Swift中文社区'
-    'SiteDescription': 'Swift中国社区是一个积极向上的Swift开发者社区，我们致力于打造一个国内专业的Swift开源技术社区，并力求做最好的Swift中文社区，在这里欢迎讨论Swift新技术技巧以及分享好玩的新鲜事，讨论iOS开发技巧，分享Swift开发中的原创内容，共同营造一个良好的社区氛围，swift中国社区|swift中文社区|swift学习交流论坛'
+    'SiteDescription': 'Swift中国社区是一个积极向上的Swift开发者社区，我们致力于打造一个国内专业的Swift开源技术社区，并力求做最好的Swift中文社区，在这里欢迎讨论Swift新技术技巧以及分享好玩的新鲜事，讨论iOS开发技巧，分享Swift开发中的原创内容，共同营造一个良好的社区氛围 swift中文社区|swift学习交流论坛'
     'Topics': '社区'
     'Wiki': 'Wiki'
     'Jobs': '工作'
