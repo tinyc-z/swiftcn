@@ -32,7 +32,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
           authentication.save!
           sign_in(:user, @user)
           
-          UserAvatarDownloaderJob.perform_later @user.id
+          # UserAvatarDownloaderJob.perform_later @user.id
+
+          @user.delay.download_remote_avatar
+
           SendWelcomeMailJob.set(wait: 10.minute).perform_later @user.id if Rails.env.production?
           
         end
