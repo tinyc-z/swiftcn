@@ -47,6 +47,7 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bugsnag (4.1.0)
     builder (3.2.2)
     byebug (9.0.4)
     cal-heatmap-rails (3.6.0)
@@ -340,6 +341,7 @@ DEPENDENCIES
   annotate
   better_errors
   binding_of_caller
+  bugsnag
   byebug
   cal-heatmap-rails
   cancancan (~> 1.10)

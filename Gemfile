@@ -75,6 +75,7 @@ gem 'rails_admin'
 gem 'kaminari'
 
 gem 'puma'
+gem "bugsnag"
 
 # Use Unicorn as the app server
 # gem 'unicorn'
