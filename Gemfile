@@ -72,6 +72,8 @@ gem 'sendcloud', '~> 0.2'
 
 # rails_admin
 gem 'rails_admin'
+
+# 分页
 gem 'kaminari'
 
 gem 'puma'
