@@ -26,6 +26,7 @@ class Node < ActiveRecord::Base
   validates :name, uniqueness: { scope: :parent_node_id }
 
   scope :is_parent, ->{where(parent_node_id: nil)}
+  scope :is_child, ->{where.not(parent_node_id: nil)}
 
   before_save :build_slug
 

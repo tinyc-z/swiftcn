@@ -22,7 +22,7 @@ set :god_name, 'swiftcn'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['config/settings.local.yml', 'log', 'tmp', 'public/uploads']
+set :shared_paths, ['config/settings.local.yml', 'log', 'tmp', 'sitemaps' , 'public/uploads']
 
 # Optional settings:
 #   set :user, 'foobar'    # Username in the server to SSH to.
@@ -53,7 +53,7 @@ end
 # all releases.
 task :setup => :environment do
 
-  %w{log tmp/pids tmp/sockets config public/uploads}.each do |dir|
+  %w{log tmp/pids tmp/sockets config public/uploads sitemaps}.each do |dir|
     queue! %[mkdir -p "#{deploy_to}/#{shared_path}/#{dir}"]
     queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/#{dir}"]
   end
@@ -165,6 +165,15 @@ namespace :nginx do
   end
 end
 
+
+namespace :site_map do
+  
+  desc "build site_map"
+  task :build => :environment do
+    queue %[cd #{deploy_to}/#{current_path} && bundle exec rake sitemap:create RAILS_ENV=production]
+  end
+  
+end
 
 namespace :sidekiq do
 

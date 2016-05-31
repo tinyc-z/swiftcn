@@ -16,34 +16,34 @@ end
   Role.find_or_create_by({name: role})
 end
 
-# case Rails.env
-# when 'development','test'
-#     100.times do |t|
-#       u = User.create!({
-#         name:Pinyin.t(Faker::Name.name, splitter: '')+t.to_s,
-#         email:Faker::Internet.email,
-#         avatar:Faker::Avatar.image
-#       })
-#     end
+case Rails.env
+when 'development','test'
+    20.times do |t|
+      u = User.create!({
+        name:Pinyin.t(Faker::Name.name, splitter: '')+t.to_s,
+        email:Faker::Internet.email,
+        avatar:Faker::Avatar.image
+      })
+    end
 
-#     nodes = Node.where('parent_node_id > ?',0)
+    nodes = Node.where('parent_node_id > ?',0)
 
-#     1000.times do |t|
-#       u = User.find(rand(99)+1)
-#       u.topics.create({
-#         title:Faker::Hipster.sentence,
-#         body_original:Faker::Hipster.paragraph,
-#         node_id:nodes[rand(nodes.count)].id
-#       })
-#     end
+    100.times do |t|
+      u = User.find(rand(19)+1)
+      u.topics.create({
+        title:Faker::Hipster.sentence,
+        body_original:Faker::Hipster.paragraph,
+        node_id:nodes[rand(nodes.count)].id
+      })
+    end
 
-#     5000.times do |t|
-#       u = User.find(rand(99)+1)
-#       topic = Topic.find(rand(1000-1)+1)
-#       topic.replies.create({
-#         body_original:Faker::Hipster.paragraph,
-#         user_id:u.id
-#       })
-#     end  
+    500.times do |t|
+      u = User.find(rand(19)+1)
+      topic = Topic.find(rand(100-1)+1)
+      topic.replies.create({
+        body_original:Faker::Hipster.paragraph,
+        user_id:u.id
+      })
+    end  
 
-# end
+end

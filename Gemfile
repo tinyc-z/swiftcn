@@ -79,6 +79,8 @@ gem 'kaminari'
 gem 'puma'
 gem "bugsnag"
 
+gem 'sitemap_generator'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
