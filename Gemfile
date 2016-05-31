@@ -80,6 +80,7 @@ gem 'puma'
 gem "bugsnag"
 
 gem 'sitemap_generator'
+gem 'whenever', :require => false
 
 # Use Unicorn as the app server
 # gem 'unicorn'
