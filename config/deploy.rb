@@ -1,6 +1,7 @@
 require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
+require 'mina/whenever'
 # require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
@@ -99,6 +100,7 @@ task :deploy => :environment do
       invoke :'god:syn_config'
       invoke :'god:restart'
       # invoke :'sidekiq:restart'
+      invoke :'whenever:update'
     end
   end
 end
