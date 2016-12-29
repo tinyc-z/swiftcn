@@ -51,9 +51,5 @@ class AvatarUploader < BaseUploader
     "uploads/avatars"
   end
 
-  def remote_avatar?
-    self.url.present? && self.url.include?('github')
-  end
-
 
 end

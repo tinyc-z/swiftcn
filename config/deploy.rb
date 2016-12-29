@@ -99,7 +99,7 @@ task :deploy => :environment do
 
       invoke :'god:syn_config'
       invoke :'god:restart'
-      # invoke :'sidekiq:restart'
+      invoke :'sidekiq:restart'
       invoke :'whenever:update'
     end
   end
