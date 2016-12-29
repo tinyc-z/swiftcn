@@ -92,8 +92,7 @@ class User < ActiveRecord::Base
   end
   
   def download_remote_avatar
-    url = self[:avatar]
-    if url.present? && url.start_with?("http")
+    if self[:avatar].remote_avatar?
       self.remote_avatar_url = url  
       self.save(validate: false)
     end
