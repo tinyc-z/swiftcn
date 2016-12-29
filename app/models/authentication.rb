@@ -22,7 +22,7 @@ class Authentication < ActiveRecord::Base
   belongs_to :user
 
   # validates :provider, :uid, :access_token, presence: true
-  validates :provider, :uid, presence: true
+
   validates :provider, uniqueness: { scope: :user_id }
 
 
