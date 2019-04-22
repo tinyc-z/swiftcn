@@ -97,8 +97,7 @@ task :deploy => :environment do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
 
-      invoke :'god:syn_config'
-      invoke :'god:restart'
+      invoke :'puma:restart'
       invoke :'sidekiq:restart'
       invoke :'whenever:update'
     end
@@ -106,34 +105,29 @@ task :deploy => :environment do
 end
 
 
-namespace :god do
+namespace :puma do
 
-  desc 'install god gem'
-  task :install => :environment do
-    queue! %[gem install god]
-    queue! %[mkdir -p /etc/god/conf.d/]
+  desc 'start puma'
+  task :start => :remote_environment do
+    in_path(fetch(:current_path)) do
+      command %{bundle exec puma --config ./config/puma-web.rb -e production -d}
+    end
   end
 
-  desc 'syn god config'
-  task :syn_config => :environment do
-    queue! %[command cp #{deploy_to}/#{current_path}/config/god/swiftcn.god /etc/god/conf.d/#{god_name}.god]
-    #加载或者启动god
-    queue! %[god load /etc/god/conf.d/#{god_name}.god || god -c /etc/god/conf.d/#{god_name}.god]
+  desc 'stop puma'
+  task :stop => :remote_environment do
+    in_path(fetch(:current_path)) do
+      command %{bundle exec pumactl stop}
+    end
   end
 
-  desc 'start god'
-  task :start => :environment do
-    queue! "god start #{god_name}"
-  end
-
-  desc 'stop god'
-  task :stop => :environment do
-    queue! "god stop #{god_name}"
-  end
-
-  desc 'restart god'
-  task :restart => :environment do
-    queue! "god restart #{god_name}"
+  desc 'restart puma'
+  task :restart => :remote_environment do
+    # in_path(fetch(:current_path)) do
+    #   command %{bundle exec pumactl phased-restart}
+    # end
+    command %{bundle exec pumactl stop || true}
+    invoke :'puma:start'
   end
 
 end
