@@ -1,7 +1,7 @@
 RailsAdmin.config do |config|
 
   ### Popular gems integration
-  config.main_app_name = ['Swift中国', '管理后台']
+  config.main_app_name = ['SwiftCN', '管理后台']
 
   ## == Devise ==
   config.authenticate_with do
