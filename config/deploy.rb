@@ -98,8 +98,8 @@ task :deploy => :environment do
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
 
       invoke :'puma:restart'
-      invoke :'sidekiq:restart'
-      invoke :'whenever:update'
+      # invoke :'sidekiq:restart'
+      # invoke :'whenever:update'
     end
   end
 end
@@ -108,21 +108,21 @@ end
 namespace :puma do
 
   desc 'start puma'
-  task :start => :remote_environment do
+  task :start => :environment do
     in_path(fetch(:current_path)) do
       command %{bundle exec puma --config ./config/puma-web.rb -e production -d}
     end
   end
 
   desc 'stop puma'
-  task :stop => :remote_environment do
+  task :stop => :environment do
     in_path(fetch(:current_path)) do
       command %{bundle exec pumactl stop}
     end
   end
 
   desc 'restart puma'
-  task :restart => :remote_environment do
+  task :restart do
     # in_path(fetch(:current_path)) do
     #   command %{bundle exec pumactl phased-restart}
     # end
